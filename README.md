@@ -5,8 +5,7 @@ Naming convention: snake_case
 
 ### Setup: 
 1. Clone this repo
-2. create `testdb` in mysql (make sure mamp/wamp is on)
-3. edit connection string in `app/core/config.py` at `SQLALCHEMY_DATABASE_URI`
+2. edit connection string in `app/core/config.py` at `SQLALCHEMY_DATABASE_URI`
 
 4. Use `pipenv` to run the app in virtual env -> its a better way to manage python applications and its requirements
 ```sh
