@@ -30,3 +30,23 @@ Reference: https://github.com/tiangolo/full-stack-fastapi-postgresql
 Used his implementation but simplified the app by docker, auth, celery and other unrequired utils.
 
 Folder structure explanation:
+
+```sh
+.
+├── app                    # Test files (alternatively `spec` or `tests`)
+│   ├── api          # Load and stress tests
+│   ├── core         # End-to-end, integration tests (alternatively `e2e`)
+│   ├── core                 # Unit tests
+│   ├── core 
+│   ├── core 
+│   ├── core 
+│   ├── core 
+│   ├── core 
+│   └── crud
+└── .gitignore
+└── Pipfile
+└── Pipfile.lock
+└── README.md
+```
+
+│   └── crud

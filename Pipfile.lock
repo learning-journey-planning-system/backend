@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "647b6bd505713297ca41a9eae0a68d1fd7638255032a41cdb817d29d9fdd6d76"
+            "sha256": "5cb9a71ea5ae055ee798e9c91b72cc3510046e5e4c1905faf69a5aa7c75fab07"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -236,22 +236,6 @@
             "index": "pypi",
             "version": "==7.1.3"
         },
-        "python-dateutil": {
-            "hashes": [
-                "sha256:0123cacc1627ae19ddf3c27a5de5bd67ee4586fbdd6440d9748f8abb483d3e86",
-                "sha256:961d03dc3453ebbc59dbdea9e4e11c5651520a876d0f4db161e8674aae935da9"
-            ],
-            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
-            "version": "==2.8.2"
-        },
-        "six": {
-            "hashes": [
-                "sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926",
-                "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"
-            ],
-            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
-            "version": "==1.16.0"
-        },
         "sniffio": {
             "hashes": [
                 "sha256:e60305c5e5d314f5389259b7f22aaa33d8f7dee49763119234af3755c55b9101",
@@ -328,7 +312,7 @@
                 "sha256:25642c956049920a5aa49edcdd6ab1e06d7e5d467fc00e0506c44ac86fbfca02",
                 "sha256:e6d2677a32f47fc7eb2795db1dd15c1f34eff616bcaf2cfb5e997f854fa1c4a6"
             ],
-            "markers": "python_version < '3.10'",
+            "markers": "python_version >= '3.7'",
             "version": "==4.3.0"
         },
         "uvicorn": {
@@ -338,14 +322,6 @@
             ],
             "index": "pypi",
             "version": "==0.18.3"
-        },
-        "validator": {
-            "hashes": [
-                "sha256:926714169dc82a233a68041c395bc12e49d2c4cd7d6103ff3fb3565bd7f66d06",
-                "sha256:bd333e36c1bd07dfa8ad0ecc64d141cbc1863d07e033ab84eada333cb154f4bd"
-            ],
-            "index": "pypi",
-            "version": "==0.7.1"
         }
     },
     "develop": {}

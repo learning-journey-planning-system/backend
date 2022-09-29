@@ -71,7 +71,7 @@ def update_role(
     return role
 
 
-@router.delete("/{role_id}", response_model=schemas.Role)
+@router.delete("/{role_id}", response_model=List[schemas.Role])
 def delete_role(
     *,
     db: Session = Depends(deps.get_db),

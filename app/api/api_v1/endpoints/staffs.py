@@ -74,7 +74,7 @@ def update_staff(
     return staff
 
 
-@router.delete("/{staff_id}", response_model=schemas.Staff)
+@router.delete("/{staff_id}", response_model=List[schemas.Staff])
 def delete_staff(
     *,
     db: Session = Depends(deps.get_db),
