@@ -64,43 +64,43 @@ Used his implementation but simplified the app by docker, auth, celery and other
 ├── app                         # The entire api module
 │   ├── api                     # 
 │   │   ├── api_v1              #
-│   │   │   ├── endpoints
-│   │   │   │   ├── __init__.py 
-│   │   │   │   ├── roles.py
-│   │   │   │   └── staffs.py
-│   │   │   ├── __init__.py 
-│   │   │   └── api.py
-│   │   ├── __init__.py 
-│   │   └── deps.py
-│   ├── core                      # 
-│   │   ├── __init__.py 
-│   │   └── config.py
-│   ├── crud                      # 
-│   │   ├── __init__.py 
-│   │   ├── base.py 
-│   │   ├── crud_role.py 
-│   │   └── crud_staff.py
-│   ├── db 
-│   │   ├── __init__.py 
-│   │   ├── base_class.py 
-│   │   ├── base.py 
-│   │   ├── init_db.py 
-│   │   └── session.py
-│   ├── models 
-│   │   ├── __init__.py 
-│   │   ├── role.py 
-│   │   └── staff.py
-│   ├── schemas 
-│   │   ├── __init__.py 
-│   │   ├── msg.py 
-│   │   ├── role.py 
-│   │   └── staff.py
-│   ├── tests 
-│   ├── __init__.py 
-│   ├── initial_data.py
-│   └── main.py
-└── .gitignore
-└── Pipfile
-└── Pipfile.lock
-└── README.md
+│   │   │   ├── endpoints       #
+│   │   │   │   ├── __init__.py #
+│   │   │   │   ├── roles.py    #
+│   │   │   │   └── staffs.py   #
+│   │   │   ├── __init__.py     #
+│   │   │   └── api.py          #
+│   │   ├── __init__.py         #
+│   │   └── deps.py             #
+│   ├── core                    # 
+│   │   ├── __init__.py         #
+│   │   └── config.py           #
+│   ├── crud                    # 
+│   │   ├── __init__.py         #
+│   │   ├── base.py             #
+│   │   ├── crud_role.py        #
+│   │   └── crud_staff.py       #
+│   ├── db                      #
+│   │   ├── __init__.py         #
+│   │   ├── base_class.py       #
+│   │   ├── base.py             #
+│   │   ├── init_db.py          #
+│   │   └── session.py          #
+│   ├── models                  #
+│   │   ├── __init__.py         #
+│   │   ├── role.py             #
+│   │   └── staff.py            #
+│   ├── schemas                 #
+│   │   ├── __init__.py         #
+│   │   ├── msg.py              #
+│   │   ├── role.py             #
+│   │   └── staff.py            #
+│   ├── tests                   #
+│   ├── __init__.py             #
+│   ├── initial_data.py         #
+│   └── main.py                 #
+└── .gitignore                  #
+└── Pipfile                     #
+└── Pipfile.lock                #
+└── README.md                   #
 ```
