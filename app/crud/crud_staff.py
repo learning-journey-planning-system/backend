@@ -1,5 +1,3 @@
-# to add more specialised CRUD methods that are not in the base class
-
 from typing import Optional
 
 from sqlalchemy.orm import Session

@@ -58,49 +58,49 @@ Used his implementation but simplified the app by docker, auth, celery and other
 └── README.md
 ```
 
-##### All files (not done yet)
+##### All files (excludes explanation for test files)
 ```sh
 .
-├── app                         # The entire api module
-│   ├── api                     # 
-│   │   ├── api_v1              # 
-│   │   │   ├── endpoints       # 
-│   │   │   │   ├── __init__.py # 
-│   │   │   │   ├── roles.py    # 
-│   │   │   │   └── staffs.py   # 
-│   │   │   ├── __init__.py     # 
-│   │   │   └── api.py          # 
-│   │   ├── __init__.py         # 
-│   │   └── deps.py             # 
-│   ├── core                    # 
-│   │   ├── __init__.py         # 
-│   │   └── config.py           # 
-│   ├── crud                    # 
-│   │   ├── __init__.py         # 
-│   │   ├── base.py             # 
-│   │   ├── crud_role.py        # 
-│   │   └── crud_staff.py       # 
-│   ├── db                      # 
-│   │   ├── __init__.py         # 
-│   │   ├── base_class.py       # 
-│   │   ├── base.py             # 
-│   │   ├── init_db.py          # 
-│   │   └── session.py          # 
-│   ├── models                  # 
-│   │   ├── __init__.py         # 
-│   │   ├── role.py             # 
-│   │   └── staff.py            # 
-│   ├── schemas                 # 
-│   │   ├── __init__.py         # 
-│   │   ├── msg.py              # 
-│   │   ├── role.py             # 
-│   │   └── staff.py            # 
-│   ├── tests                   # 
-│   ├── __init__.py             # 
-│   ├── initial_data.py         # 
-│   └── main.py                 # 
-└── .gitignore                  # 
-└── Pipfile                     # 
-└── Pipfile.lock                # 
-└── README.md                   # 
+├── app                         
+│   ├── api                     
+│   │   ├── api_v1              # apis are organised into versions (for ease of management in future releases)
+│   │   │   ├── endpoints       
+│   │   │   │   ├── __init__.py 
+│   │   │   │   ├── roles.py    # all endpoints relating to one model is stored in one file
+│   │   │   │   └── staffs.py   
+│   │   │   ├── __init__.py     
+│   │   │   └── api.py          # file to add endpoints to router
+│   │   ├── __init__.py         
+│   │   └── deps.py             # to create a database session for endpoints to retrieve data from
+│   ├── core                    
+│   │   ├── __init__.py         
+│   │   └── config.py           # stores all settings variables
+│   ├── crud                    
+│   │   ├── __init__.py         
+│   │   ├── base.py             # base model for all crud classes
+│   │   ├── crud_role.py        # indiv crud class for each model 
+│   │   └── crud_staff.py       # to add more specialised CRUD methods that are not in the base class
+│   ├── db                      
+│   │   ├── __init__.py         
+│   │   ├── base_class.py       # base class for models
+│   │   ├── base.py             # Import all the models, so that Base has them before being imported by Alembic
+│   │   ├── init_db.py          # method to initialise db
+│   │   └── session.py          # creates a session object
+│   ├── models                  
+│   │   ├── __init__.py         
+│   │   ├── role.py             # each table will have its own class, one file for one table in the db
+│   │   └── staff.py            
+│   ├── schemas                 
+│   │   ├── __init__.py         
+│   │   ├── msg.py              # define format for error/success msgs
+│   │   ├── role.py             # each model has its own file to define its input/return formats
+│   │   └── staff.py            
+│   ├── tests                   
+│   ├── __init__.py             
+│   ├── initial_data.py         
+│   └── main.py                 
+└── .gitignore                  
+└── Pipfile                     
+└── Pipfile.lock                
+└── README.md                   
 ```
