@@ -3,25 +3,25 @@
 
 Naming convention: snake_case
 
-Setup: 
+### Setup: 
 1. Clone this repo
 2. create testdb in mysql (make sure mamp/wamp is on)
 3. edit connection string in app/core/config.py at SQLALCHEMY_DATABASE_URI
 
-Use pipenv to run the app in virtual env -> its a better way to manage python applications and its requirements
+4. Use pipenv to run the app in virtual env -> its a better way to manage python applications and its requirements
 ```sh
-pip install pipenv # install pipenv
-pipenv shell # start a virtual env in the current dir
-pipenv install --dev # install all the specified dependencies
+pip install pipenv          # install pipenv
+pipenv shell                # start a virtual env in the current dir
+pipenv install --dev        # install all the specified dependencies
 ```
 
-Whenever you make changes to the models, restart the db:
+5. Whenever you make changes to the models, restart the db:
 ```sh
 export PYTHONPATH=$PWD
 python3 app/initial_data.py # initialise db first/ refresh it
 ```
 
-Run the app (make sure you are in the `backend/` dir)
+6. Run the app (make sure you are in the `backend/` dir)
 ```sh
 uvicorn app.main:app --reload
 ```
@@ -31,12 +31,14 @@ uvicorn app.main:app --reload
 ./bootstrap.sh
 ``` -->
 
-Reference: https://github.com/tiangolo/full-stack-fastapi-postgresql  
+### Reference
+[full-stack-fastapi-postgresql by tiangolo](https://github.com/tiangolo/full-stack-fastapi-postgresql)  
+[his documentation](https://fastapi.tiangolo.com/)  
 Used his implementation but simplified the app by docker, auth, celery and other unrequired utils.
 
-Folder structure explanation:
+### Folder structure explanation:
 
-Overview:
+##### Overview:
 ```sh
 .
 ├── app                         # The entire api module
@@ -56,6 +58,7 @@ Overview:
 └── README.md
 ```
 
+##### All files
 ```sh
 .
 ├── app                         # The entire api module
