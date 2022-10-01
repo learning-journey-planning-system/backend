@@ -1,7 +1,7 @@
 import secrets
 from typing import List, Union
 
-from pydantic import AnyHttpUrl, BaseSettings, EmailStr, HttpUrl, PostgresDsn, validator
+from pydantic import AnyHttpUrl, BaseSettings, validator
 
 
 class Settings(BaseSettings):
@@ -22,7 +22,7 @@ class Settings(BaseSettings):
     PROJECT_NAME = "LJPS APIs"
 
     # Connect to the database
-    SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://root:root@localhost:8889/G10T3_LJPS_DB"
+    SQLALCHEMY_DATABASE_URI = ""
 
     # Turn off the Flask-SQLAlchemy event system and warning
     SQLALCHEMY_TRACK_MODIFICATIONS = False
@@ -34,6 +34,7 @@ class Settings(BaseSettings):
 
     class Config:
         case_sensitive = True
+        env_file = "/.env"
 
 
 settings = Settings()
