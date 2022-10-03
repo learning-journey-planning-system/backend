@@ -22,7 +22,7 @@ class Settings(BaseSettings):
     PROJECT_NAME = "LJPS APIs"
 
     # Connect to the database
-    SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://root:root@localhost:8889/G10T3_LJPS_DB"
+    SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://root:@localhost:3306/G10T3_LJPS_DB"
 
     # Turn off the Flask-SQLAlchemy event system and warning
     SQLALCHEMY_TRACK_MODIFICATIONS = False
