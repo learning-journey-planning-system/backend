@@ -1,7 +1,10 @@
 from fastapi import APIRouter
 
-from app.api.api_v1.endpoints import roles, staffs
+from app.api.api_v1.endpoints import roles, staffs, skills, courses, jobroles
 
 api_router = APIRouter()
-api_router.include_router(staffs.router, prefix="/users", tags=["users"])
-api_router.include_router(roles.router, prefix="/items", tags=["items"])
+api_router.include_router(staffs.router, prefix="/staffs", tags=["staffs"])
+api_router.include_router(roles.router, prefix="/roles", tags=["roles"])
+api_router.include_router(skills.router, prefix="/skills", tags=["skills"])
+api_router.include_router(courses.router, prefix="/courses", tags=["courses"])
+api_router.include_router(jobroles.router, prefix="/jobroles", tags=["jobroles"])
