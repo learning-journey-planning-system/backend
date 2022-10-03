@@ -39,32 +39,32 @@ def create_courseskill(
     return courseskill
 
 
-@router.get("/{skill_id}", response_model=schemas.Courseskill)
+@router.get("/{courseskill_id}", response_model=schemas.Courseskill)
 def read_courseskill(
     *,
     db: Session = Depends(deps.get_db),
-    skill_id: int
+    courseskill_id: int
 ) -> Any:
     """
     Get courseskill by ID.
     """
-    courseskill = crud.courseskill.get(db=db, id=skill_id)
+    courseskill = crud.courseskill.get(db=db, id=courseskill_id)
     if not courseskill:
         raise HTTPException(status_code=404, detail="courseskill not found")
     return courseskill
 
 
-@router.put("/{skill_id}", response_model=schemas.Courseskill)
+@router.put("/{courseskill_id}", response_model=schemas.Courseskill)
 def update_courseskill(
     *,
     db: Session = Depends(deps.get_db),
-    skill_id: int,
+    courseskill_id: int,
     courseskill_in: schemas.CourseskillUpdate
 ) -> Any:
     """
     Update a courseskill.
     """
-    courseskill = crud.courseskill.get(db, id=skill_id)
+    courseskill = crud.courseskill.get(db, id=courseskill_id)
     if not courseskill:
         raise HTTPException(
             status_code=404,
@@ -74,17 +74,17 @@ def update_courseskill(
     return courseskill
 
 
-@router.delete("/{skill_id}", response_model=List[schemas.Courseskill])
+@router.delete("/{courseskill_id}", response_model=List[schemas.Courseskill])
 def delete_courseskill(
     *,
     db: Session = Depends(deps.get_db),
-    skill_id: int
+    courseskill_id: int
 ) -> Any:
     """
     Delete a courseskill.
     """
-    courseskill = crud.courseskill.get(db=db, id=skill_id)
+    courseskill = crud.courseskill.get(db=db, id=courseskill_id)
     if not courseskill:
         raise HTTPException(status_code=404, detail="Skill not found")
-    remaining_courseskill = crud.courseskill.remove(db=db, id=skill_id)
+    remaining_courseskill = crud.courseskill.remove(db=db, id=courseskill_id)
     return remaining_courseskill

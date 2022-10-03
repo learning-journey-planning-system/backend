@@ -1,12 +1,13 @@
 from typing import Optional
 
 from pydantic import BaseModel, EmailStr
-# from .skill import Skill
-# from .course import Course
+from .skill import Skill
+from .course import Course
 
 # Shared properties
 class CourseskillBase(BaseModel):
-    pass
+    id: str 
+    courseid: str 
 
 # Properties to receive via API on creation
 class CourseskillCreate(CourseskillBase):
@@ -20,8 +21,8 @@ class CourseskillUpdate(CourseskillBase):
 
 # Properties shared by models stored in DB
 class CourseskillInDBBase(CourseskillBase):
-    # skill: Optional[Skill] = None
-    # course: Optional[Course] = None
+    skill: Optional[Skill] = None
+    course: Optional[Course] = None
 
     class Config:
         orm_mode = True

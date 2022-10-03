@@ -24,11 +24,12 @@ class CourseInDBBase(CourseBase):
 
 # Properties to return via API
 class Course(CourseInDBBase):
-    id : int
+    id : str
     course_name : str
     course_status : str # Active or Retired
     course_type : str # Internal or External 
     course_category : str 
+    deleted : bool
     
 
 
