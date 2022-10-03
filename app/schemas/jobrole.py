@@ -24,3 +24,6 @@ class JobroleInDBBase(JobroleBase):
 # Properties to return via API
 class Jobrole(JobroleInDBBase):
     id: int
+    jobrole_name: Optional[str]
+    deleted: bool
+
