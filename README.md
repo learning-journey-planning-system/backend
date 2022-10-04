@@ -3,9 +3,18 @@
 
 Naming convention: snake_case
 
-### Setup: 
+### 1. Shortcut to start the app:
+1. Ensure MAMP/WAMP is on
+2. Ensure you have pipenv installed
+3. Execute the following script in the cli:
+```sh
+./start_backend.sh
+```
+
+<!-- ### Setup: 
 1. Clone this repo
-2. edit connection string in `app/core/config.py` at `SQLALCHEMY_DATABASE_URI`
+2. On MAMP/WAMP
+3. edit connection string in `app/core/config.py` at `SQLALCHEMY_DATABASE_URI` (you can use sql alchemy to help you test your connection)
 
 4. Use `pipenv` to run the app in virtual env -> its a better way to manage python applications and its requirements
 ```sh
@@ -23,19 +32,18 @@ python3 app/initial_data.py # initialise db first/ refresh it
 6. Run the app (make sure you are in the `backend/` dir)
 ```sh
 uvicorn app.main:app --reload
-```
-
-<!-- shortcut to start the app:
-```sh
-./bootstrap.sh
 ``` -->
 
-### Reference
+### 2. To stop the backend service and exit the pipenv shell
+1. Stop backend service: ctrl + C
+2. Exit pipenv shell: ctrl + D
+
+### 3. Reference
 [full-stack-fastapi-postgresql by tiangolo](https://github.com/tiangolo/full-stack-fastapi-postgresql)  
 [his documentation](https://fastapi.tiangolo.com/)  
 Used his implementation but simplified the app by docker, auth, celery and other unrequired utils.
 
-### Folder structure explanation:
+### 4. Folder structure explanation:
 
 ##### Overview:
 ```sh
