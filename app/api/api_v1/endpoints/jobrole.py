@@ -9,22 +9,22 @@ from app.api import deps
 router = APIRouter()
 
 
-@router.get("/", response_model=List[schemas.Jobrole])
+@router.get("/", response_model=List[schemas.JobRole])
 def read_jobroles(
     db: Session = Depends(deps.get_db)
 ) -> Any:
     """
-    Retrieve Jobroles.
+    Retrieve JobRoles.
     """
     jobroles = crud.jobrole.get_multi(db)
     return jobroles
 
 
-@router.post("/", response_model=schemas.Jobrole)
+@router.post("/", response_model=schemas.JobRole)
 def create_jobrole(
     *,
     db: Session = Depends(deps.get_db),
-    jobrole_in: schemas.JobroleCreate
+    jobrole_in: schemas.JobRoleCreate
 ) -> Any:
     """
     Create new jobrole.
@@ -39,7 +39,7 @@ def create_jobrole(
     return jobrole
 
 
-@router.get("/{jobrole_id}", response_model=schemas.Jobrole)
+@router.get("/{jobrole_id}", response_model=schemas.JobRole)
 def read_jobrole(
     *,
     db: Session = Depends(deps.get_db),
@@ -50,19 +50,19 @@ def read_jobrole(
     """
     jobrole = crud.jobrole.get(db=db, id=jobrole_id)
     if not jobrole:
-        raise HTTPException(status_code=404, detail="Jobrole not found")
+        raise HTTPException(status_code=404, detail="JobRole not found")
     return jobrole
 
 
-@router.put("/{jobrole_id}", response_model=schemas.Jobrole)
+@router.put("/{jobrole_id}", response_model=schemas.JobRole)
 def update_jobrole(
     *,
     db: Session = Depends(deps.get_db),
     jobrole_id: int,
-    jobrole_in: schemas.JobroleUpdate
+    jobrole_in: schemas.JobRoleUpdate
 ) -> Any:
     """
-    Update a Jobrole.
+    Update a JobRole.
     """
     jobrole = crud.jobrole.get(db, id=jobrole_id)
     if not jobrole:
@@ -74,17 +74,17 @@ def update_jobrole(
     return jobrole
 
 
-@router.delete("/{jobrole_id}", response_model=List[schemas.Jobrole])
+@router.delete("/{jobrole_id}", response_model=List[schemas.JobRole])
 def delete_jobrole(
     *,
     db: Session = Depends(deps.get_db),
     jobrole_id: int
 ) -> Any:
     """
-    Delete a Jobrole.
+    Delete a JobRole.
     """
-    Jobrole = crud.Jobrole.get(db=db, id=jobrole_id,)
-    if not Jobrole:
-        raise HTTPException(status_code=404, detail="Jobrole not found")
-    softdelete_jobrole = crud.jobrole.update(db=db, id=jobrole_id, deleted=True) # soft delete-need to test first
-    return softdelete_jobrole
+    JobRole = crud.JobRole.get(db=db, id=jobrole_id,)
+    if not JobRole:
+        raise HTTPException(status_code=404, detail="JobRole not found")
+    remaining_jobrole = crud.jobrole.remove(db=db, id=jobrole_id)
+    return remaining_jobrole

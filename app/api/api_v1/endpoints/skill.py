@@ -43,14 +43,14 @@ def create_skills(
 def read_skill(
     *,
     db: Session = Depends(deps.get_db),
-    skill_id: int
+    skill_id: str
 ) -> Any:
     """
     Get skill by ID.
     """
     skill = crud.skill.get(db=db, id=skill_id)
     if not skill:
-        raise HTTPException(status_code=404, detail="skill not found")
+        raise HTTPException(status_code=404, detail="Skill not found")
     return skill
 
 
@@ -58,8 +58,8 @@ def read_skill(
 def update_skill(
     *,
     db: Session = Depends(deps.get_db),
-    skill_id: int,
-    skill_in: schemas.JobroleUpdate
+    skill_id: str,
+    skill_in: schemas.SkillUpdate
 ) -> Any:
     """
     Update a skill.
@@ -85,6 +85,6 @@ def delete_skill(
     """
     skill = crud.skill.get(db=db, id=skill_id,)
     if not skill:
-        raise HTTPException(status_code=404, detail="skill not found")
-    softdelete_skill = crud.skill.update(db=db, id=skill_id, deleted=True) # soft delete-need to test first
-    return softdelete_skill
+        raise HTTPException(status_code=404, detail="Skill not found")
+    remaining_skill = crud.skill.remove(db=db, id=skill_id)
+    return remaining_skill

@@ -24,7 +24,7 @@ def read_courses(
 def create_course(
     *,
     db: Session = Depends(deps.get_db),
-    course_in: schemas.StaffCreate
+    course_in: schemas.CourseCreate
 ) -> Any:
     """
     Create new course.
@@ -50,16 +50,16 @@ def read_course(
     """
     course = crud.course.get(db=db, id=course_id)
     if not course:
-        raise HTTPException(status_code=404, detail="course not found")
+        raise HTTPException(status_code=404, detail="Course not found")
     return course
 
 
 @router.put("/{course_id}", response_model=schemas.Course)
-def update_staff(
+def update_course(
     *,
     db: Session = Depends(deps.get_db),
-   course_id: str,
-    course_in: schemas.StaffUpdate
+    course_id: str,
+    course_in: schemas.CourseUpdate
 ) -> Any:
     """
     Update a course.
@@ -85,6 +85,6 @@ def delete_course(
     """
     course = crud.course.get(db=db, id=course_id)
     if not course:
-        raise HTTPException(status_code=404, detail="course not found")
-    remaining_course = crud.skill.remove(db=db, id=course_id)
+        raise HTTPException(status_code=404, detail="Course not found")
+    remaining_course = crud.course.remove(db=db, id=course_id)
     return remaining_course
