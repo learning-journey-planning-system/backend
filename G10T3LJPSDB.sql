@@ -29,39 +29,6 @@ INSERT INTO jobrole (id,jobrole_name,deleted) VALUES
 (10,'PR Executive',FALSE)
 ;
 
-INSERT INTO jobroleskill (id,skillid) VALUES
-(01,'SK-08'),
-(01,'SK-05'),
-(02,'SK-03'),
-(02,'SK-05'),
-(03,'SK-09'),
-(04,'SK-08'),
-(04,'SK-05'),
-(05,'SK-10'),
-(06,'SK-08'),
-(07,'SK-04'),
-(08,'SK-06'),
-(09,'SK-09'),
-(10,'SK-07');
-
-
-
-INSERT INTO courseskill (id,courseid) VALUES
-('SK-01','IS-001'),
-('SK-01','IS-002'),
-('SK-02','HR-002'),
-('SK-02','FIN-003'),
-('SK-03','HR-002'),
-('SK-03','IS-003'),
-('SK-04','FIN-002'),
-('SK-04','FIN-001'),
-('SK-05','IS-003'),
-('SK-06','BUS-001'),
-('SK-07','HR-001'),
-('SK-08','BUS-002'),
-('SK-09','IS-003'),
-('SK-10','IS-002')
-;
 
 INSERT INTO course (id,course_name,course_desc,course_status,course_type,course_category) VALUES
 
@@ -103,7 +70,7 @@ INSERT INTO registration (id,course_id,staff_id,reg_status,completion_status) VA
 (105, 'IS-003', 3, 'Registered','Completed')
 ;
 
-INSERT INTO learning_journey (id,staff_id,jobrole_id) VALUES
+INSERT INTO learningjourney (id,staff_id,jobrole_id) VALUES
 (201,1,01),
 (202,1,02),
 (203,4,05),
@@ -119,3 +86,36 @@ INSERT INTO selection (learningjourney_id,course_id) VALUES
 (204,'IS-002'),
 (205,'IS-003')
 ;
+
+
+INSERT INTO courseskill (skill_id,course_id) VALUES
+('SK-01','IS-001'),
+('SK-01','IS-002'),
+('SK-02','HR-002'),
+('SK-02','FIN-003'),
+('SK-03','HR-002'),
+('SK-03','IS-003'),
+('SK-04','FIN-002'),
+('SK-04','FIN-001'),
+('SK-05','IS-003'),
+('SK-06','BUS-001'),
+('SK-07','HR-001'),
+('SK-08','BUS-002'),
+('SK-09','IS-003'),
+('SK-10','IS-002')
+;
+
+INSERT INTO jobroleskill (jobrole_id,skill_id) VALUES
+(01,'SK-08'),
+(01,'SK-05'),
+(02,'SK-03'),
+(02,'SK-05'),
+(03,'SK-09'),
+(04,'SK-08'),
+(04,'SK-05'),
+(05,'SK-10'),
+(06,'SK-08'),
+(07,'SK-04'),
+(08,'SK-06'),
+(09,'SK-09'),
+(10,'SK-07');

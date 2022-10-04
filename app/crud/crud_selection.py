@@ -3,8 +3,9 @@ from typing import Optional, List
 from sqlalchemy.orm import Session
 
 from app.crud.base import CRUDBase
-from app.models.learningjourney import Selection
-from app.schemas.learningjourney import SelectionCreate, SelectionUpdate
+from app.models import selection
+from app.models.selection import Selection
+from app.schemas.selection import SelectionCreate, SelectionUpdate
 
 
 class CRUDSelection(CRUDBase[Selection, SelectionCreate, SelectionUpdate]):
@@ -22,4 +23,4 @@ class CRUDSelection(CRUDBase[Selection, SelectionCreate, SelectionUpdate]):
         db.commit()
         return db.query(self.model).all()
 
-staff = CRUDSelection(Selection)
+selection = CRUDSelection(Selection)

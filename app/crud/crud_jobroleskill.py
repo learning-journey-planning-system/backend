@@ -23,4 +23,4 @@ class CRUDJobRoleSkill(CRUDBase[JobRoleSkill, JobRoleSkillCreate, JobRoleSkillUp
         db.commit()
         return db.query(self.model).all()    
 
-jobrole = CRUDJobRoleSkill(JobRoleSkill)
+jobroleskill = CRUDJobRoleSkill(JobRoleSkill)

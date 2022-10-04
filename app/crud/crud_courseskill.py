@@ -22,4 +22,4 @@ class CRUDCourseSkill(CRUDBase[CourseSkill, CourseSkillCreate, CourseSkillUpdate
         db.commit()
         return db.query(self.model).all()  
 
-skill = CRUDCourseSkill(CourseSkill)
+courseskill = CRUDCourseSkill(CourseSkill)

@@ -10,7 +10,7 @@ if TYPE_CHECKING:
     from .skill import Skill
     from .course import Course
 
-class Courseskill(Base):
+class CourseSkill(Base):
     skill_id = Column(String(20),ForeignKey("skill.id"), primary_key=True) # Populates skill ID
     course_id = Column(String(20), ForeignKey("course.id"), primary_key=True) # Populates course ID
 
