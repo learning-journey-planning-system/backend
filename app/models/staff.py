@@ -7,6 +7,8 @@ from app.db.base_class import Base
 
 if TYPE_CHECKING:
     from .role import Role
+    from .learningjourney import LearningJourney
+    from .registration import Registration
 
 class Staff(Base):
     id = Column(Integer, primary_key=True) # user logs in with this
@@ -18,3 +20,6 @@ class Staff(Base):
     role_id = Column(Integer, ForeignKey("role.id"), nullable=False)
 
     role = relationship("Role", back_populates="staffs")
+
+    learningjourneys = relationship("LearningJourney", back_populates="staff")
+    registrations = relationship("Registration", back_populates="staff")

@@ -23,6 +23,7 @@ class StaffUpdate(StaffBase):
 
 # Properties shared by models stored in DB
 class StaffInDBBase(StaffBase):
+    id: Optional[int] = None
     role: Optional[Role] = None
 
     class Config:
@@ -30,7 +31,6 @@ class StaffInDBBase(StaffBase):
 
 # Properties to return via API
 class Staff(StaffInDBBase):
-    id: Optional[int] = None
     password: Optional[str] = None
 
 # Additional properties to return via API
