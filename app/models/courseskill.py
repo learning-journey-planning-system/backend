@@ -11,8 +11,8 @@ if TYPE_CHECKING:
     from .course import Course
 
 class Courseskill(Base):
-    id = Column(String(20),ForeignKey("skill.id"), primary_key=True) # Populates skill ID
-    courseid = Column(String(20), ForeignKey("course.id"), primary_key=True) # Populates course ID
+    skill_id = Column(String(20),ForeignKey("skill.id"), primary_key=True) # Populates skill ID
+    course_id = Column(String(20), ForeignKey("course.id"), primary_key=True) # Populates course ID
 
     skill = relationship("Skill", back_populates="courseskills")
-    course = relationship("Course", back_populates="courseskill")
+    course = relationship("Course", back_populates="courseskills")

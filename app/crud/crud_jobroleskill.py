@@ -1,5 +1,5 @@
 from .base import CRUDBase
-from app.models.jobroleskill import Jobroleskill
-from app.schemas.jobroleskill import JobroleskillCreate, JobroleskillUpdate
+from app.models.jobroleskill import JobRoleSkill
+from app.schemas.jobroleskill import JobRoleSkillCreate, JobRoleSkillUpdate
 
-jobroleskill = CRUDBase[Jobroleskill, JobroleskillCreate, JobroleskillUpdate](Jobroleskill)
+jobroleskill = CRUDBase[JobRoleSkill, JobRoleSkillCreate, JobRoleSkillUpdate](JobRoleSkill)

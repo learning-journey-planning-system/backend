@@ -3,27 +3,26 @@ from typing import Optional
 from pydantic import BaseModel
 
 # Shared properties
-class JobroleBase(BaseModel):
+class JobRoleBase(BaseModel):
     jobrole_name: Optional[str] = None
+    deleted: Optional[bool] = None
 
 # Properties to receive via API on creation
-class JobroleCreate(JobroleBase):
-    id: int
+class JobRoleCreate(JobRoleBase):
+    id: int # need to change to auto increment
 
 # Properties to receive via API on update
-class JobroleUpdate(JobroleBase):
+class JobRoleUpdate(JobRoleBase):
     pass
 
 # Properties shared by models stored in DB
-class JobroleInDBBase(JobroleBase):
+class JobRoleInDBBase(JobRoleBase):
     pass
 
     class Config:
         orm_mode = True
 
 # Properties to return via API
-class Jobrole(JobroleInDBBase):
+class JobRole(JobRoleInDBBase):
     id: int
-    jobrole_name: Optional[str]
-    deleted: bool
 

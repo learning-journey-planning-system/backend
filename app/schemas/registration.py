@@ -15,6 +15,10 @@ class StaffBase(BaseModel):
 class StaffCreate(StaffBase):
     # Need to provide minimally staff_id and password on staff creation
     id: int # since we will be getting this from LMS, we do not need to autogenerate it
+    course_id: str
+    staff_id: int
+    reg_status: str
+    completion_status: str
 
 # Properties to receive via API on update
 class StaffUpdate(StaffBase):

@@ -5,11 +5,15 @@ from pydantic import BaseModel, EmailStr
 # Shared properties
 class CourseBase(BaseModel):
     course_name: Optional[str] = None
+    course_desc : Optional[str] = None
+    course_status : Optional[str] = None # Active or Retired
+    course_type : Optional[str] = None # Internal or External 
+    course_category : Optional[str] = None 
     
 
 # Properties to receive via API on creation
 class CourseCreate(CourseBase):
-    pass
+    id : str
 
 # Properties to receive via API on update
 class CourseUpdate(CourseBase):
@@ -25,10 +29,6 @@ class CourseInDBBase(CourseBase):
 # Properties to return via API
 class Course(CourseInDBBase):
     id : str
-    course_name : str
-    course_status : str # Active or Retired
-    course_type : str # Internal or External 
-    course_category : str 
     
 
 

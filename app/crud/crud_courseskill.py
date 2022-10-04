@@ -1,5 +1,5 @@
 from .base import CRUDBase
-from app.models.courseskill import Courseskill
-from app.schemas.courseskill import CourseskillCreate, CourseskillUpdate
+from app.models.courseskill import CourseSkill
+from app.schemas.courseskill import CourseSkillCreate, CourseSkillUpdate
 
-courseskill = CRUDBase[Courseskill, CourseskillCreate, CourseskillUpdate](Courseskill)
+courseskill = CRUDBase[CourseSkill, CourseSkillCreate, CourseSkillUpdate](CourseSkill)

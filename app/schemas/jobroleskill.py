@@ -2,32 +2,29 @@ from typing import Optional
 
 from pydantic import BaseModel, EmailStr
 from .skill import Skill
-from .jobrole import Jobrole
+from .jobrole import JobRole
 
 # Shared properties
-class JobroleskillBase(BaseModel):
-    id: int
-    skillid: str
+class JobRoleSkillBase(BaseModel):
+    jobrole_id: int
+    skill_id: str
 
 # Properties to receive via API on creation
-class JobroleskillCreate(JobroleskillBase):
-    # Need to provide minimally jobrole id and skill id on jobrole skill creation
-    id: int 
-    skillid: str 
+class JobRoleSkillCreate(JobRoleSkillBase):
+    pass
 
 # Properties to receive via API on update
-class JobroleskillUpdate(JobroleskillBase):
-    id: Optional[int] = None
+class JobRoleSkillUpdate(JobRoleSkillBase):
+    pass
 
 # Properties shared by models stored in DB
-class JobroleskillInDBBase(JobroleskillBase):
+class JobRoleSkillInDBBase(JobRoleSkillBase):
     skill: Optional[Skill] = None
-    jobrole: Optional[Jobrole] = None
+    jobrole: Optional[JobRole] = None
 
     class Config:
         orm_mode = True
 
 # Properties to return via API
-class Jobroleskill(JobroleskillInDBBase):
-    id: Optional[int] = None
-    skillid: Optional[str] = None
+class JobRoleSkill(JobRoleSkillInDBBase):
+    pass

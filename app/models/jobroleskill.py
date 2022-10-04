@@ -8,11 +8,11 @@ from app.db.base_class import Base
 
 if TYPE_CHECKING:
     from .skill import Skill
-    from .jobrole import Jobrole
+    from .jobrole import JobRole
 
-class Jobroleskill(Base):
-    id = Column(Integer,ForeignKey("jobrole.id"), primary_key=True) # Populates jobrole ID
-    skillid = Column(String(20), ForeignKey("skill.id"), primary_key=True) # Populates skill ID
+class JobRoleSkill(Base):
+    jobrole_id = Column(Integer,ForeignKey("jobrole.id"), primary_key=True) # Populates jobrole ID
+    skill_id = Column(String(20), ForeignKey("skill.id"), primary_key=True) # Populates skill ID
 
-    skill = relationship("Skill", back_populates="skills")
-    jobrole = relationship("Jobrole", back_populates="jobroles")
+    jobrole = relationship("JobRole", back_populates="jobroleskills")
+    skill = relationship("Skill", back_populates="jobroleskills")

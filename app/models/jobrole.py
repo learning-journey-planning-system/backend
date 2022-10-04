@@ -7,14 +7,13 @@ from sqlalchemy.orm import relationship
 from app.db.base_class import Base
 
 if TYPE_CHECKING:
-     from .jobrole import Jobrole
-     from .jobroleskill import Jobroleskill
+    from .jobroleskill import JobRoleSkill
 
-class Jobrole(Base):
+class JobRole(Base):
     id = Column(Integer, primary_key=True) # Populates Jobrole ID
     jobrole_name = Column(String(20), nullable=False)
     deleted = Column(Boolean, default = False)
 
-    jobroles = relationship("Jobroleskill", back_populates="jobrole")
+    jobroleskills = relationship("JobRoleSkill", back_populates="jobrole")
 
     
