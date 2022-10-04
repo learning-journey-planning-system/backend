@@ -1,3 +1,4 @@
+from ast import Str
 from typing import Any, List
 
 from fastapi import APIRouter, Depends, HTTPException
@@ -78,7 +79,7 @@ def update_skill(
 def delete_skill(
     *,
     db: Session = Depends(deps.get_db),
-    skill_id: int
+    skill_id: str
 ) -> Any:
     """
     Delete a skill.
