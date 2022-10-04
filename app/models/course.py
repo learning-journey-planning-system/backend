@@ -2,12 +2,13 @@ from typing import TYPE_CHECKING
 
 from sqlalchemy import Column, Integer, String, Boolean
 from sqlalchemy.orm import relationship
-from app.api.api_v1.endpoints import registration
 
 from app.db.base_class import Base
 
 if TYPE_CHECKING:
     from .courseskill import CourseSkill
+    from .selection import Selection
+    from .registration import Registration
 
 
 class Course(Base):
