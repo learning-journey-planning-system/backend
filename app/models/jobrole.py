@@ -5,6 +5,7 @@ from sqlalchemy import Column, Integer, String, ForeignKey, Boolean
 from sqlalchemy.orm import relationship
 
 from app.db.base_class import Base
+from app.models import learningjourney
 
 if TYPE_CHECKING:
     from .jobroleskill import JobRoleSkill
@@ -15,5 +16,7 @@ class JobRole(Base):
     deleted = Column(Boolean, default = False)
 
     jobroleskills = relationship("JobRoleSkill", back_populates="jobrole")
+
+    learningjourneys = relationship("LearningJourney", back_populates="jobrole")
 
     

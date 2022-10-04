@@ -2,6 +2,7 @@ from typing import TYPE_CHECKING
 
 from sqlalchemy import Column, Integer, String, Boolean
 from sqlalchemy.orm import relationship
+from app.api.api_v1.endpoints import registration
 
 from app.db.base_class import Base
 
@@ -19,4 +20,5 @@ class Course(Base):
 
     courseskills = relationship("CourseSkill", back_populates="course")
     selections = relationship("Selection", back_populates="course")
+    registrations = relationship("Registration", back_populates="course")
 
