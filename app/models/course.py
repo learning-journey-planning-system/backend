@@ -7,7 +7,7 @@ from app.db.base_class import Base
 
 
 class Course(Base):
-    id = Column(Integer, primary_key=True)
+    id = Column(String(20), primary_key=True)
     course_name = Column(String(50))
     course_desc = Column(String(255))
     course_status = Column(String(15)) # Active or Retired

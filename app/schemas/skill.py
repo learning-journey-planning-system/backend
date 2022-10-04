@@ -8,7 +8,7 @@ class SkillBase(BaseModel):
 
 # Properties to receive via API on creation
 class SkillCreate(SkillBase):
-    id: int
+    id: str
     skill_name: str
     deleted: bool
 
@@ -31,6 +31,6 @@ class SkillInDBBase(SkillBase):
 
 # Properties to return via API
 class Skill(SkillInDBBase):
-    id: int 
+    id: str
     skill_name: str
     deleted: bool
