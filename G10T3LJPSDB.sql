@@ -94,3 +94,28 @@ INSERT INTO skill (id,skill_name,deleted) VALUES
 ('SK-09','Administration',FALSE),
 ('SK-10','Programming',FALSE)
 ;
+
+INSERT INTO registration (id,course_id,staff_id,reg_status,completion_status) VALUES
+(101, 'FIN-003', 1,'Registered','Completed'), 
+(102, 'IS-002', 1,'Registered','In Progress'), 
+(103, 'IS-003', 4,'Rejected','Not Completed'), 
+(104, 'IS-002', 3,'Waitlist','Not Completed'),  
+(105, 'IS-003', 3, 'Registered','Completed')
+;
+
+INSERT INTO learning_journey (id,staff_id,jobrole_id) VALUES
+(201,1,01),
+(202,1,02),
+(203,4,05),
+(204,3,10),
+(205,3,09);
+
+INSERT INTO selection (learningjourney_id,course_id) VALUES
+(201,'FIN-003'),
+(201,'FIN-002'),
+(202,'IS-002'),
+(202,'FIN-002'),
+(203,'IS-003'),
+(204,'IS-002'),
+(205,'IS-003')
+;
