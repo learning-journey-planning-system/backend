@@ -8,7 +8,7 @@ class CRUDJobRole(CRUDBase[JobRole, JobRoleCreate, JobRoleUpdate]):
 
     # update jobrole to deleted
     def delete(self, db: Session, *, jobrole_id: int) -> Optional[JobRole]:
-        jobrole = db.query(self.model).get(jobrole_id)
+        jobrole = db.query(self.model).get({"jobrole_id":jobrole_id})
         setattr(jobrole, 'deleted', True)
         return db.query(self.model).all()
 

@@ -18,9 +18,9 @@ class CRUDJobRoleSkill(CRUDBase[JobRoleSkill, JobRoleSkillCreate, JobRoleSkillUp
         )
 
     def remove(self, db: Session, *, jobrole_id: int, skill_id: str) -> List[JobRoleSkill]:
-        obj = db.query(self.model).get(jobrole_id, skill_id)
-        db.delete(obj)
-        db.commit()
-        return db.query(self.model).all()    
+                obj = db.query(self.model).get({"jobrole_id":jobrole_id, "skill_id":skill_id})
+                db.delete(obj)
+                db.commit()
+                return db.query(self.model).all()        
 
 jobroleskill = CRUDJobRoleSkill(JobRoleSkill)

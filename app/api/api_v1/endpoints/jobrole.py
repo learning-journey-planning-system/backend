@@ -83,7 +83,7 @@ def delete_jobrole(
     """
     Delete a JobRole.
     """
-    JobRole = crud.JobRole.get(db=db, id=jobrole_id,)
+    JobRole = crud.jobrole.get(db=db, id=jobrole_id,)
     if not JobRole:
         raise HTTPException(status_code=404, detail="JobRole not found")
     remaining_jobrole = crud.jobrole.remove(db=db, id=jobrole_id)
