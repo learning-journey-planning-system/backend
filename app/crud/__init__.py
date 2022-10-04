@@ -3,7 +3,9 @@ from .crud_role import role
 from .crud_staff import staff
 from .crud_course import course
 from .crud_skill import skill
-
+from .crud_jobrole import jobrole
+from .crud_courseskill import courseskill
+from .crud_jobroleskill import jobroleskill
 
 # For a new basic set of CRUD operations you could just do
 
