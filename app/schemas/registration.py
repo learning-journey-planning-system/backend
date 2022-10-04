@@ -1,37 +1,37 @@
 from typing import Optional
 
 from pydantic import BaseModel, EmailStr
-from .role import Role
+from .staff import Staff
+from .course import Course
 
 # Shared properties
 class StaffBase(BaseModel):
-    staff_fname: Optional[str] = None
-    staff_lname: Optional[str] = None
-    dept: Optional[str] = None
-    email: Optional[EmailStr] = None
-    role_id: Optional[int] = None
+    course_id: Optional[str] = None
+    staff_id: Optional[int] = None
+    reg_status: Optional[str] = None
+    completion_status: Optional[str] = None
 
 # Properties to receive via API on creation
 class StaffCreate(StaffBase):
     # Need to provide minimally staff_id and password on staff creation
     id: int # since we will be getting this from LMS, we do not need to autogenerate it
-    password: str
 
 # Properties to receive via API on update
 class StaffUpdate(StaffBase):
-    password: Optional[str] = None
+    pass
 
 # Properties shared by models stored in DB
 class StaffInDBBase(StaffBase):
     id: Optional[int] = None
-    role: Optional[Role] = None
+    course: Optional[Course] = None
+    staff: Optional[Staff] = None
 
     class Config:
         orm_mode = True
 
 # Properties to return via API
 class Staff(StaffInDBBase):
-    password: Optional[str] = None
+    pass
 
 # Additional properties to return via API
 # @dataclass
