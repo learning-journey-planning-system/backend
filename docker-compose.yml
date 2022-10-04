@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  mysql-db:
+    container_name: mysql-db
+    image: mysql:latest
+    platform: linux/amd64
+    environment:
+      - MYSQL_DATABASE='G10T3_LJPS_DB'
+      - MYSQL_ROOT_PASSWORD='root'
+    expose:
+      - "8889"
+    ports:
+      - "8889:8889"
+  backend-server:
+    container_name: "backend"
+    build: .    
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mysql-db
