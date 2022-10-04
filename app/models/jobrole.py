@@ -5,10 +5,10 @@ from sqlalchemy import Column, Integer, String, ForeignKey, Boolean
 from sqlalchemy.orm import relationship
 
 from app.db.base_class import Base
-from app.models import learningjourney
 
 if TYPE_CHECKING:
     from .jobroleskill import JobRoleSkill
+    from .learningjourney import LearningJourney
 
 class JobRole(Base):
     id = Column(Integer, primary_key=True) # Populates Jobrole ID

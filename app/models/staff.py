@@ -2,13 +2,13 @@ from typing import TYPE_CHECKING
 
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
-from app.api.api_v1.endpoints import registration
 
 from app.db.base_class import Base
-from app.models import learningjourney
 
 if TYPE_CHECKING:
     from .role import Role
+    from .learningjourney import LearningJourney
+    from .registration import Registration
 
 class Staff(Base):
     id = Column(Integer, primary_key=True) # user logs in with this

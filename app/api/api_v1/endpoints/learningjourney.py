@@ -29,11 +29,11 @@ def create_learningjourney(
     """
     Create new learning journey.
     """
-    learningjourney = crud.learningjourney.get(db, id=learningjourney_in.id)
+    learningjourney = crud.learningjourney.get_learning_journey_by_staff_id_and_jobrole_id(db, staff_id=learningjourney_in.staff_id, jobrole_id=learningjourney_in.jobrole_id)
     if learningjourney:
         raise HTTPException(
             status_code=400,
-            detail="The learning journey with this learningjourney id already exists in the system.",
+            detail="The learning journey with this staff_id and jobrole_id already exists in the system.",
         )
     learningjourney = crud.learningjourney.create(db=db, obj_in=learningjourney_in)
     return learningjourney
@@ -54,21 +54,21 @@ def read_learningjourney(
     return learningjourney
 
 
-@router.put("/{learningjourney_id}", response_model=schemas.LearningJourney)
-def update_learningjourney(
-    *,
-    db: Session = Depends(deps.get_db),
-    learningjourney_id: int,
-    learningjourney_in: schemas.LearningJourneyUpdate
-) -> Any:
-    """
-    Update a learning journey.
-    """
-    learningjourney = crud.learningjourney.get(db=db, id=learningjourney_id)
-    if not learningjourney:
-        raise HTTPException(status_code=404, detail="Learning Journey not found")
-    learningjourney = crud.learningjourney.update(db=db, db_obj=learningjourney, obj_in=learningjourney_in)
-    return learningjourney
+# @router.put("/{learningjourney_id}", response_model=schemas.LearningJourney)
+# def update_learningjourney(
+#     *,
+#     db: Session = Depends(deps.get_db),
+#     learningjourney_id: int,
+#     learningjourney_in: schemas.LearningJourneyUpdate
+# ) -> Any:
+#     """
+#     Update a learning journey.
+#     """
+#     learningjourney = crud.learningjourney.get(db=db, id=learningjourney_id)
+#     if not learningjourney:
+#         raise HTTPException(status_code=404, detail="Learning Journey not found")
+#     learningjourney = crud.learningjourney.update(db=db, db_obj=learningjourney, obj_in=learningjourney_in)
+#     return learningjourney
 
 
 @router.delete("/{learningjourney_id}", response_model=List[schemas.LearningJourney])

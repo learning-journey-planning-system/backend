@@ -82,7 +82,7 @@ def delete_selection(
     """
     Delete a selection.
     """
-    selection = crud.selection.get(db=db, learningjourney_id=learningjourney_id, course_id=course_id)
+    selection = crud.selection.get(db, learningjourney_id=learningjourney_id, course_id=course_id)
     if not selection:
         raise HTTPException(status_code=404, detail="Selection not found")
     remaining_selections = crud.selection.remove(db=db, learningjourney_id=learningjourney_id, course_id=course_id)

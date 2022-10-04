@@ -7,8 +7,8 @@ from sqlalchemy.orm import relationship
 from app.db.base_class import Base
 
 if TYPE_CHECKING:
-    from .skill import Skill
     from .jobrole import JobRole
+    from .skill import Skill
 
 class JobRoleSkill(Base):
     jobrole_id = Column(Integer,ForeignKey("jobrole.id"), primary_key=True) # Populates jobrole ID

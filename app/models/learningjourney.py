@@ -8,6 +8,7 @@ from app.db.base_class import Base
 if TYPE_CHECKING:
     from .staff import Staff
     from .jobrole import JobRole
+    from .selection import Selection
 
 
 class LearningJourney(Base):
