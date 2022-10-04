@@ -5,8 +5,8 @@ Naming convention: snake_case
 
 ### Setup: 
 1. Clone this repo
-2. On WAMP/MAMP
-2. Edit connection string in `app/core/config.py` at `SQLALCHEMY_DATABASE_URI`
+2. On MAMP/WAMP
+3. edit connection string in `app/core/config.py` at `SQLALCHEMY_DATABASE_URI` (you can use sql alchemy to help you test your connection)
 
 4. Use `pipenv` to run the app in virtual env -> its a better way to manage python applications and its requirements
 ```sh
