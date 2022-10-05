@@ -29,7 +29,7 @@ def create_selection(
     """
     Create new selection.
     """
-    selection = crud.selection.get(db, obj_in=selection_in)
+    selection = crud.selection.get(db, learningjourney_id=selection_in.learningjourney_id, course_id=selection_in.course_id)
     if selection:
         raise HTTPException(
             status_code=400,
