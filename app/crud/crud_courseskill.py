@@ -20,7 +20,10 @@ class CRUDCourseSkill(CRUDBase[CourseSkill, CourseSkillCreate, CourseSkillUpdate
                 obj = db.query(self.model).get({"skill_id":skill_id, "course_id":course_id})
                 db.delete(obj)
                 db.commit()
-                return db.query(self.model).all()        
+                return db.query(self.model).all()   
+
+    def get_courses_by_skill_id(self, db: Session, *, skill_id: int) -> List[CourseSkill]:
+        return db.query(CourseSkill).filter(CourseSkill.skill_id == skill_id).all()   
 
 
 courseskill = CRUDCourseSkill(CourseSkill)

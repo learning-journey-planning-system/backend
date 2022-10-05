@@ -1,6 +1,7 @@
-from typing import Optional
+from typing import Optional, List
 
 from pydantic import BaseModel
+
 
 # Shared properties
 class CourseBase(BaseModel):
@@ -30,6 +31,5 @@ class CourseInDBBase(CourseBase):
 class Course(CourseInDBBase):
     id : str
     
-
 
     
