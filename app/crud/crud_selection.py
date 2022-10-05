@@ -26,4 +26,7 @@ class CRUDSelection(CRUDBase[Selection, SelectionCreate, SelectionUpdate]):
         return db.query(Selection).filter(Selection.learningjourney_id == learningjourney_id).all()
 
 
+    def get_selections_by_learningjourney_id(self, db: Session, learningjourney_id:int) -> List[Selection]:
+        return db.query(Selection).filter(Selection.learningjourney_id == learningjourney_id).all()
+
 selection = CRUDSelection(Selection)
