@@ -29,17 +29,18 @@ def create_selection(
     """
     Create new selection.
     """
-    selection = crud.selection.get(db, learningjourney_id=selection_in.learningjourney_id, course_id=selection_in.course_id)
+    selection = crud.selection.get(db, obj_in=selection_in)
     if selection:
         raise HTTPException(
             status_code=400,
             detail="This selection already exists in the system.",
         )
+    
     selection = crud.selection.create(db=db, obj_in=selection_in)
     return selection
 
 
-@router.get("/{learningjourney_id}/{course_id}", response_model=schemas.Selection)
+@router.get("/lj_id={learningjourney_id}&c_id={course_id}", response_model=schemas.Selection)
 def read_selection(
     *,
     db: Session = Depends(deps.get_db),
@@ -47,7 +48,7 @@ def read_selection(
     course_id: str
 ) -> Any:
     """
-    Get selection by ID.
+    Get selection by learningjourney_id and course_id.
     """
     selection = crud.selection.get(db=db, learningjourney_id=learningjourney_id, course_id=course_id)
     if not selection:
@@ -72,7 +73,7 @@ def read_selection(
 #     return selection
 
 
-@router.delete("/{learningjourney_id}/{course_id}", response_model=List[schemas.Selection])
+@router.delete("/lj_id={learningjourney_id}&c_id={course_id}", response_model=List[schemas.Selection])
 def delete_selection(
     *,
     db: Session = Depends(deps.get_db),
