@@ -85,3 +85,17 @@ def delete_learningjourney(
         raise HTTPException(status_code=404, detail="Learning Journey not found")
     remaining_learningjourneys = crud.learningjourney.remove(db=db, id=learningjourney_id)
     return remaining_learningjourneys
+
+@router.get("/for_one_staff/{staff_id}", response_model=List[schemas.LearningJourney])
+def get_learningjourneys_for_staff(
+    *,
+    db: Session = Depends(deps.get_db),
+    staff_id: int
+) -> Any:
+    """
+    Get learning journeys for one staff.
+    """
+    learningjourneys = crud.learningjourney.get_learning_journeys_by_staff_id(db=db, staff_id=staff_id)
+    if not learningjourneys:
+        raise HTTPException(status_code=404, detail="This Staff has no Learning Journeys")
+    return learningjourneys
