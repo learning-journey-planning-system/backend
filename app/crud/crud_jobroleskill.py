@@ -21,6 +21,9 @@ class CRUDJobRoleSkill(CRUDBase[JobRoleSkill, JobRoleSkillCreate, JobRoleSkillUp
                 obj = db.query(self.model).get({"jobrole_id":jobrole_id, "skill_id":skill_id})
                 db.delete(obj)
                 db.commit()
-                return db.query(self.model).all()        
+                return db.query(self.model).all()    
+
+    def get_skills_by_jobrole_id(self, db: Session, jobrole_id:int) -> List[JobRoleSkill]:
+        return db.query(JobRoleSkill).filter(JobRoleSkill.jobrole_id == jobrole_id).all()    
 
 jobroleskill = CRUDJobRoleSkill(JobRoleSkill)
