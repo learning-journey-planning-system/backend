@@ -88,3 +88,18 @@ def delete_selection(
         raise HTTPException(status_code=404, detail="Selection not found")
     remaining_selections = crud.selection.remove(db=db, learningjourney_id=learningjourney_id, course_id=course_id)
     return remaining_selections
+
+# @router.get("/for_one_lj/{lj_id}", response_model=List[schemas.Selection])
+# def get_selections_for_a_learningjourney(
+#     *,
+#     db: Session = Depends(deps.get_db),
+#     learningjourney_id: int,
+# ) -> Any:
+#     """
+#     Get all the courses saved to a learning journey.
+#     """
+#     learningjourney = crud.learningjourney.get(db=db, id=learningjourney_id)
+#     if not learningjourney:
+#         raise HTTPException(status_code=404, detail="This learning journey does not exist.")
+#     selections = crud.selection.get_selections_by_lj(db=db, learningjourney_id=learningjourney_id)
+#     return selections
