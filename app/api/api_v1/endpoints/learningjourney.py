@@ -29,7 +29,7 @@ def create_learningjourney(
     """
     Create new learning journey.
     """
-    learningjourney = crud.learningjourney.get_learning_journey_by_staff_id_and_jobrole_id(db, staff_id=learningjourney_in.staff_id, jobrole_id=learningjourney_in.jobrole_id)
+    learningjourney = crud.learningjourney.get_learning_journey_by_staff_id_and_jobrole_id(db, obj_in=learningjourney_in)
     if learningjourney:
         raise HTTPException(
             status_code=400,
