@@ -9,7 +9,6 @@ class Staff(Base):
     staff_lname = Column(String(50), nullable=False)
     dept = Column(String(50), nullable=False)
     email = Column(String(50), nullable=False)
-    password = Column(String(50), nullable=False)
 
     # one staff has one role
     role_id = Column(Integer, ForeignKey("role.id"), nullable=False)
