@@ -1,5 +1,4 @@
 from typing import Any, List
-from app.schemas import jobroleskill
 
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
@@ -29,8 +28,9 @@ def create_learningjourney(
 ) -> Any:
     """
     Create new learning journey.
+    For SC6 create a new learning journey.
     """
-    learningjourney = crud.learningjourney.get_learning_journey_by_staff_id_and_jobrole_id(db, obj_in=learningjourney_in)
+    learningjourney = crud.learningjourney.get_learning_journey_by_create_obj(db, obj_in=learningjourney_in)
     if learningjourney:
         raise HTTPException(
             status_code=400,
@@ -40,7 +40,7 @@ def create_learningjourney(
     return learningjourney
 
 
-@router.get("/{learningjourney_id}", response_model=schemas.LearningJourney)
+@router.get("/{learningjourney_id}", response_model=schemas.LearningJourneyFullWithSkills)
 def read_learningjourney(
     *,
     db: Session = Depends(deps.get_db),
@@ -48,6 +48,7 @@ def read_learningjourney(
 ) -> Any:
     """
     Get learning journey by ID.
+    For SC20 View learning journey.
     """
     learningjourney = crud.learningjourney.get(db=db, id=learningjourney_id)
     if not learningjourney:
@@ -55,21 +56,21 @@ def read_learningjourney(
     return learningjourney
 
 
-# @router.put("/{learningjourney_id}", response_model=schemas.LearningJourney)
-# def update_learningjourney(
-#     *,
-#     db: Session = Depends(deps.get_db),
-#     learningjourney_id: int,
-#     learningjourney_in: schemas.LearningJourneyUpdate
-# ) -> Any:
-#     """
-#     Update a learning journey.
-#     """
-#     learningjourney = crud.learningjourney.get(db=db, id=learningjourney_id)
-#     if not learningjourney:
-#         raise HTTPException(status_code=404, detail="Learning Journey not found")
-#     learningjourney = crud.learningjourney.update(db=db, db_obj=learningjourney, obj_in=learningjourney_in)
-#     return learningjourney
+@router.put("/{learningjourney_id}", response_model=schemas.LearningJourney)
+def update_learningjourney(
+    *,
+    db: Session = Depends(deps.get_db),
+    learningjourney_id: int,
+    learningjourney_in: schemas.LearningJourneyUpdate
+) -> Any:
+    """
+    Update a learning journey.
+    """
+    learningjourney = crud.learningjourney.get(db=db, id=learningjourney_id)
+    if not learningjourney:
+        raise HTTPException(status_code=404, detail="Learning Journey not found")
+    learningjourney = crud.learningjourney.update(db=db, db_obj=learningjourney, obj_in=learningjourney_in)
+    return learningjourney
 
 
 @router.delete("/{learningjourney_id}", response_model=List[schemas.LearningJourney])
@@ -87,31 +88,36 @@ def delete_learningjourney(
     remaining_learningjourneys = crud.learningjourney.remove(db=db, id=learningjourney_id)
     return remaining_learningjourneys
 
-@router.get("/for_one_staff/{staff_id}", response_model=List[schemas.LearningJourneyWithCourses])
-def get_learningjourneys_for_staff(
+
+@router.put("/{learningjourney_id}/new_course/", response_model=schemas.LearningJourneyFull)
+def add_course_to_learning_journey(
     *,
     db: Session = Depends(deps.get_db),
-    staff_id: int
+    learningjourney_id: int,
+    course_id: str
 ) -> Any:
     """
-    Get learning journeys for one staff.
+    Add a course to a learning journey.
+    For SC6 save a course to the new learning journey.
     """
 
-    # get learning journeys for staff
-    learningjourneys = crud.learningjourney.get_learning_journeys_by_staff_id(db=db, staff_id=staff_id)
-    if not learningjourneys:
-        raise HTTPException(status_code=404, detail="This Staff has no Learning Journeys")
+    # Get the learning journey
+    learningjourney = crud.learningjourney.get(db=db, id=learningjourney_id)
+    if not learningjourney:
+        raise HTTPException(status_code=404, detail="Learning Journey not found")
+    
+    # Get the course
+    course = crud.course.get(db=db, id=course_id)
+    if not course:
+        raise HTTPException(status_code=404, detail="Course not found")
 
-    # get courses for each learning journey
-    for lj in learningjourneys:
-        id = lj.id
-        selections = crud.selection.get_selections_by_learningjourney_id(db=db, learningjourney_id=id)
-        courses = [selection.course for selection in selections]
-        setattr(lj, 'courses', courses)
-
-        jr_id = lj.jobrole_id
-        jobroleskills = crud.jobroleskill.get_jobroleskills_by_jobrole_id(db=db, jobrole_id=jr_id)
-        skills = [jobroleskill.skill for jobroleskill in jobroleskills]
-        setattr(lj, 'skills', skills)
-
-    return learningjourneys
+    # Check if the course is already in the learning journey
+    if course in learningjourney.courses:
+        raise HTTPException(
+            status_code=400,
+            detail="The course is already in the learning journey.",
+        )
+    
+    # Add the course to the learning journey
+    learningjourney.courses.append(course)
+    return learningjourney

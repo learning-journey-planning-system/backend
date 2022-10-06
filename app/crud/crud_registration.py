@@ -1,9 +1,7 @@
 from typing import List
 
 from sqlalchemy.orm import Session
-
 from app.crud.base import CRUDBase
-from app.models import registration
 from app.models.registration import Registration
 from app.schemas.registration import RegistrationCreate, RegistrationUpdate
 

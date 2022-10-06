@@ -5,16 +5,16 @@ INSERT INTO role (id,role_name) VALUES
 (002,'User'),
 (003,'Manager');
 
-INSERT INTO staff (id,staff_fname,staff_lname,dept,email,role_id,password) VALUES
-(1,'admin','staff','HR','admin@gmail.com',002,'password1') ,
-(2,'admin','staff','HR','admin@gmail.com',001,'password2'),
-(3,'user','staff','Product','user@gmail.com',002,'password3') ,
-(4,'manager','staff','Operations','manager@gmail.com',002,'password4'),
-(5,'manager','staff','Operations','manager@gmail.com',003,'password5'),
-(6,'jerry','tom','HR','jerry@gmail.com',002,'password6'),
-(7,'jerry','tom','HR','jerry@gmail.com',001,'password7'),
-(8,'spongebob','sqaurepants','Finance','spongebob@gmail.com',002,'password8'),
-(9,'spongebob','sqaurepants','Finance','spongebob@gmail.com',003,'password9');
+INSERT INTO staff (id,staff_fname,staff_lname,dept,email,role_id) VALUES
+(1,'admin','staff','HR','admin@gmail.com',002),
+(2,'admin','staff','HR','admin@gmail.com',001),
+(3,'user','staff','Product','user@gmail.com',002),
+(4,'manager','staff','Operations','manager@gmail.com',002),
+(5,'manager','staff','Operations','manager@gmail.com',003),
+(6,'jerry','tom','HR','jerry@gmail.com',002),
+(7,'jerry','tom','HR','jerry@gmail.com',001),
+(8,'spongebob','sqaurepants','Finance','spongebob@gmail.com',002),
+(9,'spongebob','sqaurepants','Finance','spongebob@gmail.com',003);
 
 INSERT INTO jobrole (id,jobrole_name,deleted) VALUES
 (01,'Operations Executive',FALSE),
@@ -77,7 +77,7 @@ INSERT INTO learningjourney (id,staff_id,jobrole_id) VALUES
 (204,3,10),
 (205,3,09);
 
-INSERT INTO selection (learningjourney_id,course_id) VALUES
+INSERT INTO course_learningjourney (learningjourney_id,course_id) VALUES
 (201,'FIN-003'),
 (201,'FIN-002'),
 (202,'IS-002'),
@@ -88,7 +88,7 @@ INSERT INTO selection (learningjourney_id,course_id) VALUES
 ;
 
 
-INSERT INTO courseskill (skill_id,course_id) VALUES
+INSERT INTO course_skill (skill_id,course_id) VALUES
 ('SK-01','IS-001'),
 ('SK-01','IS-002'),
 ('SK-02','HR-002'),
@@ -105,7 +105,7 @@ INSERT INTO courseskill (skill_id,course_id) VALUES
 ('SK-10','IS-002')
 ;
 
-INSERT INTO jobroleskill (jobrole_id,skill_id) VALUES
+INSERT INTO jobrole_skill (jobrole_id,skill_id) VALUES
 (01,'SK-08'),
 (01,'SK-05'),
 (02,'SK-03'),

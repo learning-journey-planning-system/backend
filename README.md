@@ -115,3 +115,8 @@ Used his implementation but simplified the app by docker, auth, celery and other
 └── Pipfile.lock                
 └── README.md                   
 ```
+
+### Ground rules when developing new APIs
+1. Never touch/ remove the original get all, create one, read one, update one and delete one APIs -> allows tester to quickly manipulate data in database during testing
+
+2. 
