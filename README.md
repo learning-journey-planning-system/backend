@@ -1,8 +1,6 @@
 # backend
 
 
-Naming convention: snake_case
-
 <!--### 1. Shortcut to start the app:
 1. Ensure MAMP/WAMP is on
 2. Ensure you have pipenv installed
@@ -47,7 +45,21 @@ uvicorn app.main:app --reload
 [his documentation](https://fastapi.tiangolo.com/)  
 Used his implementation but simplified the app by docker, auth, celery and other unrequired utils.
 
-### 4. Folder structure explanation:
+### 4. Ground rules when developing new APIs
+1. API Naming: 
+- Use nouns instead of verbs in endpoint paths
+- Use logical nesting on endpoints, just like how you organise your folders (eg. if you want to get skills for a course, the route should be `~/course/{course_id}/skills`)
+2. Error Handling:
+- try to think of the possible errors that might happen and handle it nicely
+- eg. frontend passes a skill_id that does not exist, return a `skill does not exist`
+3. API code logic
+- try to use the crud base classes available already if can!
+- if not create new crud methods with meaningful names
+4. API definition and Description
+- the function name will be the api definition
+- and the notes in the `''''''` is the api Description. good to add the SC or issue tag it is related to so FE can reference better and know which api we developed for them
+
+### 5. Folder structure explanation:
 
 ##### Overview:
 ```sh
@@ -115,8 +127,3 @@ Used his implementation but simplified the app by docker, auth, celery and other
 └── Pipfile.lock                
 └── README.md                   
 ```
-
-### Ground rules when developing new APIs
-1. Never touch/ remove the original get all, create one, read one, update one and delete one APIs -> allows tester to quickly manipulate data in database during testing
-
-2. 
