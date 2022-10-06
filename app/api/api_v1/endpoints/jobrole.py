@@ -15,6 +15,7 @@ def read_jobroles(
 ) -> Any:
     """
     Retrieve JobRoles.
+    For SC15 View list of job roles by admin.
     """
     jobroles = crud.jobrole.get_multi(db)
     return jobroles
@@ -83,25 +84,75 @@ def delete_jobrole(
     remaining_jobrole = crud.jobrole.remove(db=db, id=jobrole_id)
     return remaining_jobrole
 
-# @router.get("/allskills/{jobrole_id}", response_model=schemas.JobRoleWithSkills)
-# def get_all_skills_for_roles(
-#     *,
-#     db: Session = Depends(deps.get_db),
-#     jobrole_id: int
-# ) -> Any:
-#     """
-#     Get skills for each role.
-#     """
+@router.put("/{jobrole_id}/new_skill/", response_model=schemas.JobRoleWithSkills)
+def add_skill_to_jobrole(
+    *,
+    db: Session = Depends(deps.get_db),
+    jobrole_id: int,
+    skill_id: str
+) -> Any:
+    """
+    Add a skill to a JobRole.
+    For SC18 Assign skill to jobrole.
+    """
 
-#     # get job role
-#     jobrole = crud.jobrole.get(db=db, id=jobrole_id)
-#     if not jobrole:
-#         raise HTTPException(status_code=404, detail="JobRole not found")
+    # Check if jobrole exists
+    jobrole = crud.jobrole.get(db, id=jobrole_id)
+    if not jobrole:
+        raise HTTPException(
+            status_code=404,
+            detail="The jobrole with this jobrole_id does not exist in the system",
+        )
+    
+    # Check if skill exists
+    skill = crud.skill.get(db, id=skill_id)
+    if not skill:
+        raise HTTPException(
+            status_code=404,
+            detail="The skill with this skill_id does not exist in the system",
+        )
+    
+    # Check if skill is already assigned to jobrole
+    if skill in jobrole.skills:
+        raise HTTPException(
+            status_code=400,
+            detail="The skill with this skill_id is already assigned to this jobrole",
+        )
+    
+    # Add skill to jobrole
+    jobrole.skills.append(skill)
+    db.commit()
+    db.refresh(jobrole)
+    return jobrole
 
-#     # get skills for each job role
-#     jobroleskills = crud.jobroleskill.get_jobroleskills_by_jobrole_id(db=db,jobrole_id=jobrole_id)
+@router.get("/{jobrole_id}/skills/", response_model=List[schemas.Skill])
+def get_skills_for_jobrole(
+    *,
+    db: Session = Depends(deps.get_db),
+    jobrole_id: int
+) -> Any:
+    """
+    Get skills for each role.
+    SC13 View skills for a jobrole.
+    """
 
-#     skills = [jobroleskill.skill for jobroleskill in jobroleskills]
-#     setattr(jobrole, 'skills', skills)
+    # Check if jobrole exists
+    jobrole = crud.jobrole.get(db, id=jobrole_id)
+    if not jobrole:
+        raise HTTPException(
+            status_code=404,
+            detail="The jobrole with this jobrole_id does not exist in the system",
+        )
+    
+    return jobrole.skills
 
-#     return jobrole
+@router.get("/available/", response_model=List[schemas.JobRole])
+def get_available_jobroles(
+    db: Session = Depends(deps.get_db)
+) -> Any:
+    """
+    Retrieve JobRoles that are available. Meaning deleted = 0.
+    For SC1 View available job roles by learner.
+    """
+    jobroles = crud.jobrole.get_multi_available(db)
+    return jobroles

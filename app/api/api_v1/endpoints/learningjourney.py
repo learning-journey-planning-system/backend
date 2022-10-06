@@ -28,6 +28,7 @@ def create_learningjourney(
 ) -> Any:
     """
     Create new learning journey.
+    For SC6 create a new learning journey.
     """
     learningjourney = crud.learningjourney.get_learning_journey_by_create_obj(db, obj_in=learningjourney_in)
     if learningjourney:
@@ -86,3 +87,37 @@ def delete_learningjourney(
         raise HTTPException(status_code=404, detail="Learning Journey not found")
     remaining_learningjourneys = crud.learningjourney.remove(db=db, id=learningjourney_id)
     return remaining_learningjourneys
+
+
+@router.put("/{learningjourney_id}/new_course/", response_model=schemas.LearningJourneyFull)
+def add_course_to_learning_journey(
+    *,
+    db: Session = Depends(deps.get_db),
+    learningjourney_id: int,
+    course_id: str
+) -> Any:
+    """
+    Add a course to a learning journey.
+    For SC6 save a course to the new learning journey.
+    """
+
+    # Get the learning journey
+    learningjourney = crud.learningjourney.get(db=db, id=learningjourney_id)
+    if not learningjourney:
+        raise HTTPException(status_code=404, detail="Learning Journey not found")
+    
+    # Get the course
+    course = crud.course.get(db=db, id=course_id)
+    if not course:
+        raise HTTPException(status_code=404, detail="Course not found")
+
+    # Check if the course is already in the learning journey
+    if course in learningjourney.courses:
+        raise HTTPException(
+            status_code=400,
+            detail="The course is already in the learning journey.",
+        )
+    
+    # Add the course to the learning journey
+    learningjourney.courses.append(course)
+    return learningjourney

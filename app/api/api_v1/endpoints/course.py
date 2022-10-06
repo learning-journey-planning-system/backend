@@ -15,6 +15,7 @@ def read_courses(
 ) -> Any:
     """
     Retrieve courses.
+    For SC24 View list of courses by admin.
     """
     courses = crud.course.get_multi(db)
     return courses
@@ -89,3 +90,45 @@ def delete_course(
         raise HTTPException(status_code=404, detail="Course not found")
     remaining_course = crud.course.remove(db=db, id=course_id)
     return remaining_course
+
+@router.put("/{course_id}/new_skill/", response_model=schemas.CourseWithSkills)
+def add_skill_to_course(
+    *,
+    db: Session = Depends(deps.get_db),
+    course_id: str,
+    skill_id: str
+) -> Any:
+    """
+    Add a skill to a course.
+    For SC19 assign skill to a course.
+    """
+
+    # Check if course exists
+    course = crud.course.get(db, id=course_id)
+    if not course:
+        raise HTTPException(
+            status_code=404,
+            detail="The course with this course id does not exist in the system",
+        )
+    
+    # Check if skill exists
+    skill = crud.skill.get(db, id=skill_id)
+    if not skill:
+        raise HTTPException(
+            status_code=404,
+            detail="The skill with this skill id does not exist in the system",
+        )
+    
+    # Check if skill is already in course
+    if skill in course.skills:
+        raise HTTPException(
+            status_code=400,
+            detail="The skill with this skill id is already in the course",
+        )
+    
+    # Add skill to course
+    course.skills.append(skill)
+    db.commit()
+    db.refresh(course)
+
+    return course
