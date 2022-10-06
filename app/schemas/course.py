@@ -1,7 +1,7 @@
 from typing import Optional, List
 
 from pydantic import BaseModel
-
+from .skill import Skill
 
 # Shared properties
 class CourseBase(BaseModel):
@@ -10,11 +10,11 @@ class CourseBase(BaseModel):
     course_status : Optional[str] = None # Active or Retired
     course_type : Optional[str] = None # Internal or External 
     course_category : Optional[str] = None 
-    
 
 # Properties to receive via API on creation
 class CourseCreate(CourseBase):
     id : str
+    course_name: str # required
 
 # Properties to receive via API on update
 class CourseUpdate(CourseBase):
@@ -22,14 +22,18 @@ class CourseUpdate(CourseBase):
 
 # Properties shared by models stored in DB
 class CourseInDBBase(CourseBase):
-    pass
+    id : str
 
     class Config:
         orm_mode = True
 
 # Properties to return via API
 class Course(CourseInDBBase):
-    id : str
+    pass
+
+# Additional properties to return via API
+class CourseWithSkills(Course):
+    skills : List[Skill] = []
     
 
     

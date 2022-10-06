@@ -10,7 +10,7 @@ class JobRoleBase(BaseModel):
 
 # Properties to receive via API on creation
 class JobRoleCreate(JobRoleBase):
-    id: int # need to change to auto increment
+    jobrole_name: str # required
 
 # Properties to receive via API on update
 class JobRoleUpdate(JobRoleBase):
@@ -18,15 +18,15 @@ class JobRoleUpdate(JobRoleBase):
 
 # Properties shared by models stored in DB
 class JobRoleInDBBase(JobRoleBase):
-    pass
+    id: int
 
     class Config:
         orm_mode = True
 
 # Properties to return via API
 class JobRole(JobRoleInDBBase):
-    id: int
+    pass
 
 # Additional properties to return via API
-class JobRoleWithSkills(JobRoleInDBBase):
+class JobRoleWithSkills(JobRole):
     skills: List[Skill] = []

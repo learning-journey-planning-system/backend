@@ -9,6 +9,7 @@ class RoleBase(BaseModel):
 # Properties to receive via API on creation
 class RoleCreate(RoleBase):
     id: int
+    role_name: str # required
 
 # Properties to receive via API on update
 class RoleUpdate(RoleBase):
@@ -16,14 +17,11 @@ class RoleUpdate(RoleBase):
 
 # Properties shared by models stored in DB
 class RoleInDBBase(RoleBase):
-    pass
+    id: int
 
     class Config:
         orm_mode = True
 
 # Properties to return via API
 class Role(RoleInDBBase):
-    id: int
-
-# # Additional properties to return via API
-# class RoleInDB(RoleInDBBase):
+    pass

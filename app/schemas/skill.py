@@ -10,25 +10,23 @@ class SkillBase(BaseModel):
 
 # Properties to receive via API on creation
 class SkillCreate(SkillBase):
-    id: str
     skill_name: str
-    deleted: bool
 
 # Properties to receive via API on update
 class SkillUpdate(SkillBase):
     pass
 
-
 # Properties shared by models stored in DB
 class SkillInDBBase(SkillBase):
-    pass
+    id: int
 
     class Config:
         orm_mode = True
 
 # Properties to return via API
 class Skill(SkillInDBBase):
-    id: str
+    pass
 
-class SkillWithCourses(SkillInDBBase):
+# Additional properties to return via API
+class SkillWithCourses(Skill):
     courses: List[Course] = []

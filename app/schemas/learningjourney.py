@@ -5,7 +5,6 @@ from pydantic import BaseModel
 from .staff import Staff
 from .jobrole import JobRole
 from .course import Course
-from .skill import Skill
 
 # Shared properties
 class LearningJourneyBase(BaseModel):
@@ -24,8 +23,6 @@ class LearningJourneyUpdate(LearningJourneyBase):
 # Properties shared by models stored in DB
 class LearningJourneyInDBBase(LearningJourneyBase):
     id: int
-    staff: Staff
-    jobrole: JobRole
 
     class Config:
         orm_mode = True
@@ -35,6 +32,7 @@ class LearningJourney(LearningJourneyInDBBase):
     pass
 
 # Additional properties to return via API
-class LearningJourneyWithCourses(LearningJourneyInDBBase):
+class LearningJourneyFull(LearningJourney):
+    staff: Staff
+    jobrole: JobRole
     courses: List[Course] = []
-    skills: List[Skill] = []
