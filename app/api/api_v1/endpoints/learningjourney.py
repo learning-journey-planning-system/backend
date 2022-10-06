@@ -1,4 +1,5 @@
 from typing import Any, List
+from app.schemas import jobroleskill
 
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
@@ -85,3 +86,32 @@ def delete_learningjourney(
         raise HTTPException(status_code=404, detail="Learning Journey not found")
     remaining_learningjourneys = crud.learningjourney.remove(db=db, id=learningjourney_id)
     return remaining_learningjourneys
+
+@router.get("/for_one_staff/{staff_id}", response_model=List[schemas.LearningJourneyWithCourses])
+def get_learningjourneys_for_staff(
+    *,
+    db: Session = Depends(deps.get_db),
+    staff_id: int
+) -> Any:
+    """
+    Get learning journeys for one staff.
+    """
+
+    # get learning journeys for staff
+    learningjourneys = crud.learningjourney.get_learning_journeys_by_staff_id(db=db, staff_id=staff_id)
+    if not learningjourneys:
+        raise HTTPException(status_code=404, detail="This Staff has no Learning Journeys")
+
+    # get courses for each learning journey
+    for lj in learningjourneys:
+        id = lj.id
+        selections = crud.selection.get_selections_by_learningjourney_id(db=db, learningjourney_id=id)
+        courses = [selection.course for selection in selections]
+        setattr(lj, 'courses', courses)
+
+        jr_id = lj.jobrole_id
+        jobroleskills = crud.jobroleskill.get_jobroleskills_by_jobrole_id(db=db, jobrole_id=jr_id)
+        skills = [jobroleskill.skill for jobroleskill in jobroleskills]
+        setattr(lj, 'skills', skills)
+
+    return learningjourneys
