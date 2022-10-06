@@ -2,7 +2,7 @@ from .msg import Msg
 
 from .course import Course, CourseCreate, CourseUpdate
 from .courseskill import CourseSkill, CourseSkillCreate, CourseSkillUpdate
-from .jobrole import JobRole, JobRoleCreate, JobRoleUpdate
+from .jobrole import JobRole, JobRoleCreate, JobRoleUpdate, JobRoleWithSkills
 from .jobroleskill import JobRoleSkill, JobRoleSkillCreate, JobRoleSkillUpdate
 from .learningjourney import LearningJourney, LearningJourneyCreate, LearningJourneyUpdate, LearningJourneyWithCourses
 from .registration import Registration, RegistrationCreate, RegistrationUpdate
