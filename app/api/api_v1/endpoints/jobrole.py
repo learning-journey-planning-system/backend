@@ -108,7 +108,7 @@ def get_all_skills_for_roles(
     # get skills for each job role
     for jr in jobrole:
         id = jr.id
-        jobroleskills = crud.jobroleskill.get_skills_by_jobrole_id(db=db,jobrole_id=id)
+        jobroleskills = crud.jobroleskill.get_jobroleskills_by_jobrole_id(db=db,jobrole_id=id)
 
         skills = [jobroleskill.skill for jobroleskill in jobroleskills]
         setattr(jr, 'skills', skills)
