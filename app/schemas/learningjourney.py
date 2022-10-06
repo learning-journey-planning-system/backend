@@ -35,3 +35,7 @@ class LearningJourneyFull(LearningJourney):
     staff: Staff
     jobrole: JobRole
     courses: List[Course] = []
+
+from .course import CourseWithSkills
+class LearningJourneyFullWithSkills(LearningJourneyFull):
+    courses: List[CourseWithSkills] = []

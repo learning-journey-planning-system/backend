@@ -3,7 +3,7 @@ from typing import List
 from sqlalchemy.orm import Session
 from app.crud.base import CRUDBase
 from app.models.learningjourney import LearningJourney
-from app.schemas.learningjourney import LearningJourneyCreate, LearningJourneyUpdate
+from app.schemas.learningjourney import LearningJourneyCreate, LearningJourneyUpdate, LearningJourneyFullWithSkills
 
 class CRUDLearningJourney(CRUDBase[LearningJourney, LearningJourneyCreate, LearningJourneyUpdate]):
 
