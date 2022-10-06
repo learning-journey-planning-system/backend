@@ -23,6 +23,7 @@ Naming convention: snake_case
 pip install pipenv          # install pipenv
 pipenv shell                # start a virtual env in the current dir
 pipenv install --dev        # install all the specified dependencies
+```
 
 5. Continue with these codes
 ```sh
