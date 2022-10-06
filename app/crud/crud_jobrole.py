@@ -12,7 +12,4 @@ class CRUDJobRole(CRUDBase[JobRole, JobRoleCreate, JobRoleUpdate]):
         setattr(jobrole, 'deleted', True)
         return db.query(self.model).all()
 
-    def get_jobrole(self, db: Session, *, jobrole_id: int) -> List[JobRole]:
-        return db.query(JobRole).filter(JobRole.id == jobrole_id).all()
-
 jobrole = CRUDJobRole(JobRole)
