@@ -6,7 +6,8 @@ Naming convention: snake_case
 <!--### 1. Shortcut to start the app:
 1. Ensure MAMP/WAMP is on
 2. Ensure you have pipenv installed
-3. Execute the following script in the cli:
+3. pipenv shell
+4. Execute the following script in the cli:
 ```sh
 ./start_backend.sh
 ```-->
