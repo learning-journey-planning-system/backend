@@ -1,4 +1,3 @@
-import imp
 from .crud_course import course
 from .crud_jobrole import jobrole
 from .crud_role import role
