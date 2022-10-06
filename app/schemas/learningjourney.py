@@ -1,9 +1,11 @@
-from typing import Optional
+from typing import Optional, List
 
 from pydantic import BaseModel
 
 from .staff import Staff
 from .jobrole import JobRole
+from .course import Course
+from .skill import Skill
 
 # Shared properties
 class LearningJourneyBase(BaseModel):
@@ -32,5 +34,7 @@ class LearningJourneyInDBBase(LearningJourneyBase):
 class LearningJourney(LearningJourneyInDBBase):
     pass
 
-# # Additional properties to return via API
-# class LearningJourneyInDB(LearningJourneyInDBBase):
+# Additional properties to return via API
+class LearningJourneyWithCourses(LearningJourneyInDBBase):
+    courses: List[Course] = []
+    skills: List[Skill] = []
