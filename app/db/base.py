@@ -6,7 +6,7 @@ from app.models.jobrole import JobRole
 from app.models.learningjourney import LearningJourney
 from app.models.registration import Registration
 from app.models.role import Role
-from app.models._secondary import Course_Skill, JobRole_Skill, Course_LearningJourney
+from app.models._secondary import course_skill, jobrole_skill, course_learningjourney
 from app.models.skill import Skill
 from app.models.staff import Staff
 

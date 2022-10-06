@@ -6,7 +6,6 @@ from sqlalchemy.orm import Session
 
 from app import crud, models, schemas
 from app.api import deps
-from app.schemas import courseskill
 
 router = APIRouter()
 
@@ -91,23 +90,23 @@ def delete_skill(
     remaining_skill = crud.skill.remove(db=db, id=skill_id)
     return remaining_skill
 
-@router.get("/allcourses/{skill_id}", response_model=schemas.SkillWithCourses)
-def get_courses_for_skill(
-    *,
-    db: Session = Depends(deps.get_db),
-    skill_id: str
-) -> Any:
-    """
-    Get All Courses for a Skill.
-    """
+# @router.get("/allcourses/{skill_id}", response_model=schemas.SkillWithCourses)
+# def get_courses_for_skill(
+#     *,
+#     db: Session = Depends(deps.get_db),
+#     skill_id: str
+# ) -> Any:
+#     """
+#     Get All Courses for a Skill.
+#     """
 
-    skill = crud.skill.get(db=db, id=skill_id)
-    if not skill:
-        raise HTTPException(status_code=404, detail="Skill not found")
+#     skill = crud.skill.get(db=db, id=skill_id)
+#     if not skill:
+#         raise HTTPException(status_code=404, detail="Skill not found")
 
-    #get courseskills by skill id
-    courseskills = crud.courseskill.get_courses_by_skill_id(db=db,skill_id=skill_id)
-    courses = [courseskill.course for courseskill in courseskills]
-    skill.courses = courses
+#     #get courseskills by skill id
+#     courseskills = crud.courseskill.get_courses_by_skill_id(db=db,skill_id=skill_id)
+#     courses = [courseskill.course for courseskill in courseskills]
+#     skill.courses = courses
 
-    return skill
+#     return skill
