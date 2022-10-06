@@ -39,7 +39,7 @@ def create_course(
     return course
 
 
-@router.get("/{course_id}", response_model=schemas.Course)
+@router.get("/{course_id}", response_model=schemas.CourseWithSkills)
 def read_course(
     *,
     db: Session = Depends(deps.get_db),
@@ -47,6 +47,7 @@ def read_course(
 ) -> Any:
     """
     Get course by ID.
+    For SC22 view a course page.
     """
     course = crud.course.get(db=db, id=course_id)
     if not course:

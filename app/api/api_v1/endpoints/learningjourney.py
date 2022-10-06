@@ -29,7 +29,7 @@ def create_learningjourney(
     """
     Create new learning journey.
     """
-    learningjourney = crud.learningjourney.get_learning_journey_by_staff_id_and_jobrole_id(db, obj_in=learningjourney_in)
+    learningjourney = crud.learningjourney.get_learning_journey_by_create_obj(db, obj_in=learningjourney_in)
     if learningjourney:
         raise HTTPException(
             status_code=400,
@@ -39,7 +39,7 @@ def create_learningjourney(
     return learningjourney
 
 
-@router.get("/{learningjourney_id}", response_model=schemas.LearningJourney)
+@router.get("/{learningjourney_id}", response_model=schemas.LearningJourneyFullWithSkills)
 def read_learningjourney(
     *,
     db: Session = Depends(deps.get_db),
@@ -47,6 +47,7 @@ def read_learningjourney(
 ) -> Any:
     """
     Get learning journey by ID.
+    For SC20 View learning journey.
     """
     learningjourney = crud.learningjourney.get(db=db, id=learningjourney_id)
     if not learningjourney:
@@ -85,32 +86,3 @@ def delete_learningjourney(
         raise HTTPException(status_code=404, detail="Learning Journey not found")
     remaining_learningjourneys = crud.learningjourney.remove(db=db, id=learningjourney_id)
     return remaining_learningjourneys
-
-# @router.get("/for_one_staff/{staff_id}", response_model=List[schemas.LearningJourneyWithCourses])
-# def get_learningjourneys_for_staff(
-#     *,
-#     db: Session = Depends(deps.get_db),
-#     staff_id: int
-# ) -> Any:
-#     """
-#     Get learning journeys for one staff.
-#     """
-
-#     # get learning journeys for staff
-#     learningjourneys = crud.learningjourney.get_learning_journeys_by_staff_id(db=db, staff_id=staff_id)
-#     if not learningjourneys:
-#         raise HTTPException(status_code=404, detail="This Staff has no Learning Journeys")
-
-#     # get courses for each learning journey
-#     for lj in learningjourneys:
-#         id = lj.id
-#         selections = crud.selection.get_selections_by_learningjourney_id(db=db, learningjourney_id=id)
-#         courses = [selection.course for selection in selections]
-#         setattr(lj, 'courses', courses)
-
-#         jr_id = lj.jobrole_id
-#         jobroleskills = crud.jobroleskill.get_jobroleskills_by_jobrole_id(db=db, jobrole_id=jr_id)
-#         skills = [jobroleskill.skill for jobroleskill in jobroleskills]
-#         setattr(lj, 'skills', skills)
-
-#     return learningjourneys
