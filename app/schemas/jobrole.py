@@ -1,6 +1,7 @@
-from typing import Optional
+from typing import Optional, List
 
 from pydantic import BaseModel
+from .skill import Skill
 
 # Shared properties
 class JobRoleBase(BaseModel):
@@ -26,3 +27,6 @@ class JobRoleInDBBase(JobRoleBase):
 class JobRole(JobRoleInDBBase):
     id: int
 
+# Additional properties to return via API
+class JobRoleWithSkills(JobRoleInDBBase):
+    skills: List[Skill] = []

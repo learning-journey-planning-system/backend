@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, List
 from .base import CRUDBase
 from sqlalchemy.orm import Session
 from app.models.jobrole import JobRole

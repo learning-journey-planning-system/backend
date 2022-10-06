@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 
 from app import crud, models, schemas
 from app.api import deps
+from app.schemas import courseskill
 
 router = APIRouter()
 
@@ -88,3 +89,26 @@ def delete_jobrole(
         raise HTTPException(status_code=404, detail="JobRole not found")
     remaining_jobrole = crud.jobrole.remove(db=db, id=jobrole_id)
     return remaining_jobrole
+
+@router.get("/allskills/{jobrole_id}", response_model=schemas.JobRoleWithSkills)
+def get_all_skills_for_roles(
+    *,
+    db: Session = Depends(deps.get_db),
+    jobrole_id: int
+) -> Any:
+    """
+    Get skills for each role.
+    """
+
+    # get job role
+    jobrole = crud.jobrole.get(db=db, id=jobrole_id)
+    if not jobrole:
+        raise HTTPException(status_code=404, detail="JobRole not found")
+
+    # get skills for each job role
+    jobroleskills = crud.jobroleskill.get_jobroleskills_by_jobrole_id(db=db,jobrole_id=jobrole_id)
+
+    skills = [jobroleskill.skill for jobroleskill in jobroleskills]
+    setattr(jobrole, 'skills', skills)
+
+    return jobrole
