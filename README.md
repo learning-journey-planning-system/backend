@@ -3,18 +3,20 @@
 
 Naming convention: snake_case
 
-### 1. Shortcut to start the app:
+<!--### 1. Shortcut to start the app:
 1. Ensure MAMP/WAMP is on
 2. Ensure you have pipenv installed
 3. Execute the following script in the cli:
 ```sh
 ./start_backend.sh
-```
+```-->
 
-<!-- ### Setup: 
-1. Clone this repo
-2. On MAMP/WAMP
-3. edit connection string in `app/core/config.py` at `SQLALCHEMY_DATABASE_URI` (you can use sql alchemy to help you test your connection)
+### 1. Setup: 
+1. Clone backend repo
+2. Ensure you are on backend directory and main branch 
+3. Check that your python version has been updated to latest version (3.10.7)  
+4. On MAMP/WAMP
+5. edit connection string in `app/core/config.py` at `SQLALCHEMY_DATABASE_URI` (you can use sql alchemy to help you test your connection)
 
 4. Use `pipenv` to run the app in virtual env -> its a better way to manage python applications and its requirements
 ```sh
@@ -32,7 +34,8 @@ python3 app/initial_data.py # initialise db first/ refresh it
 6. Run the app (make sure you are in the `backend/` dir)
 ```sh
 uvicorn app.main:app --reload
-``` -->
+``` 
+7. Go to 127.0.0.1:8000/docs on your chrome browser to see the outputs of the APIs 
 
 ### 2. To stop the backend service and exit the pipenv shell
 1. Stop backend service: ctrl + C
