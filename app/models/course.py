@@ -12,10 +12,10 @@ class Course(Base):
     course_category = Column(String(50)) 
 
     # one course can have many skills
-    skills = relationship("Skill", back_populates="courses", secondary="Course_Skill")
+    skills = relationship("Skill", back_populates="courses", secondary="course_skill")
 
     # one course can be related to many learning journeys
-    learningjourneys = relationship("LearningJourney", back_populates="courses", secondary="Course_LearningJourney")
+    learningjourneys = relationship("LearningJourney", back_populates="courses", secondary="course_learningjourney")
 
     # one course can be related to many registrations
     registrations = relationship("Registration", back_populates="course")

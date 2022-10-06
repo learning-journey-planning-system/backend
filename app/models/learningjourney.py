@@ -15,4 +15,4 @@ class LearningJourney(Base):
     jobrole = relationship("JobRole", back_populates="learningjourneys")
 
     # one learning journey can have many courses
-    courses = relationship("Course", back_populates="learningjourneys", secondary="Course_LearningJourney")
+    courses = relationship("Course", back_populates="learningjourneys", secondary="course_learningjourney")

@@ -12,6 +12,6 @@ class JobRole(Base):
     learningjourneys = relationship("LearningJourney", back_populates="jobrole")
 
     # one jobrole can have many skills
-    skills = relationship("Skill", back_populates="jobroles", secondary="JobRole_Skill")
+    skills = relationship("Skill", back_populates="jobroles", secondary="jobrole_skill")
 
     

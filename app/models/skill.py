@@ -9,7 +9,7 @@ class Skill(Base):
     deleted = Column(Boolean, nullable=False)
 
     # one skill can have many courses
-    courses = relationship("Course", back_populates="skills", secondary="Course_Skill")
+    courses = relationship("Course", back_populates="skills", secondary="course_skill")
 
     # one skill can have many jobroles
-    jobroles = relationship("JobRole", back_populates="skills", secondary="JobRole_Skill")
+    jobroles = relationship("JobRole", back_populates="skills", secondary="jobrole_skill")
