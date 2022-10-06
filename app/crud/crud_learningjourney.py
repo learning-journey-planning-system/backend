@@ -15,7 +15,7 @@ class CRUDLearningJourney(CRUDBase[LearningJourney, LearningJourneyCreate, Learn
                 LearningJourney.jobrole_id == obj_in.jobrole_id)
         .first())
 
-    def get_learning_journeys_by_staff_id(self, db: Session, *, staff_id: int) -> List[LearningJourney]:
-        return db.query(LearningJourney).filter(LearningJourney.staff_id == staff_id).all()
+    # def get_learning_journeys_by_staff_id(self, db: Session, *, staff_id: int) -> List[LearningJourney]:
+    #     return db.query(LearningJourney).filter(LearningJourney.staff_id == staff_id).all()
 
 learningjourney = CRUDLearningJourney(LearningJourney)

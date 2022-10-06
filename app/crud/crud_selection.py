@@ -21,8 +21,9 @@ class CRUDSelection(CRUDBase[Selection, SelectionCreate, SelectionUpdate]):
         db.delete(obj)
         db.commit()
         return db.query(Selection).all()
-
+        
     def get_selections_by_learningjourney_id(self, db: Session, learningjourney_id:int) -> List[Selection]:
         return db.query(Selection).filter(Selection.learningjourney_id == learningjourney_id).all()
+
 
 selection = CRUDSelection(Selection)
