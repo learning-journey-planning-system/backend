@@ -1,6 +1,7 @@
-from typing import Optional
+from typing import Optional, List
 
 from pydantic import BaseModel
+from .course import Course
 
 # Shared properties
 class SkillBase(BaseModel):
@@ -28,3 +29,6 @@ class SkillInDBBase(SkillBase):
 # Properties to return via API
 class Skill(SkillInDBBase):
     id: str
+
+class SkillWithCourses(SkillInDBBase):
+    courses: List[Course] = []

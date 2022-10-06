@@ -6,6 +6,7 @@ from sqlalchemy.orm import Session
 
 from app import crud, models, schemas
 from app.api import deps
+from app.schemas import courseskill
 
 router = APIRouter()
 
@@ -89,3 +90,27 @@ def delete_skill(
         raise HTTPException(status_code=404, detail="Skill not found")
     remaining_skill = crud.skill.remove(db=db, id=skill_id)
     return remaining_skill
+
+@router.get("/allcourses/{skill_id}", response_model=List[schemas.SkillWithCourses])
+def get_courses_for_skill(
+    *,
+    db: Session = Depends(deps.get_db),
+    skill_id: str
+) -> Any:
+    """
+    Get All Courses for a Skill.
+    """
+
+    
+    #get COURSE_ID FROM COURSESKILL
+    skills = crud.courseskill.get_courses_by_skill_id(db=db,skill_id=skill_id)
+    if not skills:
+        raise HTTPException(status_code=404, detail="No course are found.")
+
+    # get all courses for each skill
+    for sk in skills:
+        id = sk.course_id
+        courses = crud.course.get_course(db=db, course_id=id)
+        courseskill = [course for course in courses]
+        setattr(sk, 'courses', courseskill)
+    return skills

@@ -8,5 +8,5 @@ from .learningjourney import LearningJourney, LearningJourneyCreate, LearningJou
 from .registration import Registration, RegistrationCreate, RegistrationUpdate
 from .role import Role, RoleCreate, RoleUpdate
 from .selection import Selection, SelectionCreate, SelectionUpdate
-from .skill import Skill, SkillCreate, SkillUpdate
+from .skill import Skill, SkillCreate, SkillUpdate, SkillWithCourses
 from .staff import Staff, StaffCreate, StaffUpdate
