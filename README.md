@@ -23,9 +23,8 @@ Naming convention: snake_case
 pip install pipenv          # install pipenv
 pipenv shell                # start a virtual env in the current dir
 pipenv install --dev        # install all the specified dependencies
-```
 
-5. Whenever you make changes to the models, restart the db:
+5. Continue with these codes
 ```sh
 export PYTHONPATH=$PWD
 python3 app/initial_data.py # initialise db first/ refresh it
