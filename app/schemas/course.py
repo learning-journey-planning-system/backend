@@ -1,7 +1,6 @@
 from typing import Optional, List
 
 from pydantic import BaseModel
-from .skill import Skill
 
 # Shared properties
 class CourseBase(BaseModel):
@@ -32,6 +31,7 @@ class Course(CourseInDBBase):
     pass
 
 # Additional properties to return via API
+from .skill import Skill
 class CourseWithSkills(Course):
     skills : List[Skill] = []
     

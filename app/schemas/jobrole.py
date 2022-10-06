@@ -1,12 +1,11 @@
 from typing import Optional, List
 
 from pydantic import BaseModel
-from .skill import Skill
 
 # Shared properties
 class JobRoleBase(BaseModel):
     jobrole_name: Optional[str] = None
-    deleted: Optional[bool] = None
+    deleted: Optional[bool] = False
 
 # Properties to receive via API on creation
 class JobRoleCreate(JobRoleBase):
@@ -28,5 +27,6 @@ class JobRole(JobRoleInDBBase):
     pass
 
 # Additional properties to return via API
+from .skill import Skill
 class JobRoleWithSkills(JobRole):
     skills: List[Skill] = []

@@ -2,10 +2,6 @@ from typing import Optional, List
 
 from pydantic import BaseModel
 
-from .staff import Staff
-from .jobrole import JobRole
-from .course import Course
-
 # Shared properties
 class LearningJourneyBase(BaseModel):
     staff_id: Optional[int] = None
@@ -32,6 +28,9 @@ class LearningJourney(LearningJourneyInDBBase):
     pass
 
 # Additional properties to return via API
+from .staff import Staff
+from .jobrole import JobRole
+from .course import Course
 class LearningJourneyFull(LearningJourney):
     staff: Staff
     jobrole: JobRole
