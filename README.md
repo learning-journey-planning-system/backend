@@ -35,6 +35,7 @@ python3 app/initial_data.py # initialise db first/ refresh it
 ```sh
 uvicorn app.main:app --reload
 ``` 
+7. Go to 127.0.0.1:8000/docs to see the outputs of the APIs 
 
 ### 2. To stop the backend service and exit the pipenv shell
 1. Stop backend service: ctrl + C
