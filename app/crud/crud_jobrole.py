@@ -1,6 +1,7 @@
-from typing import Optional, List
-from .base import CRUDBase
+from typing import Optional
+
 from sqlalchemy.orm import Session
+from app.crud.base import CRUDBase
 from app.models.jobrole import JobRole
 from app.schemas.jobrole import JobRoleCreate, JobRoleUpdate
 

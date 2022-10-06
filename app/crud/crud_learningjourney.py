@@ -1,8 +1,6 @@
 from typing import List
 
 from sqlalchemy.orm import Session
-from fastapi.encoders import jsonable_encoder
-
 from app.crud.base import CRUDBase
 from app.models.learningjourney import LearningJourney
 from app.schemas.learningjourney import LearningJourneyCreate, LearningJourneyUpdate
