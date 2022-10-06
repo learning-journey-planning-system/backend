@@ -11,8 +11,5 @@ class CRUDSkill(CRUDBase[Skill, SkillCreate, SkillUpdate]):
         skill = db.query(self.model).get(skill_id)
         setattr(skill, 'deleted', True)
         return db.query(self.model).all()
-    
-    def get_skill_id(self, db: Session, *, skill_id: str) -> List[Skill]:
-        return db.query(Skill).filter(Skill.id == skill_id).all()
 
 skill = CRUDSkill(Skill)

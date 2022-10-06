@@ -91,7 +91,7 @@ def delete_skill(
     remaining_skill = crud.skill.remove(db=db, id=skill_id)
     return remaining_skill
 
-@router.get("/allcourses/{skill_id}", response_model=List[schemas.SkillWithCourses])
+@router.get("/allcourses/{skill_id}", response_model=schemas.SkillWithCourses)
 def get_courses_for_skill(
     *,
     db: Session = Depends(deps.get_db),
@@ -101,16 +101,13 @@ def get_courses_for_skill(
     Get All Courses for a Skill.
     """
 
-    
-    #get COURSE_ID FROM COURSESKILL
-    skills = crud.courseskill.get_courses_by_skill_id(db=db,skill_id=skill_id)
-    if not skills:
-        raise HTTPException(status_code=404, detail="No course are found.")
+    skill = crud.skill.get(db=db, id=skill_id)
+    if not skill:
+        raise HTTPException(status_code=404, detail="Skill not found")
 
-    # get all courses for each skill
-    for sk in skills:
-        id = sk.course_id
-        courses = crud.course.get_course(db=db, course_id=id)
-        courseskill = [course for course in courses]
-        setattr(sk, 'courses', courseskill)
-    return skills
+    #get courseskills by skill id
+    courseskills = crud.courseskill.get_courses_by_skill_id(db=db,skill_id=skill_id)
+    courses = [courseskill.course for courseskill in courseskills]
+    skill.courses = courses
+
+    return skill
