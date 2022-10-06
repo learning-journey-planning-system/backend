@@ -77,7 +77,7 @@ INSERT INTO learningjourney (id,staff_id,jobrole_id) VALUES
 (204,3,10),
 (205,3,09);
 
-INSERT INTO selection (learningjourney_id,course_id) VALUES
+INSERT INTO course_learningjourney (learningjourney_id,course_id) VALUES
 (201,'FIN-003'),
 (201,'FIN-002'),
 (202,'IS-002'),
@@ -88,7 +88,7 @@ INSERT INTO selection (learningjourney_id,course_id) VALUES
 ;
 
 
-INSERT INTO courseskill (skill_id,course_id) VALUES
+INSERT INTO course_skill (skill_id,course_id) VALUES
 ('SK-01','IS-001'),
 ('SK-01','IS-002'),
 ('SK-02','HR-002'),
@@ -105,7 +105,7 @@ INSERT INTO courseskill (skill_id,course_id) VALUES
 ('SK-10','IS-002')
 ;
 
-INSERT INTO jobroleskill (jobrole_id,skill_id) VALUES
+INSERT INTO jobrole_skill (jobrole_id,skill_id) VALUES
 (01,'SK-08'),
 (01,'SK-05'),
 (02,'SK-03'),

@@ -1,10 +1,8 @@
 from .course import Course
-from .courseskill import CourseSkill
 from .jobrole import JobRole
-from .jobroleskill import JobRoleSkill
 from .learningjourney import LearningJourney
 from .registration import Registration
 from .role import Role
-from .selection import Selection
+from ._secondary import Course_Skill, JobRole_Skill, Course_LearningJourney
 from .skill import Skill
 from .staff import Staff
