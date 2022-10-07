@@ -15,7 +15,7 @@ def read_jobroles(
 ) -> Any:
     """
     Retrieve JobRoles.
-    For SC15 View list of job roles by admin.
+    For SC15 View list of job roles by admin (This is for admin panel)
     """
     jobroles = crud.jobrole.get_multi(db)
     return jobroles
@@ -133,7 +133,7 @@ def get_skills_for_jobrole(
 ) -> Any:
     """
     Get skills for each role.
-    SC13 View skills for a jobrole. This is for admin
+    SC25 This is for admin panel
     """
 
     # Check if jobrole exists
@@ -153,7 +153,7 @@ def get_available_jobroles(
     """
     Retrieve JobRoles that are available. Meaning deleted = 0.
     For SC1 View available job roles by learner.
-    For each jobrole, only the skills that are available are returned.
+    Note: For each jobrole, only the skills that are available are also returned.
     """
     jobroles = crud.jobrole.get_multi_available(db)
 
@@ -171,7 +171,7 @@ def get_available_skills_for_jobrole(
 ) -> Any:
     """
     Get skills for each role.
-    SC3 View skills for a jobrole. This is for learner.
+    SC3 View available skills for a jobrole. This is for learner.
     """
 
     # Check if jobrole exists
