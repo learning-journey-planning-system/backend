@@ -171,7 +171,7 @@ def get_available_skills_for_jobrole(
 ) -> Any:
     """
     Get skills for each role.
-    SC13 View skills for a jobrole. This is for learner.
+    SC3 View skills for a jobrole. This is for learner.
     """
 
     # Check if jobrole exists
