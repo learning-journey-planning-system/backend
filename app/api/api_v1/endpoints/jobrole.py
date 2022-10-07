@@ -133,7 +133,7 @@ def get_skills_for_jobrole(
 ) -> Any:
     """
     Get skills for each role.
-    SC13 View skills for a jobrole.
+    SC13 View skills for a jobrole. This is for admin
     """
 
     # Check if jobrole exists
@@ -153,6 +153,36 @@ def get_available_jobroles(
     """
     Retrieve JobRoles that are available. Meaning deleted = 0.
     For SC1 View available job roles by learner.
+    For each jobrole, only the skills that are available are returned.
     """
     jobroles = crud.jobrole.get_multi_available(db)
+
+    # Filter out skills that are deleted
+    for jobrole in jobroles:
+        jobrole.skills = [skill for skill in jobrole.skills if skill.deleted == 0]
+
     return jobroles
+
+@router.get("/{jobrole_id}/available_skills/", response_model=List[schemas.Skill])
+def get_available_skills_for_jobrole(
+    *,
+    db: Session = Depends(deps.get_db),
+    jobrole_id: int
+) -> Any:
+    """
+    Get skills for each role.
+    SC13 View skills for a jobrole. This is for learner.
+    """
+
+    # Check if jobrole exists
+    jobrole = crud.jobrole.get(db, id=jobrole_id)
+    if not jobrole:
+        raise HTTPException(
+            status_code=404,
+            detail="The jobrole with this jobrole_id does not exist in the system",
+        )
+    
+    # Filter out deleted skills
+    available_skills = [skill for skill in jobrole.skills if skill.deleted == 0]
+    
+    return available_skills
