@@ -8,12 +8,14 @@ from app.schemas.jobrole import JobRoleCreate, JobRoleUpdate
 class CRUDJobRole(CRUDBase[JobRole, JobRoleCreate, JobRoleUpdate]):
 
     # update jobrole to deleted
-    def delete(self, db: Session, *, jobrole_id: int) -> Optional[JobRole]:
-        jobrole = db.query(self.model).get({"jobrole_id":jobrole_id})
+    def remove(self, db: Session, *, id: int) -> Optional[JobRole]:
+        jobrole = db.query(JobRole).filter(JobRole.id == id).first()
         setattr(jobrole, 'deleted', True)
-        return db.query(self.model).all()
+        db.commit()
+        db.refresh(jobrole)
+        return db.query(JobRole).all()
 
     def get_multi_available(self, db: Session) -> List[JobRole]:
-        return db.query(self.model).filter(self.model.deleted == False).all()
+        return db.query(JobRole).filter(JobRole.deleted == False).all()
 
 jobrole = CRUDJobRole(JobRole)

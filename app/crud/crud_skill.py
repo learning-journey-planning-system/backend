@@ -8,9 +8,11 @@ from app.schemas.skill import SkillCreate, SkillUpdate
 class CRUDSkill(CRUDBase[Skill, SkillCreate, SkillUpdate]):
 
     # update skill to deleted
-    def delete(self, db: Session, *, skill_id: int) -> Optional[Skill]:
-        skill = db.query(self.model).get(skill_id)
+    def remove(self, db: Session, *, id: int) -> Optional[Skill]:
+        skill = db.query(Skill).filter(Skill.id == id).first()
         setattr(skill, 'deleted', True)
-        return db.query(self.model).all()
+        db.commit()
+        db.refresh(skill)
+        return db.query(Skill).all()
 
 skill = CRUDSkill(Skill)

@@ -9,7 +9,7 @@ from app.api import deps
 router = APIRouter()
 
 
-@router.get("/", response_model=List[schemas.JobRole])
+@router.get("/", response_model=List[schemas.JobRoleWithSkills])
 def read_jobroles(
     db: Session = Depends(deps.get_db)
 ) -> Any:
@@ -146,7 +146,7 @@ def get_skills_for_jobrole(
     
     return jobrole.skills
 
-@router.get("/available/", response_model=List[schemas.JobRole])
+@router.get("/available/", response_model=List[schemas.JobRoleWithSkills])
 def get_available_jobroles(
     db: Session = Depends(deps.get_db)
 ) -> Any:
