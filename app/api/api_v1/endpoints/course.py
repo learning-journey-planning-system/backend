@@ -172,5 +172,6 @@ def get_skills_for_course(
         raise HTTPException(status_code=404, detail="This course does not exist in the system")
 
     # get skills for course that are active
-    skills = [skill for skill in course.skills if course.course_status == "Active"]
-    return skills
+    if course.course_status == "Active":
+        return course.skills
+    return []
