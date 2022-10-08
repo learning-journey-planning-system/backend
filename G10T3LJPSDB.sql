@@ -1,9 +1,5 @@
 
 
-INSERT INTO role (id,role_name) VALUES
-(001,'Admin'),
-(002,'User'),
-(003,'Manager');
 
 INSERT INTO staff (id,staff_fname,staff_lname,dept,email,role_id) VALUES
 (1,'admin','staff','HR','admin@gmail.com',002),
@@ -63,11 +59,11 @@ INSERT INTO skill (id,skill_name,deleted) VALUES
 ;
 
 INSERT INTO registration (id,course_id,staff_id,reg_status,completion_status) VALUES
-(101, 'FIN-003', 1,'Registered','Completed'), 
-(102, 'IS-002', 1,'Registered','In Progress'), 
-(103, 'IS-003', 4,'Rejected','Not Completed'), 
-(104, 'IS-002', 3,'Waitlist','Not Completed'),  
-(105, 'IS-003', 3, 'Registered','Completed')
+(100001, 'FIN-003', 1,'Registered','Completed'), 
+(100002, 'IS-002', 1,'Registered','In Progress'), 
+(100003, 'IS-003', 4,'Rejected','Not Completed'), 
+(100004, 'IS-002', 3,'Waitlist','Not Completed'),  
+(100005, 'IS-003', 3, 'Registered','Completed')
 ;
 
 INSERT INTO learningjourney (id,staff_id,jobrole_id) VALUES

@@ -3,6 +3,7 @@ from sqlalchemy_utils import database_exists, create_database
 from sqlalchemy import text
 from app.db.base_class import Base
 from app.db.session import engine
+from .seeder import seed_all
 import app.db.base
 # make sure all SQL Alchemy models are imported (app.db.base) before initializing DB
 # otherwise, SQL Alchemy might fail to initialize relationships properly
@@ -24,6 +25,9 @@ def init_db(db: Session) -> None:
     
     # Create tables.
     Base.metadata.create_all(bind=engine)
+
+    # Seed data from csv
+    seed_all(db)
 
     # Seed initial data.
     with engine.connect() as con:
