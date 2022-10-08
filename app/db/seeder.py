@@ -1,43 +1,26 @@
-from typing import Generic, Type, TypeVar
-import csv
-
-from app.db.base_class import Base
-from app.crud.base import CRUDBase
+from .seeder_base import SeederBase
 from sqlalchemy.orm import Session
 
-ModelType = TypeVar("ModelType", bound=Base)
-CRUDType = TypeVar("CRUDType", bound=CRUDBase)
-
-class SeederBase(Generic[ModelType, CRUDType]):
-    def __init__(self, model: Type[ModelType], crud: Type[CRUDType]):
-        self.model = model
-        self.crud = crud
-
-    def seed(self, db: Session) -> None:
-        print('---- Seeding %s ----' % self.model.__name__)
-
-        with open('app/db/RawData/%s.csv' % self.model.__name__.lower(), newline='') as f:
-            data = csv.reader(f, delimiter=',')
-            line = 0
-            for row in data:
-                if line == 0:
-                    columns = row
-                    print(f'Column names are {", ".join(row)}')
-                    line += 1
-                else:
-                    mapping = {}
-                    for i in range(1, len(columns)):
-                        mapping[columns[i].lower()] = row[i]
-
-                    db_obj = self.model(id = row[0], **mapping)
-                    self.crud.create(db, obj_in=db_obj)
-                    line += 1
-            print(f'✅ Seeded {line} rows of data.\n')
-
 from app.models import Course, Registration, Role, Staff
+from app.crud import CRUDCourse, CRUDRegistration, CRUDRole, CRUDStaff
 from app.crud import course, registration, role, staff
 
-course = SeederBase(Course, course)
-registration = SeederBase(Registration, registration)
-role = SeederBase(Role, role)
-staff = SeederBase(Staff, staff)
+class StaffSeeder(SeederBase[Staff, CRUDStaff]):
+
+    # manually edit column name as it does not match out db naming conventions
+    def edit_col_names(self, row):
+        for i in range(len(row)):
+            if row[i] == 'Role':
+                row[i] = 'Role_ID'
+        return row
+
+course_seeder = SeederBase[Course, CRUDCourse](Course, course)
+registration_seeder = SeederBase[Registration, CRUDRegistration](Registration, registration)
+role_seeder = SeederBase[Role, CRUDRole](Role, role)
+staff_seeder = StaffSeeder(Staff, staff)
+
+def seed_all(db: Session) -> None:
+    role_seeder.seed(db)
+    staff_seeder.seed(db)
+    course_seeder.seed(db)
+    registration_seeder.seed(db)

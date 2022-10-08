@@ -3,7 +3,7 @@ from sqlalchemy_utils import database_exists, create_database
 from sqlalchemy import text
 from app.db.base_class import Base
 from app.db.session import engine
-from .seeder import course, registration, role, staff
+from .seeder import seed_all
 import app.db.base
 # make sure all SQL Alchemy models are imported (app.db.base) before initializing DB
 # otherwise, SQL Alchemy might fail to initialize relationships properly
@@ -27,10 +27,7 @@ def init_db(db: Session) -> None:
     Base.metadata.create_all(bind=engine)
 
     # Seed data from csv
-    role.seed(db)
-    staff.seed(db)
-    course.seed(db)
-    registration.seed(db)
+    seed_all(db)
 
     # Seed initial data.
     with engine.connect() as con:
