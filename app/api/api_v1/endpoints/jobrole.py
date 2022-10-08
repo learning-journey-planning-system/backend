@@ -94,6 +94,8 @@ def add_skill_to_jobrole(
     """
     Add a skill to a JobRole.
     For SC18 Assign skill to jobrole.
+
+    If jobrole or skill has been soft deleted or does not exists, 404 will be returned.
     """
 
     # Check if jobrole exists
@@ -104,12 +106,26 @@ def add_skill_to_jobrole(
             detail="The jobrole with this jobrole_id does not exist in the system",
         )
     
+    # Check if jobrole has not been soft deleted
+    if jobrole.deleted:
+        raise HTTPException(
+            status_code=404,
+            detail="The jobrole with this jobrole_id has been soft deleted",
+        )
+    
     # Check if skill exists
     skill = crud.skill.get(db, id=skill_id)
     if not skill:
         raise HTTPException(
             status_code=404,
             detail="The skill with this skill_id does not exist in the system",
+        )
+    
+    # Check if skill has not been soft deleted
+    if skill.deleted:
+        raise HTTPException(
+            status_code=404,
+            detail="The skill with this skill_id has been soft deleted",
         )
     
     # Check if skill is already assigned to jobrole
