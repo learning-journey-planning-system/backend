@@ -84,7 +84,7 @@ def delete_jobrole(
     remaining_jobrole = crud.jobrole.remove(db=db, id=jobrole_id)
     return remaining_jobrole
 
-@router.put("/{jobrole_id}/new_skill/", response_model=schemas.JobRoleWithSkills)
+@router.post("/{jobrole_id}/new_skill/", response_model=schemas.JobRoleWithSkills)
 def add_skill_to_jobrole(
     *,
     db: Session = Depends(deps.get_db),
