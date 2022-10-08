@@ -119,3 +119,15 @@ def get_courses_for_skill(
     courses = [course for course in skill.courses if course.course_status == "Active"]
 
     return courses
+
+@router.get("/available/", response_model=List[schemas.Skill])
+def get_available_skills(
+    db: Session = Depends(deps.get_db)
+) -> Any:
+    """
+    Retrieve skills that are not soft deleted.
+    SC27 Get all available skills that are not soft deleted.
+    """
+    skills = crud.skill.get_multi(db)
+    available_skills = [skill for skill in skills if not skill.deleted]
+    return available_skills
