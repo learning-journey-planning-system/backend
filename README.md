@@ -1,14 +1,11 @@
 # backend
 
 
-<!--### 1. Shortcut to start the app:
+<!-- ### 1. Shortcut to start the app:
 1. Ensure MAMP/WAMP is on
 2. Ensure you have pipenv installed
-3. pipenv shell
-4. Execute the following script in the cli:
-```sh
-./start_backend.sh
-```-->
+3. Run `pipenv shell`
+4. Then `./start_backend.sh` -->
 
 ### 1. Setup: 
 1. Clone backend repo
@@ -16,25 +13,27 @@
 3. Check that your python version is at least 3.9  
 4. On MAMP/WAMP
 5. edit connection string in `app/core/config.py` at `SQLALCHEMY_DATABASE_URI` (you can use sql alchemy to help you test your connection)
-
-4. Use `pipenv` to run the app in virtual env -> its a better way to manage python applications and its requirements
+6. Use `pipenv` to run the app in virtual env -> its a better way to manage python applications and its requirements
 ```sh
 pip install pipenv          # install pipenv
 pipenv shell                # start a virtual env in the current dir
 pipenv install --dev        # install all the specified dependencies
 ```
 
-5. Continue with these codes
+7. Continue with these codes
 ```sh
 export PYTHONPATH=$PWD
 python3 app/initial_data.py # initialise db first/ refresh it
 ```
 
-6. Run the app (make sure you are in the `backend/` dir)
+8. Run the app (make sure you are in the `backend/` dir)
 ```sh
 uvicorn app.main:app --reload
 ``` 
-7. Go to 127.0.0.1:8000/docs on your chrome browser to see the outputs of the APIs 
+
+API documentation will be live @
+Swagger: [127.0.0.1:8000/docs](127.0.0.1:8000/docs)  
+Alternative: [127.0.0.1:8000/redoc](127.0.0.1:8000/redoc)
 
 ### 2. To stop the backend service and exit the pipenv shell
 1. Stop backend service: ctrl + C
@@ -55,6 +54,7 @@ Used his implementation but simplified the app by docker, auth, celery and other
 3. API code logic
 - try to use the crud base classes available already if can!
 - if not create new crud methods with meaningful names
+- when coding, if you find yourself writing almost the same code (eg. almost copy pasting), try to make new methods/ classes if need so that the code can be reused and we dont have too many lines of code
 4. API definition and Description
 - the function name will be the api definition
 - and the notes in the `''''''` is the api Description. good to add the SC or issue tag it is related to so FE can reference better and know which api we developed for them
