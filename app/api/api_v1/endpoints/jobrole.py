@@ -94,6 +94,8 @@ def add_skill_to_jobrole(
     """
     Add a skill to a JobRole.
     For SC18 Assign skill to jobrole.
+
+    If jobrole or skill has been soft deleted or does not exists, 404 will be returned.
     """
 
     # Check if jobrole exists
