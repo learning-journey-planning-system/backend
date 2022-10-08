@@ -175,3 +175,13 @@ def get_skills_for_course(
     if course.course_status == "Active":
         return course.skills
     return []
+
+@router.get("/with_skills", response_model=List[schemas.CourseWithSkills])
+def read_courses_with_skills(
+    db: Session = Depends(deps.get_db)
+) -> Any:
+    """
+    Retrieve all courses with their respective skills.
+    """
+    courses = crud.course.get_multi(db)
+    return courses
