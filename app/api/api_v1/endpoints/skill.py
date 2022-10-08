@@ -100,10 +100,22 @@ def get_courses_for_skill(
     """
     Get All Courses for a Skill.
     For SC5 View all courses for a skill.
+
+    Returns 404 if skill not in database or if skill has been soft deleted. 
+    
+    Only returns courses that are <u>active</u>.
     """
 
+    # check if skill exists
     skill = crud.skill.get(db=db, id=skill_id)
     if not skill:
         raise HTTPException(status_code=404, detail="Skill not found")
 
-    return skill.courses
+    # check if skill has not been soft deleted
+    if skill.deleted:
+        raise HTTPException(status_code=404, detail="Skill has been soft deleted.")
+
+    # filter out courses that are inactive
+    courses = [course for course in skill.courses if course.course_status == "Active"]
+
+    return courses
