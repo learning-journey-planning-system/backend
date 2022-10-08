@@ -101,6 +101,8 @@ def add_skill_to_course(
     """
     Add a skill to a course.
     For SC19 assign skill to a course.
+
+    If course is inactive or if skill has been soft deleted, 404 will be returned.
     """
 
     # Check if course exists
@@ -110,6 +112,13 @@ def add_skill_to_course(
             status_code=404,
             detail="The course with this course id does not exist in the system",
         )
+
+    # Check if course is active
+    if course.course_status == "Retired":
+        raise HTTPException(
+            status_code=404,
+            detail="The course with this course id is not active.",
+        )
     
     # Check if skill exists
     skill = crud.skill.get(db, id=skill_id)
@@ -117,6 +126,13 @@ def add_skill_to_course(
         raise HTTPException(
             status_code=404,
             detail="The skill with this skill id does not exist in the system",
+        )
+    
+    # Check if skill has been soft deleted
+    if skill.deleted:
+        raise HTTPException(
+            status_code=404,
+            detail="The skill with this skill id has been soft deleted.",
         )
     
     # Check if skill is already in course
