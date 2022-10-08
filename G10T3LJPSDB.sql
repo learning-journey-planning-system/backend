@@ -20,9 +20,20 @@ INSERT INTO jobrole (id,jobrole_name,deleted) VALUES
 (05,'Software Engineering',FALSE),
 (06,'Product Manager',FALSE),
 (07,'Accountant',FALSE),
-(08,'Human Resource',FALSE),
+(08,'Talent Acquisition',FALSE),
 (09,'Business Admin',FALSE),
-(10,'PR Executive',FALSE)
+(10,'PR Executive',FALSE),
+
+(11,'Marketing Executive',FALSE),
+(12,'Sales Executive',FALSE),
+(13,'Customer Service',FALSE),
+(14,'CTO',FALSE),
+(15,'Cybersecurity',FALSE),
+(16,'Operations Director',FALSE),
+(17,'Development Director',FALSE),
+(18,'HR Director',FALSE),
+(19,'Software Architect',FALSE),
+(20,'Finance Officer',FALSE)
 ;
 
 
@@ -48,14 +59,19 @@ INSERT INTO course (id,course_name,course_desc,course_status,course_type,course_
 INSERT INTO skill (id,skill_name,deleted) VALUES
 ('SK-01','Web Design',FALSE),
 ('SK-02','Marketing',FALSE),
-('SK-03','Analysis',FALSE),
+('SK-03','Data Analysis',FALSE),
 ('SK-04','Accounting',FALSE),
 ('SK-05','Statistics',FALSE),
-('SK-06','Recruiting',FALSE),
+('SK-06','Talent Development',FALSE),
 ('SK-07','Communication',FALSE),
-('SK-08','Planning',FALSE),
+('SK-08','Project Planning',FALSE),
 ('SK-09','Administration',FALSE),
-('SK-10','Programming',FALSE)
+('SK-10','Programming',FALSE),
+('SK-11','Cyber Security',FALSE),
+('SK-12','Risk Anlaysis',FALSE),
+('SK-13','Operations',FALSE),
+('SK-14','Business Development',FALSE),
+('SK-15','Leadership',FALSE)
 ;
 
 INSERT INTO registration (id,course_id,staff_id,reg_status,completion_status) VALUES
@@ -71,7 +87,13 @@ INSERT INTO learningjourney (id,staff_id,jobrole_id) VALUES
 (202,1,02),
 (203,4,05),
 (204,3,10),
-(205,3,09);
+(205,3,09),
+(206,140001,11),
+(207,140001,03),
+(208,140001,07),
+(209,150115,15),
+(210,150115,01),
+(211,150935,08);
 
 INSERT INTO course_learningjourney (learningjourney_id,course_id) VALUES
 (201,'FIN-003'),
@@ -80,7 +102,17 @@ INSERT INTO course_learningjourney (learningjourney_id,course_id) VALUES
 (202,'FIN-002'),
 (203,'IS-003'),
 (204,'IS-002'),
-(205,'IS-003')
+(205,'MGT001'),
+(206,'SAL003'),
+(206,'MGT004'),
+(206,'FIN001'),
+(207,'MGT004'),
+(208,'FIN002'),
+(209,'tch015'),
+(210,'tch019'),
+(211,'FIN001')
+
+
 ;
 
 
@@ -98,20 +130,95 @@ INSERT INTO course_skill (skill_id,course_id) VALUES
 ('SK-07','HR-001'),
 ('SK-08','BUS-002'),
 ('SK-09','IS-003'),
-('SK-10','IS-002')
+('SK-10','IS-002'),
+('SK-01','COR001'),
+('SK-01','tch012'),
+('SK-02','SAL003'),
+('SK-03','FIN001'),
+('SK-04','FIN002'),
+('SK-05','FIN001'),
+('SK-06','HRD001'),
+('SK-06','MGT001'),
+('SK-07','MGT004'),
+('SK-08','tch018'),
+('SK-08','tch019'),
+('SK-09','MGT004'),
+('SK-09','MGT001'),
+('SK-10','tch012'),
+('SK-10','COR001'),
+('SK-11','tch008'),
+('SK-11','tch012'),
+('SK-11','tch013'),
+('SK-11','tch015'),
+('SK-11','tch014'),
+('SK-12','FIN002'),
+('SK-12','FIN001'),
+('SK-13','COR002'),
+('SK-13','tch019'),
+('SK-13','tch005'),
+('SK-14','tch019'),
+('SK-14','tch005'),
+('SK-14','SAL003'),
+('SK-14','SAL004'),
+('SK-15','HRD001'),
+('SK-15','MGT001'),
+('SK-15','MGT004')
 ;
 
 INSERT INTO jobrole_skill (jobrole_id,skill_id) VALUES
 (01,'SK-08'),
 (01,'SK-05'),
+(01,'SK-13'),
+(01,'SK-14'),
 (02,'SK-03'),
 (02,'SK-05'),
+(02,'SK-12'),
 (03,'SK-09'),
+(03,'SK-15'),
+(03,'SK-14'),
 (04,'SK-08'),
 (04,'SK-05'),
+(04,'SK-15'),
+(04,'SK-13'),
 (05,'SK-10'),
+(05,'SK-11'),
 (06,'SK-08'),
+(06,'SK-07'),
+(06,'SK-15'),
 (07,'SK-04'),
 (08,'SK-06'),
+(08,'SK-07'),
 (09,'SK-09'),
-(10,'SK-07');
+(09,'SK-13'),
+(10,'SK-07'),
+(10,'SK-02'),
+(11,'SK-02'),
+(11,'SK-07'),
+(11,'SK-05'),
+(12,'SK-07'),
+(12,'SK-13'),
+(13,'SK-07'),
+(13,'SK-13'),
+(13,'SK-9'),
+(14,'SK-11'),
+(14,'SK-12'),
+(14,'SK-15'),
+(15,'SK-11'),
+(15,'SK-12'),
+(16,'SK-15'),
+(16,'SK-08'),
+(16,'SK-13'),
+(17,'SK-14'),
+(17,'SK-15'),
+(17,'SK-07'),
+(18,'SK-06'),
+(18,'SK-07'),
+(18,'SK-15'),
+(18,'SK-09'),
+(19,'SK-10'),
+(19,'SK-11'),
+(20,'SK-04'),
+(20,'SK-12'),
+(20,'SK-07')
+
+;
