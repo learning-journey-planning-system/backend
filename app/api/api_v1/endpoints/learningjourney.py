@@ -89,7 +89,7 @@ def delete_learningjourney(
     return remaining_learningjourneys
 
 
-@router.put("/{learningjourney_id}/new_course/", response_model=schemas.LearningJourneyFull)
+@router.post("/{learningjourney_id}/new_course/", response_model=schemas.LearningJourneyFull)
 def add_course_to_learning_journey(
     *,
     db: Session = Depends(deps.get_db),
