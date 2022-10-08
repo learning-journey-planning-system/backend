@@ -126,7 +126,6 @@ INSERT INTO course_skill (skill_id,course_id) VALUES
 ('SK-04','FIN-002'),
 ('SK-04','FIN-001'),
 ('SK-05','IS-003'),
-('SK-06','BUS-001'),
 ('SK-07','HR-001'),
 ('SK-08','BUS-002'),
 ('SK-09','IS-003'),
