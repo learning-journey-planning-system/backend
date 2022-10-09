@@ -77,7 +77,7 @@ def update_skill(
     return skill
 
 
-@router.delete("/{skill_id}", response_model=List[schemas.Skill])
+@router.delete("/{skill_id}", response_model=schemas.Skill)
 def delete_skill(
     *,
     db: Session = Depends(deps.get_db),
@@ -91,8 +91,8 @@ def delete_skill(
         raise HTTPException(status_code=404, detail="Skill not found")
     if skill.deleted:
         raise HTTPException(status_code=400, detail="Skill has already been soft-deleted.")
-    remaining_skill = crud.skill.remove(db=db, id=skill_id)
-    return remaining_skill
+    skill = crud.skill.remove(db=db, id=skill_id)
+    return skill
 
 @router.get("/{skill_id}/courses/", response_model=List[schemas.Course])
 def get_courses_for_skill(
