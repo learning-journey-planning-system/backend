@@ -121,3 +121,38 @@ def add_course_to_learning_journey(
     # Add the course to the learning journey
     learningjourney.courses.append(course)
     return learningjourney
+
+@router.delete("/{learningjourney_id}/delete_course/{course_id}", response_model=schemas.LearningJourneyWithCourses)
+def delete_course_from_learning_journey(
+    *,
+    db: Session = Depends(deps.get_db),
+    learningjourney_id: int,
+    course_id: str
+) -> Any:
+    """
+    Delete a course from a learning journey.
+    """
+
+    # Check if the learning journey exists
+    learningjourney = crud.learningjourney.get(db=db, id=learningjourney_id)
+    if not learningjourney:
+        raise HTTPException(status_code=404, detail="Learning Journey not found")
+    
+    # Check if the course exists
+    course = crud.course.get(db=db, id=course_id)
+    if not course:
+        raise HTTPException(status_code=404, detail="Course not found")
+    
+    # Check if the course is in the learning journey
+    if course not in learningjourney.courses:
+        raise HTTPException(
+            status_code=400,
+            detail="The course is not in the learning journey.",
+        )
+    
+    # Remove the course from the learning journey
+    learningjourney.courses.remove(course)
+    db.commit()
+    db.refresh(learningjourney)
+
+    return learningjourney
