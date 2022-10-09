@@ -30,7 +30,7 @@ def create_skills(
 ) -> Any:
     """
     Create new Skill.
-    Checks if an existing skill with the same name exists already. If not then create a new skill with the specified name.
+    Checks if an existing skill with the same name exists already ('skill' and 'Skill' are considered the same name). If not then create a new skill with the specified name.
     """
     skill = crud.skill.get_by_skill_name(db, skill_name=skill_in.skill_name)
     if skill:
@@ -89,6 +89,8 @@ def delete_skill(
     skill = crud.skill.get(db=db, id=skill_id,)
     if not skill:
         raise HTTPException(status_code=404, detail="Skill not found")
+    if skill.deleted:
+        raise HTTPException(status_code=400, detail="Skill has already been soft-deleted.")
     remaining_skill = crud.skill.remove(db=db, id=skill_id)
     return remaining_skill
 
