@@ -30,12 +30,13 @@ def create_skills(
 ) -> Any:
     """
     Create new Skill.
+    Checks if an existing skill with the same name exists already. If not then create a new skill with the specified name.
     """
-    skill = crud.skill.get(db, id=skill_in.id)
+    skill = crud.skill.get_by_skill_name(db, skill_name=skill_in.skill_name)
     if skill:
         raise HTTPException(
             status_code=400,
-            detail="The skill with this skill id already exists in the system.",
+            detail="The skill with this skill name already exists in the system.",
         )
     skill = crud.skill.create(db, obj_in=skill_in)
     return skill
@@ -45,7 +46,7 @@ def create_skills(
 def read_skill(
     *,
     db: Session = Depends(deps.get_db),
-    skill_id: str
+    skill_id: int
 ) -> Any:
     """
     Get skill by ID.
@@ -60,7 +61,7 @@ def read_skill(
 def update_skill(
     *,
     db: Session = Depends(deps.get_db),
-    skill_id: str,
+    skill_id: int,
     skill_in: schemas.SkillUpdate
 ) -> Any:
     """
@@ -80,7 +81,7 @@ def update_skill(
 def delete_skill(
     *,
     db: Session = Depends(deps.get_db),
-    skill_id: str
+    skill_id: int
 ) -> Any:
     """
     Delete a skill.
@@ -95,7 +96,7 @@ def delete_skill(
 def get_courses_for_skill(
     *,
     db: Session = Depends(deps.get_db),
-    skill_id: str
+    skill_id: int
 ) -> Any:
     """
     Get All Courses for a Skill.
