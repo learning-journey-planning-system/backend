@@ -5,7 +5,6 @@ from pydantic import BaseModel
 # Shared properties
 class JobRoleBase(BaseModel):
     jobrole_name: Optional[str] = None
-    deleted: Optional[bool] = False
 
 # Properties to receive via API on creation
 class JobRoleCreate(JobRoleBase):
@@ -18,6 +17,7 @@ class JobRoleUpdate(JobRoleBase):
 # Properties shared by models stored in DB
 class JobRoleInDBBase(JobRoleBase):
     id: int
+    deleted: Optional[bool] = False
 
     class Config:
         orm_mode = True
