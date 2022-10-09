@@ -96,7 +96,7 @@ def add_skill_to_course(
     *,
     db: Session = Depends(deps.get_db),
     course_id: str,
-    skill_id: str
+    skill_id: int
 ) -> Any:
     """
     Add a skill to a course.
@@ -148,3 +148,81 @@ def add_skill_to_course(
     db.refresh(course)
 
     return course
+
+@router.delete("/{course_id}/delete_skill/{skill_id}", response_model=schemas.CourseWithSkills)
+def delete_skill_from_course(
+    *,
+    db: Session = Depends(deps.get_db),
+    course_id: str,
+    skill_id: int
+) -> Any:
+    """
+    Delete a skill from a course.
+    """
+
+    # Check if course exists
+    course = crud.course.get(db, id=course_id)
+    if not course:
+        raise HTTPException(
+            status_code=404,
+            detail="The course with this course id does not exist in the system",
+        )
+    
+    # Check if skill exists
+    skill = crud.skill.get(db, id=skill_id)
+    if not skill:
+        raise HTTPException(
+            status_code=404,
+            detail="The skill with this skill id does not exist in the system",
+        )
+    
+    # Check if skill is in course
+    if skill not in course.skills:
+        raise HTTPException(
+            status_code=400,
+            detail="The skill with this skill id is not in the course",
+        )
+    
+    # Delete skill from course
+    course.skills.remove(skill)
+    db.commit()
+    db.refresh(course)
+
+    return course
+
+
+@router.get("/{course_id}/all_skills/", response_model=List[schemas.Skill])
+def get_skills_for_course(
+    *,
+    db: Session = Depends(deps.get_db),
+    course_id: str
+) -> Any:
+    """
+    Get All Skills for a Course.
+    For SC26 View skills of a course by admin. This is for admin panel
+
+    Returns 404 if course not in database. 
+    
+    Returns list of skills for courses are <u>active</u>.
+    For courses in retired/pending status, returns empty list.
+    """
+
+    # check if course exists in db
+    course = crud.course.get(db=db, id=course_id)
+    if not course:
+        raise HTTPException(status_code=404, detail="This course does not exist in the system")
+
+    # get skills for course that are active
+    if course.course_status == "Active":
+        return course.skills
+    return []
+
+@router.get("/with_skills", response_model=List[schemas.CourseWithSkills])
+def read_courses_with_skills(
+    db: Session = Depends(deps.get_db)
+) -> Any:
+    """
+    Retrieve all courses with their respective skills.
+    """
+    courses = crud.course.get_multi(db)
+    return courses

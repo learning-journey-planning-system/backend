@@ -39,3 +39,6 @@ class LearningJourneyFull(LearningJourney):
 from .course import CourseWithSkills
 class LearningJourneyFullWithSkills(LearningJourneyFull):
     courses: List[CourseWithSkills] = []
+
+class LearningJourneyWithCourses(LearningJourney):
+    courses: List[Course] = []

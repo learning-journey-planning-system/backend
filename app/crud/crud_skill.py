@@ -7,12 +7,16 @@ from app.schemas.skill import SkillCreate, SkillUpdate
 
 class CRUDSkill(CRUDBase[Skill, SkillCreate, SkillUpdate]):
 
+    # get skill by skill_name
+    def get_by_skill_name(self, db: Session, *, skill_name: str) -> Optional[Skill]:
+        return db.query(Skill).filter(Skill.skill_name == skill_name).first()
+
     # update skill to deleted
-    def remove(self, db: Session, *, id: int) -> Optional[Skill]:
+    def remove(self, db: Session, *, id: int) -> Skill:
         skill = db.query(Skill).filter(Skill.id == id).first()
         setattr(skill, 'deleted', True)
         db.commit()
         db.refresh(skill)
-        return db.query(Skill).all()
+        return skill
 
 skill = CRUDSkill(Skill)

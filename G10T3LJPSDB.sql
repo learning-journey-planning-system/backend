@@ -218,5 +218,4 @@ INSERT INTO jobrole_skill (jobrole_id,skill_id) VALUES
 (20,04),
 (20,12),
 (20,07)
-
 ;
