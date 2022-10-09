@@ -46,16 +46,16 @@ INSERT INTO course (id,course_name,course_desc,course_status,course_type,course_
 ('BUS-004','Business Management','This discipline focuses on core business principles and strategies, and is designed to prepare you for a wide range of careers in business and management.','Retired','Internal','Business');
 
 INSERT INTO skill (id,skill_name,deleted) VALUES
-('SK-01','Web Design',FALSE),
-('SK-02','Marketing',FALSE),
-('SK-03','Analysis',FALSE),
-('SK-04','Accounting',FALSE),
-('SK-05','Statistics',FALSE),
-('SK-06','Recruiting',FALSE),
-('SK-07','Communication',FALSE),
-('SK-08','Planning',FALSE),
-('SK-09','Administration',FALSE),
-('SK-10','Programming',FALSE)
+(1,'Web Design',FALSE),
+(2,'Marketing',FALSE),
+(3,'Analysis',FALSE),
+(4,'Accounting',FALSE),
+(5,'Statistics',FALSE),
+(6,'Recruiting',FALSE),
+(7,'Communication',FALSE),
+(8,'Planning',FALSE),
+(9,'Administration',FALSE),
+(10,'Programming',FALSE)
 ;
 
 INSERT INTO registration (id,course_id,staff_id,reg_status,completion_status) VALUES
@@ -85,33 +85,33 @@ INSERT INTO course_learningjourney (learningjourney_id,course_id) VALUES
 
 
 INSERT INTO course_skill (skill_id,course_id) VALUES
-('SK-01','IS-001'),
-('SK-01','IS-002'),
-('SK-02','HR-002'),
-('SK-02','FIN-003'),
-('SK-03','HR-002'),
-('SK-03','IS-003'),
-('SK-04','FIN-002'),
-('SK-04','FIN-001'),
-('SK-05','IS-003'),
-('SK-06','BUS-001'),
-('SK-07','HR-001'),
-('SK-08','BUS-002'),
-('SK-09','IS-003'),
-('SK-10','IS-002')
+(1,'IS-001'),
+(1,'IS-002'),
+(2,'HR-002'),
+(2,'FIN-003'),
+(3,'HR-002'),
+(3,'IS-003'),
+(4,'FIN-002'),
+(4,'FIN-001'),
+(5,'IS-003'),
+(6,'BUS-001'),
+(7,'HR-001'),
+(8,'BUS-002'),
+(9,'IS-003'),
+(10,'IS-002')
 ;
 
 INSERT INTO jobrole_skill (jobrole_id,skill_id) VALUES
-(01,'SK-08'),
-(01,'SK-05'),
-(02,'SK-03'),
-(02,'SK-05'),
-(03,'SK-09'),
-(04,'SK-08'),
-(04,'SK-05'),
-(05,'SK-10'),
-(06,'SK-08'),
-(07,'SK-04'),
-(08,'SK-06'),
-(09,'SK-09'),
-(10,'SK-07');
+(01,8),
+(01,5),
+(02,3),
+(02,5),
+(03,9),
+(04,8),
+(04,5),
+(05,10),
+(06,8),
+(07,4),
+(08,6),
+(09,9),
+(10,7);

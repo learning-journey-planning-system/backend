@@ -96,7 +96,7 @@ def add_skill_to_course(
     *,
     db: Session = Depends(deps.get_db),
     course_id: str,
-    skill_id: str
+    skill_id: int
 ) -> Any:
     """
     Add a skill to a course.

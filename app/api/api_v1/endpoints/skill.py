@@ -30,12 +30,13 @@ def create_skills(
 ) -> Any:
     """
     Create new Skill.
+    Checks if an existing skill with the same name exists already ('skill' and 'Skill' are considered the same name). If not then create a new skill with the specified name.
     """
-    skill = crud.skill.get(db, id=skill_in.id)
+    skill = crud.skill.get_by_skill_name(db, skill_name=skill_in.skill_name)
     if skill:
         raise HTTPException(
             status_code=400,
-            detail="The skill with this skill id already exists in the system.",
+            detail="The skill with this skill name already exists in the system.",
         )
     skill = crud.skill.create(db, obj_in=skill_in)
     return skill
@@ -45,7 +46,7 @@ def create_skills(
 def read_skill(
     *,
     db: Session = Depends(deps.get_db),
-    skill_id: str
+    skill_id: int
 ) -> Any:
     """
     Get skill by ID.
@@ -60,7 +61,7 @@ def read_skill(
 def update_skill(
     *,
     db: Session = Depends(deps.get_db),
-    skill_id: str,
+    skill_id: int,
     skill_in: schemas.SkillUpdate
 ) -> Any:
     """
@@ -76,11 +77,11 @@ def update_skill(
     return skill
 
 
-@router.delete("/{skill_id}", response_model=List[schemas.Skill])
+@router.delete("/{skill_id}", response_model=schemas.Skill)
 def delete_skill(
     *,
     db: Session = Depends(deps.get_db),
-    skill_id: str
+    skill_id: int
 ) -> Any:
     """
     Delete a skill.
@@ -88,14 +89,16 @@ def delete_skill(
     skill = crud.skill.get(db=db, id=skill_id,)
     if not skill:
         raise HTTPException(status_code=404, detail="Skill not found")
-    remaining_skill = crud.skill.remove(db=db, id=skill_id)
-    return remaining_skill
+    if skill.deleted:
+        raise HTTPException(status_code=400, detail="Skill has already been soft-deleted.")
+    skill = crud.skill.remove(db=db, id=skill_id)
+    return skill
 
 @router.get("/{skill_id}/courses/", response_model=List[schemas.Course])
 def get_courses_for_skill(
     *,
     db: Session = Depends(deps.get_db),
-    skill_id: str
+    skill_id: int
 ) -> Any:
     """
     Get All Courses for a Skill.
