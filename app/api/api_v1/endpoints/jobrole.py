@@ -29,7 +29,15 @@ def create_jobrole(
 ) -> Any:
     """
     Create new jobrole.
+    Checks if an existing jobrole with the same name exists already ('jobrole' and 'Jobrole' are considered the same name). If not then create a new jobrole with the specified name.
     """
+    # check if jobrole with same name exists
+    jobrole = crud.jobrole.get_by_jobrole_name(db, jobrole_name=jobrole_in.jobrole_name)
+    if jobrole:
+        raise HTTPException(
+            status_code=400,
+            detail="The jobrole with this jobrole name already exists in the system.",
+        )
     jobrole = crud.jobrole.create(db, obj_in=jobrole_in)
     return jobrole
 
@@ -69,7 +77,7 @@ def update_jobrole(
     return jobrole
 
 
-@router.delete("/{jobrole_id}", response_model=List[schemas.JobRole])
+@router.delete("/{jobrole_id}", response_model=schemas.JobRole)
 def delete_jobrole(
     *,
     db: Session = Depends(deps.get_db),
@@ -78,18 +86,23 @@ def delete_jobrole(
     """
     Delete a JobRole.
     """
-    JobRole = crud.jobrole.get(db=db, id=jobrole_id,)
-    if not JobRole:
+    jobrole = crud.jobrole.get(db=db, id=jobrole_id,)
+    if not jobrole:
         raise HTTPException(status_code=404, detail="JobRole not found")
-    remaining_jobrole = crud.jobrole.remove(db=db, id=jobrole_id)
-    return remaining_jobrole
+    if jobrole.deleted:
+        raise HTTPException(
+            status_code=400,
+            detail="The jobrole with this jobrole_id has already been deleted",
+        )
+    jobrole = crud.jobrole.remove(db=db, id=jobrole_id)
+    return jobrole
 
-@router.put("/{jobrole_id}/new_skill/", response_model=schemas.JobRoleWithSkills)
+@router.post("/{jobrole_id}/new_skill/", response_model=schemas.JobRoleWithSkills)
 def add_skill_to_jobrole(
     *,
     db: Session = Depends(deps.get_db),
     jobrole_id: int,
-    skill_id: str
+    skill_id: int
 ) -> Any:
     """
     Add a skill to a JobRole.
