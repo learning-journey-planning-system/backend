@@ -67,10 +67,10 @@ def test_delete_course_that_does_not_exist(client) -> None:
     response = client.delete(f"{load_course.base_url}{rand_record}")
     assert response.status_code == 404
 
-def test_add_skill_to_course(client) -> None:
-    data = load_course.base_data
-    rand_record = random_num_in(len(data))
-    id = data[rand_record]["id"]
-    response = client.post(f"{load_course.base_url}{id}/new_skill/", json={"skill_id": "1"})
-    assert response.status_code == 200
-    assert response.json() == data[rand_record]
+# def test_add_skill_to_course(client) -> None:
+#     data = load_course.base_data
+#     rand_record = random_num_in(len(data))
+#     id = data[rand_record]["id"]
+#     response = client.post(f"{load_course.base_url}{id}/new_skill/", json={"skill_id": "1"})
+#     assert response.status_code == 200
+#     assert response.json() == data[rand_record]
