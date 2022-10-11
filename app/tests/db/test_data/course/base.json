@@ -1,0 +1,18 @@
+[
+    {
+        "course_name": "Systems Thinking and Design",
+        "course_desc": "This foundation module aims to introduce students to the fundamental concepts and underlying principles of systems thinking,",
+        "course_status": "Active",
+        "course_type": "Internal",
+        "course_category": "Core",
+        "id": "COR001"
+    },
+    {
+        "course_name": "Lean Six Sigma Green Belt Certification",
+        "course_desc": "Apply Lean Six Sigma methodology and statistical tools such as Minitab to be used in process analytics",
+        "course_status": "Active",
+        "course_type": "Internal",
+        "course_category": "Core",
+        "id": "COR002"
+    }
+]
