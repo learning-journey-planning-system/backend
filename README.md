@@ -1,5 +1,6 @@
 # backend
 
+[![LJPS API Application](https://github.com/learning-journey-planning-system/backend/actions/workflows/run_unit_tests.yml/badge.svg?branch=main)](https://github.com/learning-journey-planning-system/backend/actions/workflows/run_unit_tests.yml)
 
 <!-- ### 1. Shortcut to start the app:
 1. Ensure MAMP/WAMP is on
