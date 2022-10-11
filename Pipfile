@@ -13,6 +13,7 @@ pytest = "*"
 uvicorn = "*"
 sqlalchemy-utils = "*"
 requests = "*"
+flake8 = "*"
 
 [dev-packages]
 
