@@ -1,5 +1,5 @@
-# Description
-Fixes Jira ticket G7T5-120
+# Jira Ticket Number
+// SPMXX
 
 # Type of change
 Please delete options that are not relevant.
