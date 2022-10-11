@@ -1,0 +1,12 @@
+[
+    {
+        "jobrole_name": "Operations Executive",
+        "id": 1,
+        "deleted": false
+    },
+    {
+        "jobrole_name": "Business Analyst",
+        "id": 2,
+        "deleted": false
+    }
+]
