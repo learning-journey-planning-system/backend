@@ -226,3 +226,5 @@ def read_courses_with_skills(
     """
     courses = crud.course.get_multi(db)
     return courses
+
+    @this will fail
