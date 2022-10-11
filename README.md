@@ -1,5 +1,7 @@
 # backend
 
+[![Unit Tests for Endpoints](https://github.com/learning-journey-planning-system/backend/actions/workflows/run_unit_tests.yml/badge.svg?branch=main&event=workflow_run)](https://github.com/learning-journey-planning-system/backend/actions/workflows/run_unit_tests.yml)
+
 <!-- ### 1. Shortcut to start the app:
 1. Ensure MAMP/WAMP is on
 2. Ensure you have pipenv installed
