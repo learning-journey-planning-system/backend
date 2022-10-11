@@ -12,6 +12,7 @@ email-validator = "*"
 pytest = "*"
 uvicorn = "*"
 sqlalchemy-utils = "*"
+requests = "*"
 
 [dev-packages]
 
