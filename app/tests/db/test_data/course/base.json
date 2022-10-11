@@ -14,5 +14,13 @@
         "course_type": "Internal",
         "course_category": "Core",
         "id": "COR002"
+    },
+    {
+        "course_name": "Manage Change",
+        "course_desc": "Identify risks associated with change and develop risk mitigation plans.",
+        "course_status": "Retired",
+        "course_type": "External",
+        "course_category": "Core",
+        "id": "COR006"
     }
 ]

@@ -1,0 +1,17 @@
+[
+    {
+        "skill_name": "Statistics",
+        "id": 1,
+        "deleted": false
+    },
+    {
+        "skill_name": "Project Planning",
+        "id": 2,
+        "deleted": false
+    },
+    {
+        "skill_name": "Data Analysis",
+        "id": 3,
+        "deleted": false
+    }
+]

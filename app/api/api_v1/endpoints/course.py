@@ -217,7 +217,7 @@ def get_skills_for_course(
         return course.skills
     return []
 
-@router.get("/with_skills", response_model=List[schemas.CourseWithSkills])
+@router.get("/with_skills/", response_model=List[schemas.CourseWithSkills])
 def read_courses_with_skills(
     db: Session = Depends(deps.get_db)
 ) -> Any:
