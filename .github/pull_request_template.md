@@ -14,8 +14,7 @@ Please delete options that are not relevant.
 // Please indicate the testcase ID you have added or are using
 
 # Checklist:
-- [ ] I have added the appropriate labels to my PR
-- [ ] My code follows the style guidelines of this project
-- [ ] My changes generate no new warnings
-- [ ] I have added tests that prove my fix is effective or that my feature works
+- [ ] Add appropriate labels to the PR
+- [ ] All checks passed
+- [ ] I have added the relevant unit tests for my fix/feature
 - [ ] New and existing unit tests pass locally with my changes
