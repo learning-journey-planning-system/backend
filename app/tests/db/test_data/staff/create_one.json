@@ -1,0 +1,8 @@
+{
+    "staff_fname": "string",
+    "staff_lname": "string",
+    "dept": "string",
+    "email": "user@example.com",
+    "role_id": 0,
+    "id": 0
+}

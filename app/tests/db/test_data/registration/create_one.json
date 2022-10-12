@@ -1,0 +1,7 @@
+{
+    "reg_status": "string",
+    "completion_status": "string",
+    "staff_id": 0,
+    "course_id": "string",
+    "id": 0
+    }
