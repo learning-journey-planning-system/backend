@@ -1,8 +1,8 @@
-from .test_role import load_role
+
 from .test_base import LoadDataBase
 from app import crud
 
-load_course = LoadDataBase("role")
+load_role = LoadDataBase("role")
 
 def test_read_roles(client) -> None:
     data = load_role.base_data

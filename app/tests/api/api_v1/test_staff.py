@@ -1,8 +1,8 @@
-from .test_staff import load_staff
+# from .test_learningjourney import load_learningjourney
 from .test_base import LoadDataBase
 from app import crud
 
-load_course = LoadDataBase("staff")
+load_staff = LoadDataBase("staff")
 
 def test_read_staffs(client) -> None:
     data = load_staff.base_data
