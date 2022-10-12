@@ -88,3 +88,19 @@ def delete_staff(
         raise HTTPException(status_code=404, detail="Staff not found")
     remaining_staffs = crud.staff.remove(db=db, id=staff_id)
     return remaining_staffs
+
+
+@router.get("/{staff_id}/learningjourneys", response_model=List[schemas.LearningJourneyFullWithSkills])
+def read_staff_learning_journeys(
+    *,
+    db: Session = Depends(deps.get_db),
+    staff_id: int
+) -> Any:
+    """
+    Get all the learning journeys that a staff has.
+    For SC20 View Learning Journey by learner.
+    """
+    staff = crud.staff.get(db=db, id=staff_id)
+    if not staff:
+        raise HTTPException(status_code=404, detail="Staff not found")
+    return staff.learningjourneys
