@@ -10,7 +10,7 @@ INSERT INTO jobrole (id,jobrole_name,deleted) VALUES
 (09,'Business Admin',FALSE),
 (10,'PR Executive',FALSE),
 (11,'Marketing Executive',FALSE),
-(12,'Sales Executive',FALSE),
+(12,'Sales Executive',TRUE),
 (13,'Customer Service',FALSE),
 (14,'CTO',FALSE),
 (15,'Cybersecurity',FALSE),
@@ -36,7 +36,9 @@ INSERT INTO skill (id,skill_name,deleted) VALUES
 (12,'Risk Anlaysis',FALSE),
 (13,'Operations',FALSE),
 (14,'Business Development',FALSE),
-(15,'Leadership',FALSE)
+(15,'Leadership',FALSE), 
+(16,'Manual documentation',TRUE),
+(17,'Paper filing',TRUE)
 ;
 
 INSERT INTO learningjourney (id,staff_id,jobrole_id) VALUES
@@ -124,8 +126,6 @@ INSERT INTO jobrole_skill (jobrole_id,skill_id) VALUES
 (11,02),
 (11,07),
 (11,05),
-(12,07),
-(12,13),
 (13,07),
 (13,13),
 (13,09),
