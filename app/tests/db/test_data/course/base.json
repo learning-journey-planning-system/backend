@@ -22,5 +22,13 @@
         "course_type": "External",
         "course_category": "Core",
         "id": "COR006"
+    },
+    {
+        "course_name": "Data Collection and Analysis",
+        "course_desc": "Data is meaningless unless insights and analysis can be drawn to provide useful information for business decision-making. It is imperative that data quality, integrity and security ",
+        "course_status": "Active",
+        "course_type": "External",
+        "course_category": "Finance",
+        "id": "FIN001"
     }
 ]
