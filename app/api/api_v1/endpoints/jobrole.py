@@ -233,10 +233,18 @@ def delete_skill_from_jobrole(
     if not jobrole:
         raise HTTPException(status_code=404,detail="The jobrole with this jobrole_id does not exist in the system")
 
+    # Check if the jobrole has not been soft deleted
+    if jobrole.deleted:
+        raise HTTPException(status_code=404,detail="The jobrole with this jobrole_id has been soft deleted")
+
     # Check if the skill exists
     skill = crud.skill.get(db=db, id=skill_id)
     if not skill:
         raise HTTPException(status_code=404, detail="Skill not found")
+    
+    # Check if the skill has not been soft deleted
+    if skill.deleted:
+        raise HTTPException(status_code=404, detail="Skill with this skill_id has been soft deleted")
     
     # Check if the skill exist in the jobrole
     if skill not in jobrole.skills:
