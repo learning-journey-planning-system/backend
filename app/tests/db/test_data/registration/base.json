@@ -11,13 +11,13 @@
       "completion_status": "Completed",
       "staff_id": 130001,
       "course_id": "COR001",
-      "id": 245
+      "id": 2
     },
     {
       "reg_status": "Registered",
       "completion_status": "Completed",
       "staff_id": 130002,
       "course_id": "COR002",
-      "id": 2
+      "id": 3
     }
 ]

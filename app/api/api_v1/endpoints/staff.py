@@ -74,22 +74,6 @@ def update_staff(
     return staff
 
 
-@router.delete("/{staff_id}", response_model=List[schemas.Staff])
-def delete_staff(
-    *,
-    db: Session = Depends(deps.get_db),
-    staff_id: int
-) -> Any:
-    """
-    Delete a staff.
-    """
-    staff = crud.staff.get(db=db, id=staff_id)
-    if not staff:
-        raise HTTPException(status_code=404, detail="Staff not found")
-    remaining_staffs = crud.staff.remove(db=db, id=staff_id)
-    return remaining_staffs
-
-
 @router.get("/{staff_id}/learningjourneys", response_model=List[schemas.LearningJourneyFullWithSkills])
 def read_staff_learning_journeys(
     *,
@@ -104,3 +88,45 @@ def read_staff_learning_journeys(
     if not staff:
         raise HTTPException(status_code=404, detail="Staff not found")
     return staff.learningjourneys
+
+@router.delete("/{staff_id}", response_model=List[schemas.Staff])
+def delete_staff(
+    *,
+    db: Session = Depends(deps.get_db),
+    staff_id: int
+) -> Any:
+    """
+    Delete a staff.
+    """
+    staff = crud.staff.get(db=db, id=staff_id)
+    if not staff:
+        raise HTTPException(status_code=404, detail="Staff not found")
+
+    #Remove staff's learning journeys amd resgistration
+    registration = crud.registration.get_registration_by_staff_id(db=db, staff_id=staff_id)
+    learningjourney = crud.learningjourney.get_learning_journeys_by_staff_id(db=db, staff_id=staff_id)
+    
+    #For staff with no registration and learning journey
+    if not registration and not learningjourney:
+        remaining_staffs = crud.staff.remove(db=db, id=staff_id)
+
+    # For staff with registration only
+    if not learningjourney:
+        for n in registration:
+            crud.registration.remove(db=db, id=n.id)
+
+    # For staff with learning journey only
+    if not registration:
+        for i in learningjourney:
+            crud.learningjourney.remove(db=db, id=i.id)
+
+    # For staff with both registration and learning journey
+    if learningjourney and registration:
+        for i in learningjourney:
+            crud.learningjourney.remove(db=db, id=i.id)
+        for n in registration:
+            crud.registration.remove(db=db, id=n.id)
+
+    remaining_staffs = crud.staff.remove(db=db, id=staff_id)
+
+    return remaining_staffs

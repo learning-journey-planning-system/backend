@@ -16,17 +16,17 @@
   },
   {
     "skill_name": "Paper filing",
-    "id": 17,
-    "deleted": true
+    "id": 4,
+    "deleted": false
   },
   {
     "skill_name": "Agility",
-    "id": 18,
+    "id": 5,
     "deleted": false
   },
   {
     "skill_name": "Business Development",
-    "id": 14,
+    "id": 6,
     "deleted": false
   }
 ]
