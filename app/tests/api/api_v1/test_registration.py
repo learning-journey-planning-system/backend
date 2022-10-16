@@ -1,8 +1,5 @@
+from .test_base import load_registration
 
-from .test_base import LoadDataBase
-from app import crud
-
-load_registration = LoadDataBase("registration")
 
 def test_read_registrations(client) -> None: #read all registrations
     data = load_registration.base_data

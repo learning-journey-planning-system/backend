@@ -30,7 +30,7 @@ def create_learningjourney(
     Create new learning journey.
     For SC6 create a new learning journey.
     """
-    learningjourney = crud.learningjourney.get_learning_journey_by_create_obj(db, obj_in=learningjourney_in)
+    learningjourney = crud.learningjourney.get_learning_journey_by_staff_id_and_jobrole_id(db, obj_in=learningjourney_in)
     if learningjourney:
         raise HTTPException(
             status_code=400,

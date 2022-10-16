@@ -1,8 +1,5 @@
-from .test_skill import load_skill
-from .test_base import LoadDataBase
+from .test_base import load_course, load_skill
 from app import crud
-
-load_course = LoadDataBase("course")
 
 
 def test_read_courses(client) -> None:
@@ -40,7 +37,7 @@ def test_update_course(client) -> None:
 
 
 def test_delete_course(client) -> None:
-    data = load_course.base_data[0]
+    data = load_course.base_data[2]
     id = data["id"]
     response = client.delete(f"{load_course.base_url}{id}")
     assert response.status_code == 200
