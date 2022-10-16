@@ -21,7 +21,7 @@ def test_create_staff(client) -> None:
 def test_read_staff(client) -> None:
     data = load_staff.base_data[0]
     id = data["id"]
-    response = client.get(f"{load_course.base_url}{id}")
+    response = client.get(f"{load_staff.base_url}{id}")
     assert response.status_code == 200
     assert response.json() == data
 

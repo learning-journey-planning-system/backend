@@ -9,7 +9,7 @@ load_jobrole = LoadDataBase("jobrole")
 def test_read_jobroles(client) -> None:
     data = load_jobrole.base_data
     response = client.get(load_jobrole.base_url)
-    skill = load_skill.base_data[0]
+    skill = load_skill.base_data[5]
     assert response.status_code == 200
     for i in range(len(data)):
         for key, value in data[i].items():
@@ -79,3 +79,68 @@ def test_delete_jobrole_that_is_already_deleted(client, session) -> None:
     id = data["id"]
     response = client.delete(f"{load_jobrole.base_url}{id}")
     assert response.status_code == 400
+
+def test_add_skill_to_jobrole(client) -> None:
+    data = load_jobrole.base_data[0]
+    id = data["id"]
+    skill = load_skill.base_data[0]
+    response = client.post(f"{load_jobrole.base_url}{id}/new_skill/", params={"skill_id": skill["id"]})
+    assert response.status_code == 200
+    assert skill in response.json()["skills"]
+
+def test_add_skill_to_jobrole_that_does_not_exist(client) -> None:
+    skill = load_skill.base_data[0]
+    response = client.post(f"{load_jobrole.base_url}999/new_skill/", params={"skill_id": skill["id"]})
+    assert response.status_code == 404
+
+def test_add_skill_to_jobrole_that_been_softdeleted(client, session) -> None:
+    crud.jobrole.remove(session, id=1)
+    skill = load_skill.base_data[0]
+    response = client.post(f"{load_jobrole.base_url}1/new_skill/", params={"skill_id": skill["id"]})
+    assert response.status_code == 400
+
+def test_add_skill_to_jobrole_that_already_exists(client) -> None:
+    data = load_jobrole.base_data[0]
+    id = data["id"]
+    skill = data["skills"][0]
+    response = client.post(f"{load_jobrole.base_url}{id}/new_skill/", params={"skill_id": skill["id"]})
+    assert response.status_code == 400
+
+def test_add_softdeleted_skill_from_jobrole(client) -> None:
+    data = load_jobrole.base_data[0]
+    id = data["id"]
+    skill = load_skill.base_data[3]
+    response = client.post(f"{load_jobrole.base_url}{id}/new_skill/", params={"skill_id": skill["id"]})
+    assert response.status_code == 400
+
+def test_get_skills_for_jobrole(client) -> None:
+    data = load_jobrole.base_data[0]
+    id = data["id"]
+    response = client.get(f"{load_jobrole.base_url}{id}/skills/")
+    assert response.status_code == 200
+    assert response.json() == data["skills"]
+
+def test_get_skills_for_jobrole_that_does_not_exist(client) -> None:
+    response = client.get(f"{load_jobrole.base_url}999/skills/")
+    assert response.status_code == 404
+
+def get_available_skills_for_jobrole(client) -> None:
+    data = load_jobrole.base_data[0]
+    response = client.get(f"{load_jobrole.base_url}/available_skills/")
+    assert response.status_code == 200
+    assert response.json() == data["skills"]
+
+def test_get_available_jobroles(client) -> None:
+    response = client.get(f"{load_jobrole.base_url}/available/")
+    assert response.status_code == 200
+
+def test_get_available_skills_for_jobrole(client) -> None:
+    data = load_jobrole.base_data[0]
+    id = data["id"]
+    response = client.get(f"{load_jobrole.base_url}{id}/available_skills/")
+    assert response.status_code == 200
+    assert response.json() == data["skills"]
+
+def test_get_available_skills_for_jobrole_that_does_not_exist(client) -> None:
+    response = client.get(f"{load_jobrole.base_url}999/available_skills/")
+    assert response.status_code == 404
