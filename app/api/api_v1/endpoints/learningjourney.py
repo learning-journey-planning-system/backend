@@ -120,6 +120,8 @@ def add_course_to_learning_journey(
     
     # Add the course to the learning journey
     learningjourney.courses.append(course)
+    db.commit()
+    db.refresh(learningjourney)
     return learningjourney
 
 @router.delete("/{learningjourney_id}/delete_course/{course_id}", response_model=schemas.LearningJourneyWithCourses)
