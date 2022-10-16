@@ -215,3 +215,36 @@ def get_available_skills_for_jobrole(
     available_skills = [skill for skill in jobrole.skills if skill.deleted == 0]
     
     return available_skills
+
+@router.delete("/{jobrole_id}/delete_skill/{skill_id}", response_model=schemas.JobRoleWithSkills)
+def delete_skill_from_jobrole(
+    *,
+    db: Session = Depends(deps.get_db),
+    jobrole_id: int,
+    skill_id: int
+) -> Any:
+    """
+    Delete a skill from a jobrole.
+    SC12 Delete skill from job role API. This is for admin, and will be used in admin panel.
+    """
+
+    # Check if the jobrole exists
+    jobrole = crud.jobrole.get(db, id=jobrole_id)
+    if not jobrole:
+        raise HTTPException(status_code=404,detail="The jobrole with this jobrole_id does not exist in the system")
+
+    # Check if the skill exists
+    skill = crud.skill.get(db=db, id=skill_id)
+    if not skill:
+        raise HTTPException(status_code=404, detail="Skill not found")
+    
+    # Check if the skill exist in the jobrole
+    if skill not in jobrole.skills:
+        raise HTTPException(status_code=400,detail="Jobrole has no such skill.")
+    
+    # Remove the skill from the jobrole
+    jobrole.skills.remove(skill)
+    db.commit()
+    db.refresh(jobrole)
+
+    return jobrole

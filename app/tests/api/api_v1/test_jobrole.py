@@ -144,3 +144,27 @@ def test_get_available_skills_for_jobrole(client) -> None:
 def test_get_available_skills_for_jobrole_that_does_not_exist(client) -> None:
     response = client.get(f"{load_jobrole.base_url}999/available_skills/")
     assert response.status_code == 404
+
+
+def test_delete_skill_from_jobrole(client) -> None:
+    data = load_jobrole.base_data[0]
+    id = data["id"]
+    skill = data["skills"][0]
+    skill_id = skill["id"]
+    response = client.delete(f"{load_jobrole.base_url}{id}/delete_skill/{skill_id}")
+    assert response.status_code == 200
+    for key, value in data.items():
+        assert response.json()[key] == value
+    assert skill not in response.json()["skills"]
+
+def test_delete_skill_from_jobrole_that_does_not_exist(client) -> None:
+    skill_id = load_skill.base_data[0]['id']
+    response = client.delete(f"{load_jobrole.base_url}999/delete_skill/{skill_id}")
+    assert response.status_code == 404
+
+def test_delete_skill_that_does_not_exist_from_jobrole(client) -> None:
+    data = load_jobrole.base_data[0]
+    id = data["id"]
+    response = client.delete(f"{load_jobrole.base_url}{id}/delete_skill/999")
+    assert response.status_code == 404
+
