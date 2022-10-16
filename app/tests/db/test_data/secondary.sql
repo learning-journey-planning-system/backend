@@ -1,5 +1,5 @@
 INSERT INTO course_learningjourney (learningjourney_id,course_id) VALUES
-(206,'SAL003');
+(1,'COR001');
 
 INSERT INTO course_skill (skill_id,course_id) VALUES
 (1,'COR001');

@@ -56,6 +56,7 @@ def read_learningjourney(
     return learningjourney
 
 
+# not applicable at all for our use case
 @router.put("/{learningjourney_id}", response_model=schemas.LearningJourney)
 def update_learningjourney(
     *,
@@ -123,6 +124,7 @@ def add_course_to_learning_journey(
     db.commit()
     db.refresh(learningjourney)
     return learningjourney
+
 
 @router.delete("/{learningjourney_id}/delete_course/{course_id}", response_model=schemas.LearningJourneyWithCourses)
 def delete_course_from_learning_journey(

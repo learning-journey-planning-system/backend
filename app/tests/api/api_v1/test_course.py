@@ -31,9 +31,10 @@ def test_update_course(client) -> None:
     data = load_course.base_data[0]
     id = data["id"]
     response = client.put(f"{load_course.base_url}{id}", json=update_data)
-    update_data["id"] = id
     assert response.status_code == 200
-    assert response.json() == update_data
+    for key, value in update_data.items():
+        assert response.json()[key] == value
+    assert response.json()["id"] == id
 
 
 def test_delete_course(client) -> None:
