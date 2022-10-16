@@ -71,7 +71,7 @@ def test_delete_learningjourney_that_does_not_exist(client) -> None:
 def test_add_course_to_learningjourney(client) -> None:
     data = load_learningjourney.base_data[0]
     id = data["id"]
-    course = load_course.create_one_data[1]
+    course = load_course.base_data[1]
     course_id = course["id"]
     response = client.post(f"{load_learningjourney.base_url}{id}/new_course/", params={"course_id": course_id})
     assert response.status_code == 200
@@ -79,7 +79,7 @@ def test_add_course_to_learningjourney(client) -> None:
 
 #Learning Journey not found
 def test_add_course_to_learningjourney_that_does_not_exist(client) -> None:
-    course = load_course.create_one_data[1]
+    course = load_course.base_data[1]
     course_id = course["id"]
     response = client.post(f"{load_learningjourney.base_url}999/new_course/", params={"course_id": course_id})
     assert response.status_code == 404
@@ -88,7 +88,7 @@ def test_add_course_to_learningjourney_that_does_not_exist(client) -> None:
 def test_add_course_to_learningjourney_that_already_exists(client) -> None:
     data = load_learningjourney.base_data[0]
     id = data["id"]
-    course = load_course.create_one_data[3]
+    course = load_course.base_data[3]
     course_id = course["id"]
     response = client.post(f"{load_learningjourney.base_url}{id}/new_course/", params={"course_id": course_id})
     assert response.status_code == 400
@@ -103,7 +103,7 @@ def test_add_non_existent_course_to_learningjourney(client) -> None:
 def test_delete_course_from_learningjourney(client) -> None:
     data = load_learningjourney.base_data[0]
     id = data["id"]
-    course = load_course.create_one_data[3]
+    course = load_course.base_data[3]
     course_id = course["id"]
     response = client.delete(f"{load_learningjourney.base_url}{id}/delete_course/", params={"course_id": course_id})
     assert response.status_code == 200
@@ -111,7 +111,7 @@ def test_delete_course_from_learningjourney(client) -> None:
 
 #Learning Journey not found
 def test_delete_course_from_learningjourney_that_does_not_exist(client) -> None:
-    course = load_course.create_one_data[3]
+    course = load_course.base_data[3]
     course_id = course["id"]
     response = client.delete(f"{load_learningjourney.base_url}999/delete_course/", params={"course_id": course_id})
     assert response.status_code == 404
@@ -127,7 +127,7 @@ def test_delete_non_existent_course_from_learningjourney(client) -> None:
 def test_delete_course_that_does_not_exist_in_learningjourney(client) -> None:
     data = load_learningjourney.base_data[0]
     id = data["id"]
-    course = load_course.create_one_data[0]
+    course = load_course.base_data[0]
     course_id = course["id"]
     response = client.delete(f"{load_learningjourney.base_url}{id}/delete_course/", params={"course_id": course_id})
     assert response.status_code == 400
