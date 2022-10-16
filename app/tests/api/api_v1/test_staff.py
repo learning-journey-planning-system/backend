@@ -73,7 +73,13 @@ def test_read_staff_learning_journeys(client) -> None:
     assert response.status_code == 200
     assert response.json() == data["learning_journeys"]
 
-def test_read_staff_learning_journeys_that_does_not_exist(client) -> None:
+def test_read_staff_that_does_not_exist_learning_journeys(client) -> None:
     response = client.get(f"{load_staff.base_url}999/learning_journeys")
     assert response.status_code == 404
+
+def test_read_staff_learning_journey_that_does_not_exist(client) -> None:
+    data = load_staff.base_data[1]
+    id = data["id"]
+    response = client.get(f"{load_staff.base_url}{id}/learning_journeys")
+    assert response.json() == []
 

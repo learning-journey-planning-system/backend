@@ -38,6 +38,7 @@ def test_update_learningjourney(client) -> None:
     assert response.status_code == 200
     assert response.json() == update_data
 
+
 def test_delete_learningjourney(client) -> None:
     data = load_learningjourney.base_data[0]
     id = data["id"]

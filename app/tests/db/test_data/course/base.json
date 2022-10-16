@@ -30,5 +30,13 @@
         "course_type": "External",
         "course_category": "Finance",
         "id": "FIN001"
-    }
+    },
+    {
+        "course_name": "Optimising Your Brand For The Digital Spaces",
+        "course_desc": "Digital has fundamentally shifted communication between brands and their consumers from a one-way broadcast to a two-way dialogue. In a hastened bid to transform their businesses to be digital market-ready,",
+        "course_status": "Active",
+        "course_type": "External",
+        "course_category": "Sales",
+        "id": "SAL003"
+      }
 ]

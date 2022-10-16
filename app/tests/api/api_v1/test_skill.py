@@ -23,16 +23,14 @@ def test_read_skill(client) -> None:
     assert response.status_code == 200
     assert response.json() == data
 
-
 def test_update_skill(client) -> None:
+    update_data = load_skill.update_one_data
     data = load_skill.base_data[0]
     id = data["id"]
-    update_data = load_skill.update_one_data
     response = client.put(f"{load_skill.base_url}{id}", json=update_data)
     update_data["id"] = id
     assert response.status_code == 200
-    assert response.json() == update_data
-
+    assert response.json()["skill_name"] == update_data["skill_name"]
 
 def test_delete_skill(client) -> None:
     data = load_skill.base_data[0]
@@ -41,9 +39,9 @@ def test_delete_skill(client) -> None:
     assert response.status_code == 200
     assert data not in response.json()
 
-#The skill with this skill name already exists in the system.
 def test_create_skill_that_exists(client) -> None:
     data = load_skill.base_data[0]
+    client.post(load_skill.base_url, json=data)
     response = client.post(load_skill.base_url, json=data)
     assert response.status_code == 400
 
@@ -64,9 +62,9 @@ def test_delete_skill_that_does_not_exist(client) -> None:
     assert response.status_code == 404
 
 def test_get_courses_for_skill(client) -> None:
-    data = load_skill.base_data[0]
+    data = load_skill.base_data[1]
     id = data["id"]
-    course = load_course.base_data[0]
+    course = load_course.base_data[4]
     response = client.get(f"{load_skill.base_url}{id}/courses/")
     assert response.status_code == 200
     assert course in response.json()

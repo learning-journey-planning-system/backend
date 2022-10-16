@@ -61,5 +61,5 @@ def test_update_registration_that_does_not_exist(client) -> None:
 
 #Registration not found in the system for delete
 def test_delete_registration_that_does_not_exist(client) -> None:
-    response = client.delete(f"{load_registration.base_urll}999")
+    response = client.delete(f"{load_registration.base_url}999")
     assert response.status_code == 404
