@@ -30,7 +30,7 @@ def create_learningjourney(
     Create new learning journey.
     For SC6 create a new learning journey.
     """
-    learningjourney = crud.learningjourney.get_learning_journey_by_create_obj(db, obj_in=learningjourney_in)
+    learningjourney = crud.learningjourney.get_learning_journey_by_staff_id_and_jobrole_id(db, obj_in=learningjourney_in)
     if learningjourney:
         raise HTTPException(
             status_code=400,
@@ -56,6 +56,7 @@ def read_learningjourney(
     return learningjourney
 
 
+# not applicable at all for our use case
 @router.put("/{learningjourney_id}", response_model=schemas.LearningJourney)
 def update_learningjourney(
     *,
@@ -123,6 +124,7 @@ def add_course_to_learning_journey(
     db.commit()
     db.refresh(learningjourney)
     return learningjourney
+
 
 @router.delete("/{learningjourney_id}/delete_course/{course_id}", response_model=schemas.LearningJourneyWithCourses)
 def delete_course_from_learning_journey(

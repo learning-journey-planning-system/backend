@@ -91,6 +91,7 @@ def delete_course(
     remaining_course = crud.course.remove(db=db, id=course_id)
     return remaining_course
 
+
 @router.post("/{course_id}/new_skill/", response_model=schemas.CourseWithSkills)
 def add_skill_to_course(
     *,
