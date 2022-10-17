@@ -27,7 +27,7 @@ INSERT INTO skill (id,skill_name,deleted) VALUES
 (3,'Data Analysis',FALSE),
 (4,'Accounting',FALSE),
 (5,'Statistics',FALSE),
-(6,'Talent Development',FALSE),
+(6,'Talent Development',TRUE),
 (7,'Communication',FALSE),
 (8,'Project Planning',FALSE),
 (9,'Administration',TRUE),
