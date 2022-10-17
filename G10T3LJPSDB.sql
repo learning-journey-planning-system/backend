@@ -39,7 +39,8 @@ INSERT INTO skill (id,skill_name,deleted) VALUES
 (15,'Leadership',FALSE),
 (16,'Manual documentation',TRUE),
 (17,'Paper filing',TRUE),
-(18,'Agility',FALSE)
+(18,'Agility',FALSE),
+(19,'Sourcing',FALSE)
 ;
 
 INSERT INTO learningjourney (id,staff_id,jobrole_id) VALUES
@@ -120,6 +121,7 @@ INSERT INTO jobrole_skill (jobrole_id,skill_id) VALUES
 (07,04),
 (08,06),
 (08,07),
+(08,19),
 (09,09),
 (09,13),
 (10,07),
