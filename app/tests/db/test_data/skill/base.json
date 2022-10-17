@@ -1,17 +1,32 @@
 [
-    {
-        "skill_name": "Statistics",
-        "id": 1,
-        "deleted": false
-    },
-    {
-        "skill_name": "Project Planning",
-        "id": 2,
-        "deleted": false
-    },
-    {
-        "skill_name": "Data Analysis",
-        "id": 3,
-        "deleted": false
-    }
+  {
+    "skill_name": "Web Design",
+    "id": 1,
+    "deleted": false
+  },
+  {
+    "skill_name": "Marketing",
+    "id": 2,
+    "deleted": false
+  },
+  {
+    "skill_name": "Data Analysis",
+    "id": 3,
+    "deleted": false
+  },
+  {
+    "skill_name": "Paper filing",
+    "id": 17,
+    "deleted": true
+  },
+  {
+    "skill_name": "Agility",
+    "id": 18,
+    "deleted": false
+  },
+  {
+    "skill_name": "Business Development",
+    "id": 14,
+    "deleted": false
+  }
 ]
