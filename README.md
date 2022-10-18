@@ -2,9 +2,6 @@
 
 <a name="readme-top"></a>
 
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -29,7 +26,6 @@
 </details>
 
 
-
 <!-- ABOUT THE PROJECT -->
 ## About
 This is the source code for the API service used by the Learning Journey Planning System by All-in-One. This service is built with <a href="https://fastapi.tiangolo.com/"><img src="https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png" alt="FastAPI" width="88"/></a>
@@ -37,28 +33,12 @@ This is the source code for the API service used by the Learning Journey Plannin
 ### Documentation
 <table>
   <tr>
-    <td>
-      <a href="http://127.0.0.1:8000/docs">
-        <img src="img/swagger-ui.png"/>
-      </a>
-    </td>
-    <td>
-      <a href="http://127.0.0.1:8000/docs">
-        <img src="img/redoc.png"/>
-      </a>
-    </td>
+    <td><a href="http://127.0.0.1:8000/docs"><img src="img/swagger-ui.png"/></a></td>
+    <td><a href="http://127.0.0.1:8000/docs"><img src="img/redoc.png"/></a></td>
   </tr>
   <tr>
-    <td>
-      <a href="http://127.0.0.1:8000/docs">
-        Swagger Documentation
-      </a>
-    </td>
-    <td>
-      <a href="http://127.0.0.1:8000/redoc">
-        Redoc Documentation
-      </a>
-    </td>
+    <td><a href="http://127.0.0.1:8000/docs">Swagger Documentation</a></td>
+    <td><a href="http://127.0.0.1:8000/redoc">Redoc Documentation</a></td>
   </tr>
 </table>
 
@@ -92,7 +72,6 @@ This is the source code for the API service used by the Learning Journey Plannin
 </table>
 
 ### End Service
-
 1. Stop backend service: `ctrl` + `C`
 2. Exit pipenv shell: `ctrl` + `D`
 
@@ -118,14 +97,3 @@ This is the source code for the API service used by the Learning Journey Plannin
 * [mihi on stackoverflow](https://stackoverflow.com/questions/67255653/how-to-set-up-and-tear-down-a-database-between-tests-in-fastapi)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/github_username/repo_name.svg?style=for-the-badge
-[contributors-url]: https://github.com/learning-journey-planning-system/backend/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/github_username/repo_name.svg?style=for-the-badge
-[forks-url]: https://github.com/learning-journey-planning-system/backend/network/members
-[stars-shield]: https://img.shields.io/github/stars/github_username/repo_name.svg?style=for-the-badge
-[stars-url]: https://github.com/learning-journey-planning-system/backend/stargazers
