@@ -35,7 +35,7 @@
 This is the source code for the API service used by the Learning Journey Planning System by All-in-One. This service is built with <a href="https://fastapi.tiangolo.com/"><img src="https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png" alt="FastAPI" width="88"/></a>
 
 ### Documentation
-<table style='text-align:center'>
+<table>
   <tr>
     <td>
       <a href="http://127.0.0.1:8000/docs">
@@ -49,12 +49,12 @@ This is the source code for the API service used by the Learning Journey Plannin
     </td>
   </tr>
   <tr>
-    <td>
+    <td style='text-align:center'>
       <a href="http://127.0.0.1:8000/docs">
         Swagger Documentation
       </a>
     </td>
-    <td>
+    <td style='text-align:center'>
       <a href="http://127.0.0.1:8000/redoc">
         Redoc Documentation
       </a>
