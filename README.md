@@ -90,7 +90,7 @@ This is the source code for the API service used by the Learning Journey Plannin
 
 
 <!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
+## References
 
 * [tiangolo of FastAPI](https://fastapi.tiangolo.com/)
 * [mihi on stackoverflow](https://stackoverflow.com/questions/67255653/how-to-set-up-and-tear-down-a-database-between-tests-in-fastapi)
