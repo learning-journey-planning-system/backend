@@ -18,7 +18,8 @@ INSERT INTO jobrole (id,jobrole_name,deleted) VALUES
 (17,'Development Director',FALSE),
 (18,'HR Director',FALSE),
 (19,'Software Architect',FALSE),
-(20,'Finance Officer',FALSE)
+(20,'Finance Officer',FALSE),
+(21,'Clerk',TRUE)
 ;
 
 INSERT INTO skill (id,skill_name,deleted) VALUES
