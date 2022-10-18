@@ -14,8 +14,6 @@
       <a href="#about">About</a>
       <ul>
         <li><a href="#documentation">Documentation</a></li>
-        <li><a href="#alternative-documentation">Alternative Documentation</a></li>
-        <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
     <li>
@@ -34,21 +32,35 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About
-This is the source code for the API service used by the Learning Journey Planning System by All-in-One.
+This is the source code for the API service used by the Learning Journey Planning System by All-in-One. This service is built with <a href="https://fastapi.tiangolo.com/"><img src="https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png" alt="FastAPI" width="88"/></a>
 
 ### Documentation
-
-[![Swagger Documentation][product-screenshot-1]](http://127.0.0.1:8000/docs)
-
-Documentation for the API Service can be viewed on swagger docs with the following URL: http://127.0.0.1:8000/docs
-
-### Alternative Documentation
-[![Redoc Documentation][product-screenshot-2]](http://127.0.0.1:8000/redoc)
-Alternative documentation on redoc is available as well: http://127.0.0.1:8000/redoc
-
-### Built With
-
-<a href="https://fastapi.tiangolo.com/"><img src="https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png" alt="FastAPI" width="100"/></a>
+<table style='text-align:center'>
+  <tr>
+    <td>
+      <a href="http://127.0.0.1:8000/docs">
+        <img src="img/swagger-ui.png"/>
+      </a>
+    </td>
+    <td>
+      <a href="http://127.0.0.1:8000/docs">
+        <img src="img/redoc.png"/>
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="http://127.0.0.1:8000/docs">
+        Swagger Documentation
+      </a>
+    </td>
+    <td>
+      <a href="http://127.0.0.1:8000/redoc">
+        Redoc Documentation
+      </a>
+    </td>
+  </tr>
+</table>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -117,5 +129,3 @@ Alternative documentation on redoc is available as well: http://127.0.0.1:8000/r
 [forks-url]: https://github.com/learning-journey-planning-system/backend/network/members
 [stars-shield]: https://img.shields.io/github/stars/github_username/repo_name.svg?style=for-the-badge
 [stars-url]: https://github.com/learning-journey-planning-system/backend/stargazers
-[product-screenshot-1]: img/swagger-ui.png
-[product-screenshot-2]: img/redoc.png
