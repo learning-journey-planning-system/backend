@@ -1,8 +1,8 @@
 {
-    "staff_fname": "string",
-    "staff_lname": "string",
-    "dept": "string",
-    "email": "user@example.com",
-    "role_id": 0,
-    "id": 0
+    "staff_fname": "Emma",
+    "staff_lname": "Heng",
+    "dept": "Sales",
+    "email": "Emma.Heng@allinone",
+    "role_id": 2,
+    "id": 140025
 }

@@ -86,7 +86,21 @@ def delete_staff(
     staff = crud.staff.get(db=db, id=staff_id)
     if not staff:
         raise HTTPException(status_code=404, detail="Staff not found")
+
+    #Remove staff's learning journeys and resgistration
+    registrations = staff.registrations
+    learningjourneys = staff.learningjourneys
+
+    if registrations != []:
+        for registration in registrations:
+            crud.registration.remove(db=db, id=registration.id)
+
+    if learningjourneys != []:
+        for learningjourney in learningjourneys:
+            crud.learningjourney.remove(db=db, id=learningjourney.id)
+
     remaining_staffs = crud.staff.remove(db=db, id=staff_id)
+
     return remaining_staffs
 
 

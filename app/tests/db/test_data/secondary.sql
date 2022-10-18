@@ -1,5 +1,9 @@
+PRAGMA foreign_keys = ON;
+
 INSERT INTO course_learningjourney (learningjourney_id,course_id) VALUES
-(1,'COR001');
+(1,'COR001'),
+(2,'COR002')
+;
 
 INSERT INTO course_skill (skill_id,course_id) VALUES
 (1,'COR001');

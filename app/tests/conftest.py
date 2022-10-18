@@ -14,7 +14,7 @@ SQLALCHEMY_DATABASE_URL = "sqlite:///app/tests/test.db"
 engine = sa.create_engine(
     SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
 )
-TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+TestingSessionLocal = sessionmaker(autoflush=False, bind=engine)
 
 # Set up the database once
 Base.metadata.drop_all(bind=engine)
@@ -60,6 +60,7 @@ def do_begin(conn):
 @pytest.fixture()
 def session():
     connection = engine.connect()
+    connection.execute("PRAGMA foreign_keys = ON")
     transaction = connection.begin()
     session = TestingSessionLocal(bind=connection)
 

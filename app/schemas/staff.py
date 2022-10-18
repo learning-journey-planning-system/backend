@@ -1,13 +1,13 @@
 from typing import Optional
 
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel
 
 # Shared properties
 class StaffBase(BaseModel):
     staff_fname: Optional[str] = None
     staff_lname: Optional[str] = None
     dept: Optional[str] = None
-    email: Optional[EmailStr] = None
+    email: Optional[str] = None
     role_id: Optional[int] = None
 
 # Properties to receive via API on creation
@@ -16,7 +16,7 @@ class StaffCreate(StaffBase):
     staff_fname: str
     staff_lname: str
     dept: str
-    email: EmailStr
+    email: str
     role_id: int
 
 # Properties to receive via API on update

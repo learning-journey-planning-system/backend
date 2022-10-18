@@ -2,6 +2,6 @@
     "staff_fname": "test",
     "staff_lname": "test",
     "dept": "test",
-    "email": "testuser@example.com",
-    "role_id": 0
-    }
+    "email": "test@example.com",
+    "role_id": 2
+}

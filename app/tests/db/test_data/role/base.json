@@ -10,9 +10,5 @@
   {
     "role_name": "Manager",
     "id": 3
-  },
-  {
-    "role_name": "Trainer",
-    "id": 4
   }
 ]
