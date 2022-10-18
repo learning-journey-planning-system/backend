@@ -28,8 +28,6 @@
 ## About
 This is the source code for the API service used by the Learning Journey Planning System by All-in-One. This service is built with <a href="https://fastapi.tiangolo.com/"><img src="https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png" alt="FastAPI" width="88"/></a>
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -73,8 +71,6 @@ This is the source code for the API service used by the Learning Journey Plannin
 1. Stop backend service: `ctrl` + `C`
 2. Exit pipenv shell: `ctrl` + `D`
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 <!-- DEVELOPMENT -->
 ## Feature Development Workflow
@@ -85,13 +81,9 @@ This is the source code for the API service used by the Learning Journey Plannin
 3. Push to the Branch (`git push origin feature/<jira-ticket-number>-<short description>`)
 4. Open a Pull Request
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 <!-- ACKNOWLEDGMENTS -->
 ## References
 
 * [tiangolo of FastAPI](https://fastapi.tiangolo.com/)
 * [mihi on stackoverflow](https://stackoverflow.com/questions/67255653/how-to-set-up-and-tear-down-a-database-between-tests-in-fastapi)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
