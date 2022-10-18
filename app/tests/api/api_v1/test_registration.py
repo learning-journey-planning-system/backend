@@ -1,4 +1,4 @@
-from .test_base import load_registration
+from .test_base import load_registration, load_staff, load_course
 
 
 def test_read_registrations(client) -> None: #read all registrations
@@ -7,11 +7,13 @@ def test_read_registrations(client) -> None: #read all registrations
     assert response.status_code == 200
     assert response.json() == data
 
+
 def test_create_registration(client) -> None:
     data = load_registration.create_one_data
     response = client.post(load_registration.base_url, json=data)
     assert response.status_code == 200
     assert response.json() == data
+
 
 def test_create_registration_that_exists(client) -> None:
     data = load_registration.base_data[0]
@@ -27,9 +29,11 @@ def test_read_registration(client) -> None: #read one registration
     assert response.status_code == 200
     assert response.json() == data
 
+
 def test_read_registration_that_does_not_exist(client) -> None:
     response = client.get(f"{load_registration.base_url}999")
     assert response.status_code == 404
+
 
 def test_update_registration(client) -> None:
     update_data = load_registration.update_one_data
@@ -40,10 +44,12 @@ def test_update_registration(client) -> None:
     assert response.status_code == 200
     assert response.json() == update_data
 
+
 def test_update_registration_that_does_not_exist(client) -> None:
     update_data = load_registration.update_one_data
     response = client.put(f"{load_registration.base_url}999", json=update_data)
     assert response.status_code == 404
+
 
 def test_delete_registration(client) -> None:
     data = load_registration.base_data[0]
@@ -51,6 +57,7 @@ def test_delete_registration(client) -> None:
     response = client.delete(f"{load_registration.base_url}{id}")
     assert response.status_code == 200
     assert data not in response.json()
+
 
 def test_delete_registration_that_does_not_exist(client) -> None:
     response = client.delete(f"{load_registration.base_url}999")

@@ -12,7 +12,7 @@
       "staff_lname": "Sim",
       "dept": "CEO",
       "email": "jack.sim@allinone.com.sg",
-      "role_id": 1,
+      "role_id": 2,
       "id": 130002
     },
     {
@@ -20,7 +20,15 @@
       "staff_lname": "Tan",
       "dept": "Sales",
       "email": "Derek.Tan@allinone.com.sg",
-      "role_id": 3,
+      "role_id": 1,
       "id": 140001
+    },
+    {
+      "staff_fname": "Susan",
+      "staff_lname": "Goh",
+      "dept": "Sales",
+      "email": "Susan.Goh@allinone.com.sg",
+      "role_id": 2,
+      "id": 140002
     }
 ]

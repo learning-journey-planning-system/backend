@@ -1,7 +1,7 @@
 {
-    "reg_status": "string",
-    "completion_status": "string",
-    "staff_id": 0,
-    "course_id": "string",
-    "id": 0
-    }
+    "reg_status": "Registered",
+    "completion_status": "Completed",
+    "staff_id": 140001,
+    "course_id": "COR001",
+    "id": 4
+}

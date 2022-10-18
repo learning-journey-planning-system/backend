@@ -94,6 +94,7 @@ def delete_skill(
     skill = crud.skill.remove(db=db, id=skill_id)
     return skill
 
+
 @router.get("/{skill_id}/courses/", response_model=List[schemas.Course])
 def get_courses_for_skill(
     *,
@@ -122,6 +123,7 @@ def get_courses_for_skill(
     courses = [course for course in skill.courses if course.course_status == "Active"]
 
     return courses
+
 
 @router.get("/available/", response_model=List[schemas.Skill])
 def get_available_skills(

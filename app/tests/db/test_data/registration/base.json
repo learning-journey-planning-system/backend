@@ -2,22 +2,15 @@
     {
       "reg_status": "Registered",
       "completion_status": "Completed",
-      "staff_id": 130001,
-      "course_id": "COR002",
+      "staff_id": 140001,
+      "course_id": "COR001",
       "id": 1
     },
     {
       "reg_status": "Registered",
       "completion_status": "Completed",
-      "staff_id": 130001,
-      "course_id": "COR001",
-      "id": 2
-    },
-    {
-      "reg_status": "Registered",
-      "completion_status": "Completed",
-      "staff_id": 130002,
+      "staff_id": 140002,
       "course_id": "COR002",
-      "id": 3
+      "id": 2
     }
 ]
