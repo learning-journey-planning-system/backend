@@ -13,20 +13,5 @@
     "skill_name": "Data Analysis",
     "id": 3,
     "deleted": false
-  },
-  {
-    "skill_name": "Paper filing",
-    "id": 4,
-    "deleted": false
-  },
-  {
-    "skill_name": "Agility",
-    "id": 5,
-    "deleted": false
-  },
-  {
-    "skill_name": "Business Development",
-    "id": 6,
-    "deleted": false
   }
 ]
