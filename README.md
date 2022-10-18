@@ -103,7 +103,7 @@ This is the source code for the API service used by the Learning Journey Plannin
 ## Feature Development Workflow
 1. Create a new branch (`git checkout -b feature/<jira-ticket-number>-<short description>`)
 2. Develop feature
-3. Write unit tests (if needed)
+3. Write [unit tests](./tree/main/app/tests) (if needed)
 2. Commit your Changes (`git commit -m 'Adds <feature-description>'`)
 3. Push to the Branch (`git push origin feature/<jira-ticket-number>-<short description>`)
 4. Open a Pull Request
