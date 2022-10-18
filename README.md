@@ -9,14 +9,12 @@
   <ol>
     <li>
       <a href="#about">About</a>
-      <ul>
-        <li><a href="#documentation">Documentation</a></li>
-      </ul>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#db-connection-string-examples">DB Connection String Examples</a></li>
+        <li><a href="#documentation">Documentation</a></li>
         <li><a href="#end-service">End Service</a></li>
       </ul>
     </li>
@@ -30,18 +28,6 @@
 ## About
 This is the source code for the API service used by the Learning Journey Planning System by All-in-One. This service is built with <a href="https://fastapi.tiangolo.com/"><img src="https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png" alt="FastAPI" width="88"/></a>
 
-### Documentation
-<table>
-  <tr>
-    <td><a href="http://127.0.0.1:8000/docs"><img src="img/swagger-ui.png"/></a></td>
-    <td><a href="http://127.0.0.1:8000/docs"><img src="img/redoc.png"/></a></td>
-  </tr>
-  <tr>
-    <td><a href="http://127.0.0.1:8000/docs">Swagger Documentation</a></td>
-    <td><a href="http://127.0.0.1:8000/redoc">Redoc Documentation</a></td>
-  </tr>
-</table>
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
@@ -49,11 +35,12 @@ This is the source code for the API service used by the Learning Journey Plannin
 ## Getting Started
 1. Clone repository on local.
 2. Ensure [MAMP](https://www.mamp.info/en/downloads/)/[WAMP](https://www.wampserver.com/en/download-wampserver-64bits/) is on.
-3. Rename `.env.example` to `.env`. Configure the connection string in that file. (see [DB Connection String Examples](#db-connection-string-examples))
+3. Rename `.env.example` to `.env`. Configure the connection string in that file. (see [DB Connection String Examples](#db-connection-string-examples)).
 4. Ensure you have [pipenv](https://pipenv.pypa.io/en/latest/) installed.
 5. Enter the `backend` directory and run `pipenv shell`.
-6. Then run `./start_backend.sh`
-7. Once you have finished using the API service, refer [here](#end-service) to end the service.
+6. Then run `./start_backend.sh`.
+7. Access the [API docucumentation](#documentation) on your Chrome Browser.
+7. Once you have finished using the API service, [end the service](#end-service).
   
 ### DB Connection String Examples
 <table border=1>
@@ -68,6 +55,18 @@ This is the source code for the API service used by the Learning Journey Plannin
   <tr>
     <td>Windows</td>
     <td>mysql+mysqlconnector://root@localhost:3306/G10T3_LJPS_DB</td>
+  </tr>
+</table>
+
+### Documentation
+<table>
+  <tr>
+    <td><a href="http://127.0.0.1:8000/docs"><img src="img/swagger-ui.png"/></a></td>
+    <td><a href="http://127.0.0.1:8000/docs"><img src="img/redoc.png"/></a></td>
+  </tr>
+  <tr>
+    <td>Swagger Documentation @<a href="http://127.0.0.1:8000/docs">http://localhost:8000/docs</a></td>
+    <td>Redoc Documentation @<a href="http://127.0.0.1:8000/redoc">http://localhost:8000/redoc</a></td>
   </tr>
 </table>
 
