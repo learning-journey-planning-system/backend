@@ -33,13 +33,12 @@ This is the source code for the API service used by the Learning Journey Plannin
 
 <!-- GETTING STARTED -->
 ## Getting Started
-1. Clone repository on local.
+1. Clone repository on local (with GitHub GLI: `gh repo clone learning-journey-planning-system/backend`)
 2. Ensure [MAMP](https://www.mamp.info/en/downloads/)/[WAMP](https://www.wampserver.com/en/download-wampserver-64bits/) is on.
 3. Rename `.env.example` to `.env`. Configure the connection string in that file. (see [DB Connection String Examples](#db-connection-string-examples)).
 4. Ensure you have [pipenv](https://pipenv.pypa.io/en/latest/) installed.
-5. Enter the `backend` directory and run `pipenv shell`.
-6. Then run `./start_backend.sh`.
-7. Access the [API docucumentation](#documentation) on your Chrome Browser.
+5. Run the following commands: (1) `cd backend`, (2) `pipenv shell`, (3) `./start_backend.sh`.
+6. Access the [API docucumentation](#documentation) on your Chrome Browser.
 7. Once you have finished using the API service, [end the service](#end-service).
   
 ### DB Connection String Examples
