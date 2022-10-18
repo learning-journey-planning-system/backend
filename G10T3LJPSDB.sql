@@ -6,7 +6,7 @@ INSERT INTO jobrole (id,jobrole_name,deleted) VALUES
 (05,'Software Engineering',FALSE),
 (06,'Product Manager',FALSE),
 (07,'Accountant',FALSE),
-(08,'Talent Acquisition',FALSE),
+(08,'Talent Acquisition',TRUE),
 (09,'Business Admin',FALSE),
 (10,'PR Executive',FALSE),
 (11,'Marketing Executive',FALSE),
