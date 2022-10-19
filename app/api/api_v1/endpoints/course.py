@@ -1,6 +1,7 @@
 from typing import Any, List
 
 from fastapi import APIRouter, Depends, HTTPException
+from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 
 from app import crud, models, schemas
@@ -92,18 +93,23 @@ def delete_course(
     return remaining_course
 
 
-@router.post("/{course_id}/new_skill/", response_model=schemas.CourseWithSkills)
-def add_skill_to_course(
+@router.post("/{course_id}/new_skills/", response_model=List[List[str]])
+def add_skills_to_course(
     *,
     db: Session = Depends(deps.get_db),
     course_id: str,
-    skill_id: int
+    skill_ids: List[int]
 ) -> Any:
     """
-    Add a skill to a course.
+    Add skill(s) to a course.
     For SC19 assign skill to a course.
 
-    If course is inactive or if skill has been soft deleted, 404 will be returned.
+    If course does not exist or is not active, 404 will be returned.
+
+    Otherwise, it will return a list of two lists of skills that were not added in this format:\n
+    [  [ skills that are soft deleted ], [ skills that are already assigned to the course ]  ]
+
+    If an empty list is returned, all skills were added successfully!
     """
 
     # Check if course exists
@@ -121,34 +127,27 @@ def add_skill_to_course(
             detail="The course with this course id is not active.",
         )
     
-    # Check if skill exists
-    skill = crud.skill.get(db, id=skill_id)
-    if not skill:
-        raise HTTPException(
-            status_code=404,
-            detail="The skill with this skill id does not exist in the system",
-        )
-    
-    # Check if skill has been soft deleted
-    if skill.deleted:
-        raise HTTPException(
-            status_code=404,
-            detail="The skill with this skill id has been soft deleted.",
-        )
-    
-    # Check if skill is already in course
-    if skill in course.skills:
-        raise HTTPException(
-            status_code=400,
-            detail="The skill with this skill id is already in the course",
-        )
-    
-    # Add skill to course
-    course.skills.append(skill)
-    db.commit()
-    db.refresh(course)
+    soft_deleted = []
+    already_assigned = []
+    for skill_id in skill_ids:
+        skill = crud.skill.get(db, id=skill_id)
 
-    return course
+        # Check if skill has been soft deleted
+        if skill.deleted:
+            soft_deleted.append(skill.skill_name)
+
+        # Check if skill is already in course
+        elif skill in course.skills:
+            already_assigned.append(skill)
+        
+        # Add skill to course
+        else:
+            course.skills.append(skill)
+            db.commit()
+
+    db.refresh(course)
+    
+    return [soft_deleted, already_assigned]
 
 @router.delete("/{course_id}/delete_skill/{skill_id}", response_model=schemas.CourseWithSkills)
 def delete_skill_from_course(
