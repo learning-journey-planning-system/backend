@@ -22,21 +22,5 @@
         "course_type": "External",
         "course_category": "Core",
         "id": "COR006"
-    },
-    {
-        "course_name": "Data Collection and Analysis",
-        "course_desc": "Data is meaningless unless insights and analysis can be drawn to provide useful information for business decision-making. It is imperative that data quality, integrity and security ",
-        "course_status": "Active",
-        "course_type": "External",
-        "course_category": "Finance",
-        "id": "FIN001"
-    },
-    {
-        "course_name": "Optimising Your Brand For The Digital Spaces",
-        "course_desc": "Digital has fundamentally shifted communication between brands and their consumers from a one-way broadcast to a two-way dialogue. In a hastened bid to transform their businesses to be digital market-ready,",
-        "course_status": "Active",
-        "course_type": "External",
-        "course_category": "Sales",
-        "id": "SAL003"
     }
 ]

@@ -138,7 +138,7 @@ def add_skills_to_course(
 
         # Check if skill is already in course
         elif skill in course.skills:
-            already_assigned.append(skill)
+            already_assigned.append(skill.skill_name)
         
         # Add skill to course
         else:
