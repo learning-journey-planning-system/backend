@@ -1,7 +1,7 @@
 from .msg import Msg
 
 from .course import Course, CourseCreate, CourseUpdate, CourseWithSkills
-from .jobrole import JobRole, JobRoleCreate, JobRoleUpdate, JobRoleWithSkills
+from .jobrole import JobRole, JobRoleCreate, JobRoleUpdate, JobRoleWithSkills, JobRoleWithSkillsWithCourses
 from .learningjourney import LearningJourney, LearningJourneyCreate, LearningJourneyUpdate, LearningJourneyFull, LearningJourneyFullWithSkills, LearningJourneyWithCourses
 from .registration import Registration, RegistrationCreate, RegistrationUpdate
 from .role import Role, RoleCreate, RoleUpdate

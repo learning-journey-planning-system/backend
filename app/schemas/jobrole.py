@@ -27,6 +27,9 @@ class JobRole(JobRoleInDBBase):
     pass
 
 # Additional properties to return via API
-from .skill import Skill
+from .skill import Skill, SkillWithCourses
 class JobRoleWithSkills(JobRole):
     skills: List[Skill] = []
+
+class JobRoleWithSkillsWithCourses(JobRole):
+    skills: List[SkillWithCourses] = []
