@@ -97,18 +97,23 @@ def delete_jobrole(
     jobrole = crud.jobrole.remove(db=db, id=jobrole_id)
     return jobrole
 
-@router.post("/{jobrole_id}/new_skill/", response_model=schemas.JobRoleWithSkills)
-def add_skill_to_jobrole(
+@router.post("/{jobrole_id}/new_skills/", response_model=List[List[str]])
+def add_skills_to_jobrole(
     *,
     db: Session = Depends(deps.get_db),
     jobrole_id: int,
-    skill_id: int
+    skill_ids: List[int]
 ) -> Any:
     """
-    Add a skill to a JobRole.
+    Add skill(s) to a JobRole.
     For SC18 Assign skill to jobrole.
 
-    If jobrole or skill has been soft deleted or does not exists, 404 will be returned.
+    If jobrole does not exist or is soft deleted, 404 will be returned.
+
+    Otherwise, it will return a list of two lists of skills that were not added in this format:\n
+    [  [ skills that are soft deleted ], [ skills that are already assigned to the course ]  ]
+
+    If an empty list is returned, all skills were added successfully!
     """
 
     # Check if jobrole exists
@@ -116,43 +121,38 @@ def add_skill_to_jobrole(
     if not jobrole:
         raise HTTPException(
             status_code=404,
-            detail="The jobrole with this jobrole_id does not exist in the system",
+            detail="The jobrole with this jobrole id does not exist in the system",
         )
-    
-    # Check if jobrole has not been soft deleted
+
+    # Check if jobrole is not soft deleted
     if jobrole.deleted:
         raise HTTPException(
             status_code=404,
-            detail="The jobrole with this jobrole_id has been soft deleted",
+            detail="The jobrole with this jobrole id has been soft deleted.",
         )
     
-    # Check if skill exists
-    skill = crud.skill.get(db, id=skill_id)
-    if not skill:
-        raise HTTPException(
-            status_code=404,
-            detail="The skill with this skill_id does not exist in the system",
-        )
-    
-    # Check if skill has not been soft deleted
-    if skill.deleted:
-        raise HTTPException(
-            status_code=404,
-            detail="The skill with this skill_id has been soft deleted",
-        )
-    
-    # Check if skill is already assigned to jobrole
-    if skill in jobrole.skills:
-        raise HTTPException(
-            status_code=400,
-            detail="The skill with this skill_id is already assigned to this jobrole",
-        )
-    
-    # Add skill to jobrole
-    jobrole.skills.append(skill)
-    db.commit()
+    soft_deleted = []
+    already_assigned = []
+    for skill_id in skill_ids:
+        skill = crud.skill.get(db, id=skill_id)
+
+        # Check if skill has been soft deleted
+        if skill.deleted:
+            soft_deleted.append(skill.skill_name)
+
+        # Check if skill is already in jobrole
+        elif skill in jobrole.skills:
+            already_assigned.append(skill.skill_name)
+        
+        # Add skill to course
+        else:
+            jobrole.skills.append(skill)
+            db.commit()
+
     db.refresh(jobrole)
-    return jobrole
+    
+    return [soft_deleted, already_assigned]
+
 
 @router.get("/{jobrole_id}/skills/", response_model=List[schemas.Skill])
 def get_skills_for_jobrole(
