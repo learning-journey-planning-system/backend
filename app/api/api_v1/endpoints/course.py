@@ -149,6 +149,7 @@ def add_skills_to_course(
     
     return [soft_deleted, already_assigned]
 
+
 @router.delete("/{course_id}/delete_skill/{skill_id}", response_model=schemas.CourseWithSkills)
 def delete_skill_from_course(
     *,
