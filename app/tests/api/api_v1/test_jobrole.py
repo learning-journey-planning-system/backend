@@ -31,9 +31,18 @@ def test_create_jobrole_that_exists_already(client) -> None:
 def test_read_jobrole(client) -> None:
     data = load_jobrole.base_data[0]
     id = data["id"]
+    skill = load_skill.base_data[0]
+    course = load_course.base_data[0]
     response = client.get(f"{load_jobrole.base_url}{id}")
     assert response.status_code == 200
-    assert response.json() == data
+    for key, value in data.items():
+        assert response.json()[key] == value
+    assert len(response.json()["skills"]) == 1
+    for key, value in skill.items():
+        assert response.json()["skills"][0][key] == value
+    assert len(response.json()["skills"][0]["courses"]) == 1
+    for key, value in course.items():
+        assert response.json()["skills"][0]["courses"][0][key] == value
 
 
 def test_read_jobrole_that_does_not_exist(client) -> None:

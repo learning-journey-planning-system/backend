@@ -42,14 +42,16 @@ def create_jobrole(
     return jobrole
 
 
-@router.get("/{jobrole_id}", response_model=schemas.JobRole)
+@router.get("/{jobrole_id}", response_model=schemas.JobRoleWithSkillsWithCourses)
 def read_jobrole(
     *,
     db: Session = Depends(deps.get_db),
     jobrole_id: int
 ) -> Any:
     """
-    Get jobrole by ID.
+    Get full details of jobrole by ID.
+    For SC7.
+    Returns jobrole details, skills needed for jobrole and the courses related to the skills.
     """
     jobrole = crud.jobrole.get(db=db, id=jobrole_id)
     if not jobrole:
