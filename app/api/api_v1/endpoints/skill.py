@@ -176,7 +176,7 @@ def update_skill_name(
     if skill_in.skill_name in skills_name:
         raise HTTPException(
             status_code=404,
-            detail="The Skill name is already exist in the system",
+            detail="This Skill name already exist in the system",
         )
     
     skill = crud.skill.update(db, db_obj=skill, obj_in=skill_in)
