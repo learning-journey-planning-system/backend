@@ -120,3 +120,31 @@ def test_get_available_skills(client, session) -> None:
     # check if the rest of the records are in the response
     assert response.json() == data
 
+def test_update_skill_name(client) -> None:
+    data = load_skill.base_data[0]
+    id = data["id"]
+    update_data = {"skill_name": "new name"}
+    response = client.put(f"{load_skill.base_url}{id}/name", json=update_data)
+    assert response.status_code == 200
+    assert response.json()["skill_name"] == update_data["skill_name"]
+
+def test_update_skill_name_which_skill_that_does_not_exist(client) -> None:
+    update_data = {"skill_name": "new name"}
+    response = client.put(f"{load_skill.base_url}999/name", json=update_data)
+    assert response.status_code == 404
+
+def test_update_skill_name_which_skill_that_has_been_deleted(client,session) -> None:
+    crud.skill.remove(session, id=1)
+    update_data = {"skill_name": "new name"}
+    response = client.put(f"{load_skill.base_url}1/name", json=update_data)
+    assert response.status_code == 404
+
+def test_update_skill_name_which_skill_name_is_same_as_current(client) -> None:
+    update_data = {"skill_name": "Web Design"}
+    response = client.put(f"{load_skill.base_url}1/name", json=update_data)
+    assert response.status_code == 404
+
+def test_update_skill_name_which_skill_name_exist_in_db(client) -> None:
+    update_data = {"skill_name": "Data Analysis"}
+    response = client.put(f"{load_skill.base_url}1/name", json=update_data)
+    assert response.status_code == 404
