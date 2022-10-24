@@ -87,6 +87,7 @@ def delete_jobrole(
 ) -> Any:
     """
     Delete a JobRole.
+    For SC17 Deleting job roles from LJPS.
     """
     jobrole = crud.jobrole.get(db=db, id=jobrole_id,)
     if not jobrole:
