@@ -66,15 +66,40 @@ def update_skill(
 ) -> Any:
     """
     Update a skill.
+    SC10 Update skill name by admin.
     """
+    #check if skill exists
     skill = crud.skill.get(db, id=skill_id)
     if not skill:
         raise HTTPException(
             status_code=404,
             detail="The skill with this skill_id does not exist in the system",
         )
+
+    # check if skill has not been soft deleted
+    if skill.deleted:
+        raise HTTPException(status_code=404, detail="Skill has been soft deleted.")
+
+    # check if updated skill name is the same as current skill name
+    skill_name = skill.skill_name
+    if skill_name == skill_in.skill_name:
+        raise HTTPException(
+            status_code=404,
+            detail="The Skill name is the same as the current Skill name",
+        )
+    
+    # check if updated skill name already exists in the database
+    skills = crud.skill.get_multi(db)
+    skills_name = [skill.skill_name for skill in skills]
+    if skill_in.skill_name in skills_name:
+        raise HTTPException(
+            status_code=404,
+            detail="This Skill name already exist in the system",
+        )
+    
     skill = crud.skill.update(db, db_obj=skill, obj_in=skill_in)
     return skill
+    
 
 
 @router.delete("/{skill_id}", response_model=schemas.Skill)
@@ -136,48 +161,3 @@ def get_available_skills(
     skills = crud.skill.get_multi(db)
     available_skills = [skill for skill in skills if not skill.deleted]
     return available_skills
-
-
-@router.put("/{skill_id}/name", response_model=schemas.Skill)
-def update_skill_name(
-    *,
-    db: Session = Depends(deps.get_db),
-    skill_id: int,
-    skill_in: schemas.SkillUpdate
-) -> Any:
-    """
-    Updating skill for LJPS
-    SC10 Update skill name by admin.
-    """
-
-    #check if skill exists
-    skill = crud.skill.get(db, id=skill_id)
-    if not skill:
-        raise HTTPException(
-            status_code=404,
-            detail="The skill with this skill_id does not exist in the system",
-        )
-
-    # check if skill has not been soft deleted
-    if skill.deleted:
-        raise HTTPException(status_code=404, detail="Skill has been soft deleted.")
-
-    # check if updated skill name is the same as current skill name
-    skill_name = skill.skill_name
-    if skill_name == skill_in.skill_name:
-        raise HTTPException(
-            status_code=404,
-            detail="The Skill name is the same as the current Skill name",
-        )
-    
-    # check if updated skill name already exists in the database
-    skills = crud.skill.get_multi(db)
-    skills_name = [skill.skill_name for skill in skills]
-    if skill_in.skill_name in skills_name:
-        raise HTTPException(
-            status_code=404,
-            detail="This Skill name already exist in the system",
-        )
-    
-    skill = crud.skill.update(db, db_obj=skill, obj_in=skill_in)
-    return skill
