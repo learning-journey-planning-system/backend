@@ -38,7 +38,7 @@ def test_update_course(client) -> None:
 
 
 def test_delete_course(client) -> None:
-    data = load_course.base_data[3]
+    data = load_course.base_data[6]
     id = data["id"]
     response = client.delete(f"{load_course.base_url}{id}")
     assert response.status_code == 200

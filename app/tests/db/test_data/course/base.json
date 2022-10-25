@@ -30,5 +30,29 @@
         "course_type": "External",
         "course_category": "Finance",
         "id": "FIN001"
+    },
+    {
+        "course_name": "Risk and Compliance Reporting",
+        "course_desc": "Regulatory reporting is a requirement for businesses from highly regulated sectors to demonstrate compliance with the necessary regulatory provisions.",
+        "course_status": "Active",
+        "course_type": "External",
+        "course_category": "Finance",
+        "id": "FIN002"
+    },
+    {
+        "course_name": "Optimising Your Brand For The Digital Spaces",
+        "course_desc": "Digital has fundamentally shifted communication between brands and their consumers from a one-way broadcast to a two-way dialogue. In a hastened bid to transform their businesses to be digital market-ready,",
+        "course_status": "Active",
+        "course_type": "External",
+        "course_category": "Sales",
+        "id": "SAL003"
+    },
+    {
+        "course_name": "People Management",
+        "course_desc": "enable learners to manage team performance and development through effective communication, conflict resolution and negotiation skills.",
+        "course_status": "Active",
+        "course_type": "Internal",
+        "course_category": "Management",
+        "id": "MGT001"
     }
 ]

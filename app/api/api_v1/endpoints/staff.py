@@ -135,9 +135,8 @@ def get_completion_status(
 
     if registration is None:
         return {"msg": "Not Registered"}
+
+    completion_status = crud.registration.get_completion_status(reg_status=registration.reg_status, completion_status=registration.completion_status)
     
-    if registration.reg_status == "Registered":
-        return {"msg": registration.completion_status}
-    
-    return {"msg": "Registration " + registration.reg_status}
+    return {"msg": completion_status}
 

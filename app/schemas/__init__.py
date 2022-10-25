@@ -1,6 +1,6 @@
 from .msg import Msg
 
-from .course import Course, CourseCreate, CourseUpdate, CourseWithSkills
+from .course import Course, CourseCreate, CourseUpdate, CourseWithSkills, CourseWithCompletionStatus
 from .jobrole import JobRole, JobRoleCreate, JobRoleUpdate, JobRoleWithSkills, JobRoleWithSkillsWithCourses
 from .learningjourney import LearningJourney, LearningJourneyCreate, LearningJourneyUpdate, LearningJourneyFull, LearningJourneyFullWithSkills, LearningJourneyWithCourses
 from .registration import Registration, RegistrationCreate, RegistrationUpdate
