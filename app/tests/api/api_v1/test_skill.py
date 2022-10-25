@@ -35,21 +35,33 @@ def test_read_skill_that_does_not_exist(client) -> None:
     response = client.get(f"{load_skill.base_url}999")
     assert response.status_code == 404
 
-
 def test_update_skill(client) -> None:
-    update_data = load_skill.update_one_data
     data = load_skill.base_data[0]
     id = data["id"]
+    update_data = {"skill_name": "new name"}
     response = client.put(f"{load_skill.base_url}{id}", json=update_data)
     assert response.status_code == 200
-    for key, value in update_data.items():
-        assert response.json()[key] == value
-    assert response.json()["id"] == id
+    assert response.json()["skill_name"] == update_data["skill_name"]
 
-
-def test_update_skill_that_does_not_exist(client) -> None:
-    update_data = load_skill.update_one_data
+def test_update_skill_which_skill_that_does_not_exist(client) -> None:
+    update_data = {"skill_name": "new name"}
     response = client.put(f"{load_skill.base_url}999", json=update_data)
+    assert response.status_code == 404
+
+def test_update_skill_which_skill_that_has_been_deleted(client,session) -> None:
+    crud.skill.remove(session, id=1)
+    update_data = {"skill_name": "new name"}
+    response = client.put(f"{load_skill.base_url}1", json=update_data)
+    assert response.status_code == 404
+
+def test_update_skill_which_skill_name_is_same_as_current(client) -> None:
+    update_data = {"skill_name": "Web Design"}
+    response = client.put(f"{load_skill.base_url}1", json=update_data)
+    assert response.status_code == 404
+
+def test_update_skill_which_skill_name_exist_in_db(client) -> None:
+    update_data = {"skill_name": "Data Analysis"}
+    response = client.put(f"{load_skill.base_url}1", json=update_data)
     assert response.status_code == 404
 
 
