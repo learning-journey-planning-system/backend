@@ -1,4 +1,4 @@
-from .test_base import load_skill, load_course
+from .test_base import load_skill, load_course, load_registration
 from app import crud
 
 
@@ -109,7 +109,7 @@ def test_get_courses_for_skill_that_has_been_deleted(client,session) -> None:
 
 
 def test_get_courses_for_skill_that_has_no_courses(client) -> None:
-    data = load_skill.base_data[1]
+    data = load_skill.base_data[4]
     id = data["id"]
     response = client.get(f"{load_skill.base_url}{id}/courses/")
     assert response.status_code == 200
@@ -132,3 +132,53 @@ def test_get_available_skills(client, session) -> None:
     # check if the rest of the records are in the response
     assert response.json() == data
 
+
+def test_get_courses_with_completion_status_completed_for_skill(client) -> None:
+    staff_id = load_registration.base_data[0]["staff_id"]
+    course = load_course.base_data[0]
+    response = client.get(f"{load_skill.base_url}1/courses_with_completion/", params={"staff_id": staff_id})
+    assert response.status_code == 200
+    for key, value in course.items():
+        assert response.json()[0][key] == value
+    assert response.json()[0]["completion_status"] == "Completed"
+
+
+def test_get_courses_with_completion_status_waitlist_for_skill(client) -> None:
+    staff_id = load_registration.base_data[0]["staff_id"]
+    course = load_course.base_data[5]
+    response = client.get(f"{load_skill.base_url}2/courses_with_completion/", params={"staff_id": staff_id})
+    assert response.status_code == 200
+    for key, value in course.items():
+        assert response.json()[0][key] == value
+    assert response.json()[0]["completion_status"] == "Registration Waitlist"
+
+
+def test_get_courses_with_completion_status_rejected_for_skill(client) -> None:
+    staff_id = load_registration.base_data[0]["staff_id"]
+    course = load_course.base_data[3]
+    response = client.get(f"{load_skill.base_url}3/courses_with_completion/", params={"staff_id": staff_id})
+    assert response.status_code == 200
+    for key, value in course.items():
+        assert response.json()[0][key] == value
+    assert response.json()[0]["completion_status"] == "Registration Rejected"
+
+
+def test_get_courses_with_completion_status_ongoing_for_skill(client) -> None:
+    staff_id = load_registration.base_data[0]["staff_id"]
+    course = load_course.base_data[4]
+    response = client.get(f"{load_skill.base_url}4/courses_with_completion/", params={"staff_id": staff_id})
+    assert response.status_code == 200
+    for key, value in course.items():
+        assert response.json()[0][key] == value
+    assert response.json()[0]["completion_status"] == "Ongoing"
+
+
+def test_get_courses_with_completion_status_not_registered_for_skill(client) -> None:
+    staff_id = load_registration.base_data[0]["staff_id"]
+    course = load_course.base_data[6]
+    response = client.get(f"{load_skill.base_url}6/courses_with_completion/", params={"staff_id": staff_id})
+    assert response.status_code == 200
+    print(response.json())
+    for key, value in course.items():
+        assert response.json()[0][key] == value
+    assert response.json()[0]["completion_status"] == "Not Registered"

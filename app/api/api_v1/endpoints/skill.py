@@ -163,7 +163,7 @@ def get_available_skills(
     return available_skills
 
 
-@router.get("/{skill_id}/courses_with_completion", response_model=List[schemas.CourseWithCompletionStatus])
+@router.get("/{skill_id}/courses_with_completion/", response_model=List[schemas.CourseWithCompletionStatus])
 def get_courses_with_completion_status_for_skill(
     *,
     db: Session = Depends(deps.get_db),

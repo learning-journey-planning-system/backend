@@ -17,14 +17,14 @@
       "reg_status": "Waitlist",
       "completion_status": "",
       "staff_id": 140001,
-      "course_id": "COR006",
+      "course_id": "SAL003",
       "id": 3
     },
     {
       "reg_status": "Rejected",
       "completion_status": "",
       "staff_id": 140001,
-      "course_id": "COR002",
+      "course_id": "FIN001",
       "id": 4
     },
     {
@@ -33,5 +33,12 @@
       "staff_id": 140002,
       "course_id": "COR006",
       "id": 5
+    },
+    {
+      "reg_status": "Registered",
+      "completion_status": "Ongoing",
+      "staff_id": 140001,
+      "course_id": "FIN002",
+      "id": 6
     }
 ]
