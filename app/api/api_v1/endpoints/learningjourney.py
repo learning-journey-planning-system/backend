@@ -82,6 +82,7 @@ def delete_learningjourney(
 ) -> Any:
     """
     Delete a learning journey.
+    For SC28 Delete a learning journey
     """
     learningjourney = crud.learningjourney.get(db=db, id=learningjourney_id)
     if not learningjourney:
