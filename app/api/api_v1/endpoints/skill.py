@@ -110,6 +110,7 @@ def delete_skill(
 ) -> Any:
     """
     Delete a skill.
+    SC21 Delete skill from list of skills
     """
     skill = crud.skill.get(db=db, id=skill_id,)
     if not skill:
