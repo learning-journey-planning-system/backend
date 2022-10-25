@@ -118,3 +118,26 @@ def read_staff_learning_journeys(
     if not staff:
         raise HTTPException(status_code=404, detail="Staff not found")
     return staff.learningjourneys
+
+
+@router.get("/{staff_id}/courses/{course_id}/completion_status", response_model=schemas.Msg)
+def get_completion_status(
+    *,
+    db: Session = Depends(deps.get_db),
+    staff_id: int,
+    course_id: str
+) -> Any:
+    """
+    Get completion status of a course for a staff.
+    Returns one of these options: (1) Not Registered, (2) Registration Rejected, (3) Registration Waitlist, (4) Ongoing, (5) Completed
+    """
+    registration = crud.registration.get_registration_by_staff_and_course_id(db, staff_id=staff_id, course_id=course_id)
+
+    if registration is None:
+        return {"msg": "Not Registered"}
+    
+    if registration.reg_status == "Registered":
+        return {"msg": registration.completion_status}
+    
+    return {"msg": "Registration " + registration.reg_status}
+

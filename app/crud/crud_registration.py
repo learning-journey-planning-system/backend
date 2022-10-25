@@ -11,4 +11,8 @@ class CRUDRegistration(CRUDBase[Registration, RegistrationCreate, RegistrationUp
     def get_registration_by_staff_id(self, db: Session, *, staff_id: int) -> List[Registration]:
         return db.query(Registration).filter(Registration.staff_id == staff_id).all()
 
+    
+    def get_registration_by_staff_and_course_id(self, db: Session, *, staff_id: int, course_id: str) -> Registration:
+        return db.query(Registration).filter(Registration.staff_id == staff_id, Registration.course_id == course_id).first()
+
 registration = CRUDRegistration(Registration)

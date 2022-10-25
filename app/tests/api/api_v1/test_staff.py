@@ -1,4 +1,4 @@
-from .test_base import load_staff, load_learningjourney, load_jobrole, load_course, load_skill
+from .test_base import load_staff, load_learningjourney, load_jobrole, load_course, load_skill, load_registration
 from app import crud
 
 
@@ -142,3 +142,37 @@ def test_read_staff_with_no_learning_journeys(client) -> None:
     id = data["id"]
     response = client.get(f"{load_staff.base_url}{id}/learningjourneys")
     assert response.json() == []
+
+
+def test_get_completion_status_not_registered(client) -> None:
+    course_id, staff_id = "COR001", 140002
+    response = client.get(f"{load_staff.base_url}{staff_id}/courses/{course_id}/completion_status")
+    assert response.json()['msg'] == "Not Registered"
+
+
+def test_get_completion_status_rejected(client) -> None:
+    data = load_registration.base_data[3]
+    staff_id, course_id = data["staff_id"], data["course_id"]
+    response = client.get(f"{load_staff.base_url}{staff_id}/courses/{course_id}/completion_status")
+    assert response.json()['msg'] == "Registration Rejected"
+
+
+def test_get_completion_status_waitlist(client) -> None:
+    data = load_registration.base_data[2]
+    staff_id, course_id = data["staff_id"], data["course_id"]
+    response = client.get(f"{load_staff.base_url}{staff_id}/courses/{course_id}/completion_status")
+    assert response.json()['msg'] == "Registration Waitlist"
+
+
+def test_get_completion_status_ongoing(client) -> None:
+    data = load_registration.base_data[4]
+    staff_id, course_id = data["staff_id"], data["course_id"]
+    response = client.get(f"{load_staff.base_url}{staff_id}/courses/{course_id}/completion_status")
+    assert response.json()['msg'] == "Ongoing"
+
+
+def test_get_completion_status_completed(client) -> None:
+    data = load_registration.base_data[0]
+    staff_id, course_id = data["staff_id"], data["course_id"]
+    response = client.get(f"{load_staff.base_url}{staff_id}/courses/{course_id}/completion_status")
+    assert response.json()['msg'] == "Completed"
