@@ -13,5 +13,20 @@
     "skill_name": "Data Analysis",
     "id": 3,
     "deleted": false
+  },
+  {
+    "skill_name": "Accounting",
+    "id": 4,
+    "deleted": false
+  },
+  {
+    "skill_name": "Statistics",
+    "id": 5,
+    "deleted": false
+  },
+  {
+    "skill_name": "Talent Development",
+    "id": 6,
+    "deleted": false
   }
 ]

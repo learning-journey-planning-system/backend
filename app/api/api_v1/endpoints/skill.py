@@ -161,3 +161,43 @@ def get_available_skills(
     skills = crud.skill.get_multi(db)
     available_skills = [skill for skill in skills if not skill.deleted]
     return available_skills
+
+
+@router.get("/{skill_id}/courses_with_completion/", response_model=List[schemas.CourseWithCompletionStatus])
+def get_courses_with_completion_status_for_skill(
+    *,
+    db: Session = Depends(deps.get_db),
+    skill_id: int,
+    staff_id: int
+) -> Any:
+    """
+    Get All Courses for a Skill.
+    For SC5 View all courses for a skill. Includes completion status for each course based on the staff_id passed in.
+
+    Returns 404 if skill not in database or if skill has been soft deleted. 
+    
+    Only returns courses that are <u>active</u>.
+    """
+
+    # check if skill exists
+    skill = crud.skill.get(db=db, id=skill_id)
+    if not skill:
+        raise HTTPException(status_code=404, detail="Skill not found")
+
+    # check if skill has not been soft deleted
+    if skill.deleted:
+        raise HTTPException(status_code=404, detail="Skill has been soft deleted.")
+
+    # filter out courses that are inactive
+    courses = [course for course in skill.courses if course.course_status == "Active"]
+
+    # add completion status to courses
+    registrations = crud.staff.get(db=db, id=staff_id).registrations
+    for i in range(len(courses)):
+        for registration in registrations:
+            if courses[i].id == registration.course_id:
+                completion_status = crud.registration.get_completion_status(reg_status=registration.reg_status, completion_status=registration.completion_status)
+                setattr(courses[i], "completion_status", completion_status)
+                break
+
+    return courses

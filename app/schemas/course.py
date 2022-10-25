@@ -34,6 +34,6 @@ class Course(CourseInDBBase):
 from .skill import Skill
 class CourseWithSkills(Course):
     skills : List[Skill] = []
-    
 
-    
+class CourseWithCompletionStatus(Course):
+    completion_status : str = "Not Registered"
