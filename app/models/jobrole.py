@@ -5,7 +5,7 @@ from app.db.base_class import Base
 
 class JobRole(Base):
     id = Column(Integer, primary_key=True)
-    jobrole_name = Column(String(20), nullable=False)
+    jobrole_name = Column(String(30), nullable=False)
     deleted = Column(Boolean, default = False)
 
     # one jobrole can have many learning journeys
