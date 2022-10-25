@@ -68,16 +68,37 @@ def update_jobrole(
 ) -> Any:
     """
     Update a JobRole.
+    SC16 Update JobRole in LJPS
     """
     jobrole = crud.jobrole.get(db, id=jobrole_id)
     if not jobrole:
         raise HTTPException(
             status_code=404,
-            detail="The jobrole with this jobrole_id does not exist in the system",
+            detail="The JobRole with this jobrole_id does not exist in the system",
         )
+    if jobrole.deleted:
+        raise HTTPException(
+            status_code=400,
+            detail="The JobRole with this jobrole_id has been deleted",
+        )
+    jobrole_name = jobrole.jobrole_name
+    if jobrole_name == jobrole_in.jobrole_name:
+        raise HTTPException(
+            status_code=404,
+            detail="The JobRole name is the same as the current JobRole name",
+        )
+    jobroles = crud.jobrole.get_multi(db)
+    jobroles_names = [jobrole.jobrole_name for jobrole in jobroles]
+    if jobrole_in.jobrole_name in jobroles_names:
+        raise HTTPException(
+            status_code=404,
+            detail="The JobRole name already exists in the system",
+        )
+
     jobrole = crud.jobrole.update(db, db_obj=jobrole, obj_in=jobrole_in)
     return jobrole
 
+    
 
 @router.delete("/{jobrole_id}", response_model=schemas.JobRole)
 def delete_jobrole(
