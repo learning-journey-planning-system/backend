@@ -65,6 +65,21 @@ def test_update_jobrole_that_does_not_exist(client) -> None:
     response = client.put(f"{load_jobrole.base_url}999", json=update_data)
     assert response.status_code == 404
 
+def test_update_jobrole_that_is_already_deleted(client, session) -> None:
+    crud.jobrole.remove(session, id=1)
+    update_data = load_jobrole.update_one_data
+    response = client.put(f"{load_jobrole.base_url}1", json=update_data)
+    assert response.status_code == 400
+
+def test_update_jobrole_which_jobrole_name_is_same_as_current(client) -> None:
+    update_data = {"jobrole_name": "Operations Executive"}
+    response = client.put(f"{load_jobrole.base_url}1", json=update_data)
+    assert response.status_code == 404
+
+def test_update_jobrole_which_jobrole_name_exist_in_db(client) -> None:
+    update_data = {"jobrole_name": "Business Analyst"}
+    response = client.put(f"{load_jobrole.base_url}1", json=update_data)
+    assert response.status_code == 404
 
 def test_delete_jobrole(client) -> None:
     data = load_jobrole.base_data[0]
