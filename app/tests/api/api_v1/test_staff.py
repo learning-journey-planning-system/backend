@@ -176,3 +176,33 @@ def test_get_completion_status_completed(client) -> None:
     staff_id, course_id = data["staff_id"], data["course_id"]
     response = client.get(f"{load_staff.base_url}{staff_id}/courses/{course_id}/completion_status")
     assert response.json()['msg'] == "Completed"
+
+def test_acquired_skill_for_jobrole(client) -> None:
+    staff_id = load_staff.base_data[2]["id"]
+    jobrole_id = load_jobrole.base_data[0]["id"]
+    response = client.get(f"{load_staff.base_url}{staff_id}/jobrole/{jobrole_id}/acquired_skills")
+    assert response.json() == [load_skill.base_data[0]]
+
+def test_acquired_skill_for_jobrole_that_staff_does_not_exist(client) -> None:
+    jobrole_id = load_jobrole.base_data[0]["id"]
+    response = client.get(f"{load_staff.base_url}999/jobrole/{jobrole_id}/acquired_skills")
+    assert response.status_code == 404
+
+def test_acquired_skill_for_jobrole_that_jobrole_does_not_exist(client) -> None:
+    staff_id = load_staff.base_data[2]["id"]
+    response = client.get(f"{load_staff.base_url}{staff_id}/jobrole/999/acquired_skills")
+    assert response.status_code == 404
+
+def test_acquired_skill_for_jobrole_that_jobrole_have_been_deleted(client,session) -> None:
+    staff_id = load_staff.base_data[2]["id"]
+    jobrole_id = load_jobrole.base_data[0]["id"]
+    crud.jobrole.remove(session, id=jobrole_id)
+    response = client.get(f"{load_staff.base_url}{staff_id}/jobrole/{jobrole_id}/acquired_skills")
+    assert response.status_code == 404
+
+def test_acquired_skill_for_jobrole_that_staff_has_no_completed_course(client,session) -> None:
+    staff_id = load_staff.base_data[3]["id"]
+    jobrole_id = load_jobrole.base_data[0]["id"]
+    crud.registration.remove(session, id=2)
+    response = client.get(f"{load_staff.base_url}{staff_id}/jobrole/{jobrole_id}/acquired_skills")
+    assert response.status_code == 404

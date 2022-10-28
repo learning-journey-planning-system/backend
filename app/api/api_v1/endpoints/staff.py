@@ -140,3 +140,40 @@ def get_completion_status(
     
     return {"msg": completion_status}
 
+@router.get("/{staff_id}/jobrole/{jobrole_id}/acquired_skills", response_model=List[schemas.Skill])
+def get_acquired_skill_for_jobrole(
+    *,
+    db: Session = Depends(deps.get_db),
+    staff_id: int,
+    jobrole_id: int
+) -> Any:
+    """
+    Get Acquired Skills For A JobRole.
+    SC23 View acquired skills of job role by learner. 
+    """
+
+    # Check if staff exist
+    staff = crud.staff.get(db, id=staff_id)
+    if not staff:
+        raise HTTPException(status_code=404,detail="The staff with this staff_id does not exist in the system")
+
+    # Check if the jobrole exists
+    jobrole = crud.jobrole.get(db, id=jobrole_id)
+    if not jobrole:
+        raise HTTPException(status_code=404,detail="The jobrole with this jobrole_id does not exist in the system")
+
+    # Check if the jobrole has not been soft deleted
+    if jobrole.deleted:
+        raise HTTPException(status_code=404,detail="The jobrole with this jobrole_id has been soft deleted")
+    
+    # Check for registrations
+    registrations = crud.registration.get_registration_by_staff_id(db, staff_id=staff_id)
+    course_ids = [registration.course_id for registration in registrations if registration.completion_status == "Completed"]
+    if not course_ids:
+        raise HTTPException(status_code=404,detail="The staff with this staff_id has not completed any courses")
+        
+    courses = [crud.course.get(db=db, id=id) for id in course_ids]
+    course_skill = [skill for course in courses for skill in course.skills]
+    acquired_skills = [skill for skill in course_skill if skill in jobrole.skills]
+
+    return acquired_skills
