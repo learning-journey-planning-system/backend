@@ -60,7 +60,7 @@ INSERT INTO course_learningjourney (learningjourney_id,course_id) VALUES
 (208,'FIN002'),
 (209,'tch015'),
 (210,'tch019'),
-(211,'FIN001')
+(211,'MGT004')
 ;
 
 
