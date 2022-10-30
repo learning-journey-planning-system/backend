@@ -1,5 +1,5 @@
 # backend
-
+[![Unit Tests for Endpoints](https://github.com/learning-journey-planning-system/backend/actions/workflows/run_unit_tests.yml/badge.svg)](https://github.com/learning-journey-planning-system/backend/actions/workflows/run_unit_tests.yml)
 
 <!-- TABLE OF CONTENTS -->
 <details>
